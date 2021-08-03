@@ -409,8 +409,187 @@ Utilisée sans argument, la commande `touch(1)`_ permet de créer un fichier vid
    -rw-r--r-- 1 obo obo 283 Aug  3 14:11 fichier.txt
    -rw-r--r-- 1 obo obo 181 Aug  3 10:18 points.csv
    
-Pour organiser tous ces fichiers, il est important de pouvoir les regrouper ensemble dans des répertoires
+Pour organiser tous ces fichiers, il est important de pouvoir les regrouper dans des répertoires. Prenons l'exemple d'une étudiante bien organisée qui doit gérer toutes les informations relatives à chacun de ses cours. Il va créer un répertoire pour chaque année académique et un sous-répertoire pour chaque cours. La commande `mkdir(1)`_ lui permet de créer un répertoire pour l'année ``2021-2022``. Elle va ensuite y créer les répertoires des cours d'informatiques, d'anglais et de mathématiques. Pour cela, elle devra aller dans le répertoire ``2021-2022`` en utilisant la commande `cd(1)`_ (change directory). Cette commande permet de changer de répertoire courant.
 
+.. code:: console
+
+   $ mkdir 2021-2022/
+   $ ls -l
+   total 12
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:10 2021-2022
+   -rw-r--r-- 1 obo obo  283 Aug  3 14:11 fichier.txt
+   -rw-r--r-- 1 obo obo  181 Aug  3 10:18 points.csv
+   -rw-r--r-- 1 obo obo    0 Aug  3 14:13 vide.txt
+   $ cd 2021-2022/
+   ~/2021-2022$ ls -l
+   total 0
+   ~/2021-2022$ mkdir anglais
+   ~/2021-2022$ mkdir info
+   ~/2021-2022$ mkdir math
+   ~/2021-2022$ ls -l
+   total 12
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 anglais
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 info
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 math
+
+
+On les répertoires avec la lettre d comme première permission dans l'information affichée par la commande ``ls -l``. La commande `pwd(1)`_ indique quel est le répertoire courant, c'est-à-dire le répertoire dans lequel les commandes sont exécutées.
+
+.. code:: console
+
+   ~/2021-2022$ pwd
+   /home/obo/2021-2022
+
+
+Sous Unix, le système de stockage est organisé comme une arborescence. La racine (correspondant au répertoire ``/``) contient différents sous-répertoires dont la plupart sont nécessaires au bon fonctionnement du système. 
+
+
+.. code:: console
+
+   $ ls /
+   bin   home            lib32       media  root  sys  vmlinuz
+   boot  initrd.img      lib64       mnt    run   tmp  vmlinuz.old
+   dev   initrd.img.old  libx32      opt    sbin  usr
+   etc   lib             lost+found  proc   srv   var	  
+	  
+Les trois répertoires qui nous intéresseront le plus sont ``/home`` qui contient un répertoire appartenant à chaque utilisateur. C'est dans ce répertoire qu'un utilisateur pourra stocker ses fichiers privés. Le répertoire ``/media`` est celui dans lequel des dispositifs externes tels que des clés USB seront accessibles. Enfin, le répertoire ``/tmp`` contient des fichiers temporaires qui sont automatiquement effacés à chaque arrêt de l'ordinateur.
+
+.. code:: console
+
+   ~/2021-2022$ cd math/
+   ~/2021-2022/math$ pwd
+   /home/obo/2021-2022/math
+
+   
+La commande `cd(1)`_ vous permet de descendre l'arborescence des fichiers, depuis la racine vers les répertoires feuille. Comment faire pour remonter l'arborescence des fichiers vers la racine ? Pour cela, Unix utilise deux sous-répertoires cachés qui sont présents dans tous les répertoires. Le sous-répertoire ``.`` est un synonyme du répertoire courant. Il est peu utilisé. Par contre, le sous-répertoire ``..`` est un `lien` vers le répertoire père du répertoire courant. En utilisant le répertoire ``..`` il est donc possible de remonter vers le répertoire racine.
+
+.. code:: console
+
+   ~/2021-2022/math$ ls -l
+   $ ls -l
+   total 0
+   ~/2021-2022/math$ ls -la
+   total 8
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 .
+   drwxr-xr-x 5 obo obo 4096 Aug  3 16:18 ..
+   ~/2021-2022/math$ cd ..
+   ~/2021-2022$ ls -la
+   total 20
+   drwxr-xr-x 5 obo obo 4096 Aug  3 16:18 .
+   drwxr-xr-x 3 obo obo 4096 Aug  3 16:10 ..
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 anglais
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 info
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 math
+   ~/2021-2022$ cd ..
+   $ ls -la
+   total 20
+   drwxr-xr-x  3 obo obo 4096 Aug  3 16:10 .
+   drwxr-xr-x 14 obo obo 4096 Aug  3 14:04 ..
+   drwxr-xr-x  5 obo obo 4096 Aug  3 16:18 2021-2022
+   -rw-r--r--  1 obo obo  283 Aug  3 14:11 fichier.txt
+   -rw-r--r--  1 obo obo  181 Aug  3 10:18 points.csv
+   -rw-r--r--  1 obo obo    0 Aug  3 14:13 vide.txt
+
+
+Enfin, notez que l'option ``R`` de la commande `ls(1)`_ permet de parcourir automatiquement tous les sous-répertoires (et leurs sous-répertoires).    
+
+.. code:: console
+
+   $ ls -lRa
+   .:
+   total 20
+   drwxr-xr-x  3 obo obo 4096 Aug  3 16:10 .
+   drwxr-xr-x 14 obo obo 4096 Aug  3 14:04 ..
+   drwxr-xr-x  5 obo obo 4096 Aug  3 16:18 2021-2022
+   -rw-r--r--  1 obo obo  283 Aug  3 14:11 fichier.txt
+   -rw-r--r--  1 obo obo  181 Aug  3 10:18 points.csv
+   -rw-r--r--  1 obo obo    0 Aug  3 14:13 vide.txt
+
+   ./2021-2022:
+   total 20
+   drwxr-xr-x 5 obo obo 4096 Aug  3 16:18 .
+   drwxr-xr-x 3 obo obo 4096 Aug  3 16:10 ..
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 anglais
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 info
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 math
+   
+   ./2021-2022/anglais:
+   total 8
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 .
+   drwxr-xr-x 5 obo obo 4096 Aug  3 16:18 ..
+   
+   ./2021-2022/info:
+   total 8
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 .
+   drwxr-xr-x 5 obo obo 4096 Aug  3 16:18 ..
+   
+   ./2021-2022/math:
+   total 8
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 .
+   drwxr-xr-x 5 obo obo 4096 Aug  3 16:18 ..
+   
+
+.. note:: Raccourcis clavier
+
+   La ligne de commande supporte de nombreux raccourcis clavier qui peuvent vous permettre d'être encore plus rapide. La flèche vers le haut vous permet par exemple de récupérer les commandes précédentes. Vous pouvez ensuite utiliser les flèches gauche et droite pour éditer l'ancienne commande avant de taper sur Return pour l'exécuter. Lorsque vous tapez les premières lettres d'une commande, il suffit de taper sur la touche de tabulation pour que la commande soit complétée si elle est reconnue. Ainsi, si vous tapez ``mkd`` suivi de tabulation, les caractères ``ir`` manquants seront automatiquement ajouté. Ce mécanisme de complétion de la ligne de commande s'applique aussi aux arguments losque ceux-ci sont des fichiers ou des répertoires. Ainsi, si vous tapez ``cat fi`` suivi de tabulation dans le répLorsque l'on travaille en ligne de commande, 	  
+
+.. cp, mv, rmdir, rm
+   
+
+D'autres commandes permettent de manipuler les fichiers qui sont stockés sur l'ordinateur. La commande `cp(1)`_ permet de copier un fichier sous un autre nom ou de le copier dans un autre répertoire en conservant son nom original. On peut par exemple faire un backup d'un fichier avant de le modifier afin de pouvoir récupérer son état original en cas de problème.
+
+.. code:: console
+
+   $ cp fichier.txt fichier.txt.bak
+   $ ls -l
+   total 16
+   drwxr-xr-x 5 obo obo 4096 Aug  3 16:18 2021-2022
+   -rw-r--r-- 1 obo obo  283 Aug  3 14:11 fichier.txt
+   -rw-r--r-- 1 obo obo  283 Aug  3 16:52 fichier.txt.bak
+   -rw-r--r-- 1 obo obo  181 Aug  3 10:18 points.csv
+   -rw-r--r-- 1 obo obo    0 Aug  3 14:13 vide.txt
+   $ cp fichier.txt 2021-2022/info/
+   $ ls -l 2021-2022/info/
+   total 4
+   -rw-r--r-- 1 obo obo 283 Aug  3 16:52 fichier.txt
+	  
+La commande `mv(1)`_ permet de renommer un fichier ou de le déplacer dans un autre répertoire.
+
+.. code:: console
+
+   $ mv vide.txt a_effacer.txt
+   $ mkdir backup
+   $ mv fichier.txt.bak backup/
+   $ ls -l
+   total 16
+   drwxr-xr-x 5 obo obo 4096 Aug  3 16:18 2021-2022
+   -rw-r--r-- 1 obo obo    0 Aug  3 14:13 a_effacer.txt
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:55 backup
+   -rw-r--r-- 1 obo obo  283 Aug  3 14:11 fichier.txt
+   -rw-r--r-- 1 obo obo  181 Aug  3 10:18 points.csv
+   $ ls -l backup/
+   total 4
+   -rw-r--r-- 1 obo obo 283 Aug  3 16:52 fichier.txt.bak
+
+Parfois il est nécessaire de supprimer des fichiers ou des répertoires. Cela peut se faire un utilisant les commandes `rm(1)`_ et `rmdir(1)`_. Il faut noter que `rmdir(1)`_ ne peut effacer qu'un sous répertoire vide. Vous devez donc d'abord effacer les fichiers qui se trouvent dans un sous-répertoire avant de pouvoir l'effacer lui-même.
+
+.. code:: console
+
+   $ rm a_effacer.txt 
+   $ ls -l
+   total 16
+   drwxr-xr-x 5 obo obo 4096 Aug  3 16:18 2021-2022
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:55 backup
+   -rw-r--r-- 1 obo obo  283 Aug  3 14:11 fichier.txt
+   -rw-r--r-- 1 obo obo  181 Aug  3 10:18 points.csv
+   $ rmdir backup/
+   rmdir: failed to remove 'backup/': Directory not empty
+   $ cd backup/
+   $ rm fichier.txt.bak 
+   backup$ cd ..
+   $ rmdir backup/
+
+   
   
 Shell
 ^^^^^
