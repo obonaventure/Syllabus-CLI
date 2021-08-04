@@ -266,11 +266,11 @@ On peut maintenant trier sur base des noms de famille ou des points obtenus.
    Antoine, Marchand, 15, 15
    Vanessa, Dupond, 14, 12
 
-Malheureusement, ce dernier tri ne donne pas le résultat attendu. On voudrait avoir en première ligne l'étudiant ou l'étudiante qui a le mieux réussi le cours. Or, ce n'est pas ce que la commande `sort(1)`_ affiche. C'est parce que la commande `sort(1)`_ fait un tri par ordre alphabétique par défaut. Pour obtenir un tri qui prend en compte les nombres (entiers ou réels), il faut utiliser l'option ``-n``.    
+Malheureusement, ce dernier tri ne donne pas le résultat attendu. On voudrait avoir en première ligne l'étudiant ou l'étudiante qui a le mieux réussi le cours. Or, ce n'est pas ce que la commande `sort(1)`_ affiche. C'est parce que la commande `sort(1)`_ fait un tri par ordre alphabétique par défaut. Pour obtenir un tri qui prend en compte les nombres (entiers ou réels), il faut utiliser l'option ``-g``.    
 
 .. code:: console
 
-   $ sort -n -r -t "," -k 4 points.csv
+   $ sort -g -r -t "," -k 4 points.csv
    Emilie, Michel, 17, 19
    Laurence, Dupont, 14, 18
    Jean, Dubois, 12, 17
@@ -590,6 +590,7 @@ Parfois il est nécessaire de supprimer des fichiers ou des répertoires. Cela p
    $ rmdir backup/
 
    
+   
   
 Shell
 ^^^^^
@@ -649,6 +650,191 @@ Les shells Unix supportent un second mécanisme qui est encore plus intéressant
 
 Le premier exemple utilise `echo(1)`_ pour générer du texte et le passer directement à `wc(1)`_ qui compte le nombre de caractères. Le deuxième exemple utilise `cat(1)`_ pour afficher sur la sortie standard le contenu d'un fichier. Cette sortie est reliée à `sort(1)`_ qui trie le texte reçu sur son entrée standard en ordre alphabétique croissant. Cette sortie en ordre alphabétique est reliée à `uniq(1)`_ qui la filtre pour en retirer les lignes dupliquées.
 
+
+
+Traitement de plusieurs fichiers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Dans les exemples précédents, nous avons vu comment une commande Unix pouvait traiter un fichier ou un répertoire passé en argument. Cela permettait de présenter des exemples simples et faciles à visualiser. En pratique, on doit souvent traiter plusieurs fichiers avec une même commande. Toutes les commandes Unix sont prévues pour recevoir un nombre quelconque d'arguments. Si une commande reçoit deux arguments, elle va d'avoir traiter le premier et ensuite le second. Si elle reçoit 17 arguments, elle fera de même. Dans l'exemple ci-dessous, la commande touch est appliquée aux fichiers ``fichier.txt`` et ``points.csv```.
+
+.. code:: console
+
+   $ ls -l
+   total 12
+   drwxr-xr-x 5 obo obo 4096 Aug  3 16:18 2021-2022
+   -rw-r--r-- 1 obo obo  283 Aug  3 14:11 fichier.txt
+   -rw-r--r-- 1 obo obo  181 Aug  3 10:18 points.csv
+   $ touch fichier.txt points.csv 
+   $ ls -l
+   total 12
+   drwxr-xr-x 5 obo obo 4096 Aug  3 16:18 2021-2022
+   -rw-r--r-- 1 obo obo  283 Aug  4 12:30 fichier.txt
+   -rw-r--r-- 1 obo obo  181 Aug  4 12:30 points.csv
+
+
+Considérons un deuxième exemple qui concerne les données météorologiques. Le site web `https://www.historique-meteo.net/europe/belgique/charleroi/ <https://www.historique-meteo.net/europe/belgique/charleroi/>`_ fournit les relevés météorologiques pour la ville de Charleroi depuis 2009 en format csv.
+
+.. code:: console
+
+
+   $ ls
+   2009.csv  2011.csv  2013.csv  2015.csv  2017.csv  2019.csv
+   2010.csv  2012.csv  2014.csv  2016.csv  2018.csv  2020.csv
+   $ head -6 2009.csv 
+   #### EXPORT DONNEES METEO POUR "CHARLEROI" (LAT/LON: 50.4108095/4.444643)
+   #### DONNEES PROVENANT DE WWW.HISTORIQUE-METEO.NET - UTILISATION LIBRE A CONDITION DE MENTIONNER LEUR PROVENANCE
+   #### DOC POUR LES WEATHER CODES : https://www.historique-meteo.net/weathercodes.txt
+   2009-01-01,-1,-4,12,-6,-1,-5,0,62,10,1030,14.5,0,0,-7,113,113,113,0,2,8.1,météo très défavorable
+   2009-01-02,0,-5,13,-6,-1,-1,0,91,10,1029,52.75,0,0,-5,113,122,119,0,2,4.9,météo très défavorable
+   2009-01-03,-1,-4,13,-5,-1,-5,0,84,9,1031,21,0,0,-9,143,113,113,0,2,8.1,météo très défavorable
+
+   
+Chacun de ces fichiers contient une entête avec trois lignes de commentaires et les données de chaque jour sous séparées par une virgule. Chaque ligne contient les informations suivantes:
+
+.. code:: console
+
+   DATE,MAX_TEMPERATURE_C,MIN_TEMPERATURE_C,WINDSPEED_MAX_KMH,TEMPERATURE_MORNING_C,TEMPERATURE_NOON_C,TEMPERATURE_EVENING_C,PRECIP_TOTAL_DAY_MM,HUMIDITY_MAX_PERCENT,VISIBILITY_AVG_KM,PRESSURE_MAX_MB,CLOUDCOVER_AVG_PERCENT,HEATINDEX_MAX_C,DEWPOINT_MAX_C,WINDTEMP_MAX_C,WEATHER_CODE_MORNING,WEATHER_CODE_NOON,WEATHER_CODE_EVENING,TOTAL_SNOW_MM,UV_INDEX,SUNHOUR,OPINION   
+
+
+Essayons par exemple de voir quel est le jour durant lequel il a fait le plus chaud à Charleroi sur les douze dernières années. La quantité de précipitations est dans la deuxième colonne. On peut donc utiliser `sort(1)`_ pour trier le fichier et en extraire l'information qui nous intéresse. Cependant, les trois premières lignes qui ne contiennent pas de données utiles peuvent perturber notre tri. Nous pouvons les "retirer" du fichier avant le tri en utilisant `grep(1)`_ pour soit ne prendre que le lignes qui commencent par ``2009``` soit retirer les lignes qui commencent par ``#`` qui est un caractères fréquemment utilisé pour indiquer des commentaires.
+
+.. code:: console
+	  
+   $ grep -v "#" 2009.csv | sort -r -g -t ',' -k 2 | head -1
+   2009-08-20,32,27,25,24,32,20,1.9,60,9.75,1019,28.375,34,19,28,116,113,200,0,6,13.4,météo idéale
+
+   
+Pour analyser de la même façon toutes les mesures ou les mesures d'une décennie, on pourrait simplement lister tous les fichiers concernés. Ce sertait une longue commande.
+
+.. code:: console
+
+   $ grep -v "#" 2001.csv 2002.csv 2003.csv 2004.csv 2005.csv 2006.csv 2007.csv 2008.csv 2009.csv | sort -r -g -t ',' -k 2 | head -1
+   2009-08-20,32,27,25,24,32,20,1.9,60,9.75,1019,28.375,34,19,28,116,113,200,0,6,\13.4,météo idéale
+
+Sous Unix, on peut être plus rapide en utilisant les `wildcards` ce sont des caractères spéciaux qui peuvent être remplacés par un ou plusieurs caractères. Les plus courants sont :
+
+ - ``?`` qui remplace n'importe quel caractère
+ - ``*`` qui remplace un ou plusieurs caractères
+
+Lorsque l'on tape un de ces caractères spéciaux en ligne de commande, Unix essaye de voir si il y a un ou plusieurs fichiers qui correspondent. A titre d'exemple, considérons le répertoire qui contient les fichiers suivants
+
+ - ``A.txt`` ``Bb.txt`` ```Ccc.csv```
+
+Si vous tapez ``*`` comme argument, Unix le remplacera automatiquement ``A.txt BB.txt Ccc.csv``.
+
+Si vous tapez ``*.txt`` comme argument, Unix le remplacera automatiquement en ``A.txt BB.txt``.
+
+Si vous tapez ``?.txt`` ou ``?.???`` comme argument, Unix le remplacera automatiquement en ``A.txt``.
+
+Unix supporte d'autres caractères spéciaux, vous trouverez plus de détails dans les pages de manuel`.
+
+.. code:: console
+   
+   $ grep -v "#" 2*.csv | sort -r -g -t ',' -k 2 | head -1
+   2019.csv:2019-07-25,38,30,13,24,35,35,0,55,10,1016,6.25,39,20,30,116,116,116,0,8,14.5,météo favorable
+   $ grep -v "#" 200?.csv | sort -r -g -t ',' -k 2 | head -12009-08-20,32,27,25,24,32,20,1.9,60,9.75,1019,28.375,34,19,28,116,113,200,0,6,13.4,météo idéale
+
+
+
+Archiver et comprimer des fichiers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Lorsque l'on manipule de gros fichiers, comme des données qu'il faut analyser à des fins statistiques, on se retrouve parfois à consommer beaucoup d'espace sur le disque. Celui-ci étant infini, on doit parfois libérer de l'espace. La solution la plus courante est de supprimer les fichiers qui ne sont plus utiles. Une autre solution est de comprimer les très gros fichiers pour qu'ils prennent moins de place. C'est ce que les utilitaires `gzip(1)`_, `gunzip(1)`_ et `zcat(1)`_ permettent de faire.
+
+
+.. code:: console
+
+   $ ls -l 2009*
+   -rw-r--r-- 1 obo obo 35802 Aug  4 12:44 2009.csv
+   $ gzip 2009.csv 
+   $ ls -l 2009*
+   -rw-r--r-- 1 obo obo 9171 Aug  4 12:44 2009.csv.gz
+   $ gunzip 2009.csv.gz 
+   $ ls -l 2009*
+   -rw-r--r-- 1 obo obo 35802 Aug  4 12:44 2009.csv
+
+`gzip(1)`_ permet donc de compresser un fichier, c'est-à-dire de modifier la façon dont il est stocké sur le disque pour qu'il prenne moins de place. Par convention, les fichiers qu'il a comprimé ont comme extension ``.gz``. La commande ``gunzip(1)`_ fait l'opération inverse et récupère le fichier original. La commande `zcat(1)`_ est équivalente à `cat(1)`_, mais elle prend en entrée un ou des fichiers compressés qu'elle décompresse avant d'afficher sur la sortie standard.
+
+.. code:: console
+
+
+   $ zcat 2*csv.gz | grep -v "#"  | sort -r -g -t ',' -k 2 | head -1 2019-07-25,38,30,13,24,35,35,0,55,10,1016,6.25,39,20,30,116,116,116,0,8,14.5,météo favorable
+
+
+Lorsque l'on travaille sur des projets qui regroupent plusieurs fichiers, il est parfois nécessaire de les échanger avec des collègues ou de les envoyer au professeur. Même si il est possible d'attacher plusieurs fichiers à un email, c'est une opération manuelle qui prend vite du temps. Une meilleure solution est de placer l'ensemble des fichiers dans une archive. Sous Unix, la solution standard pour créer de telles archives est le programme `tar(1)`_. Il prend supporte différents options. Les plus courantes sont :
+
+ - ```v`` qui active le mode "verbeux", c'est-à-dire que `tar(1)`_ donne sur la sortie standard la liste de tous les fichiers qu'il a traité
+ - ``c`` qui demande de créer une archive et d'y place des fichiers
+ - ``z`` qui demande à `tar(1)`_ d'automatiquement utiliser `gzip(1)`_ ou `gunzip(1)`_ pour manipuler des archives comprimées
+ - ``f`` qui permet d'indiquer le nom de l'archive (ce nom est l'argument qui suit le caractère ``f``)
+   - ``t`` qui permet de demander de tester si une archive est correcte 
+
+   
+A titre d'exemple, nous allons placer tous les fichiers de données météorologiques dans une archive au format ``.tar.gz```.
+
+.. code:: console
+	  
+	  $ tar czvf meteo.tar.gz meteo/*.csv
+	  meteo/2009.csv
+	  meteo/2010.csv
+	  meteo/2011.csv
+	  meteo/2012.csv
+	  meteo/2013.csv
+	  meteo/2014.csv
+	  meteo/2015.csv
+	  meteo/2016.csv
+	  meteo/2017.csv
+	  meteo/2018.csv
+	  meteo/2019.csv
+	  meteo/2020.csv
+	  $ tar tzvf meteo.tar.gz 
+	  -rw-r--r-- obo/obo       35802 2021-08-04 12:44 meteo/2009.csv
+	  -rw-r--r-- obo/obo       36192 2021-08-04 12:44 meteo/2010.csv
+	  -rw-r--r-- obo/obo       35880 2021-08-04 12:44 meteo/2011.csv
+	  -rw-r--r-- obo/obo       36095 2021-08-04 12:44 meteo/2012.csv
+	  -rw-r--r-- obo/obo       36095 2021-08-04 12:44 meteo/2013.csv
+	  -rw-r--r-- obo/obo       35774 2021-08-04 12:44 meteo/2014.csv
+	  -rw-r--r-- obo/obo       35704 2021-08-04 12:44 meteo/2015.csv
+	  -rw-r--r-- obo/obo       35849 2021-08-04 12:44 meteo/2016.csv
+	  -rw-r--r-- obo/obo       35731 2021-08-04 12:44 meteo/2017.csv
+	  -rw-r--r-- obo/obo       35519 2021-08-04 12:44 meteo/2018.csv
+	  -rw-r--r-- obo/obo       36019 2021-08-04 12:44 meteo/2019.csv
+	  -rw-r--r-- obo/obo       36129 2021-08-04 12:44 meteo/2020.csv
+	  $ mkdir copie
+	  $ cd copie
+	  ~/copie$ tar xzvf ../meteo.tar.gz 
+	  meteo/2009.csv
+	  meteo/2010.csv
+	  meteo/2011.csv
+	  meteo/2012.csv
+	  meteo/2013.csv
+	  meteo/2014.csv
+	  meteo/2015.csv
+	  meteo/2016.csv
+	  meteo/2017.csv
+	  meteo/2018.csv
+	  meteo/2019.csv
+	  meteo/2020.csv
+	  ~/copie$ ls -lR
+	  .:
+	  total 4
+	  drwxr-xr-x 2 obo obo 4096 Aug  4 13:56 meteo
+   
+	  ./meteo:
+	  total 432
+	  -rw-r--r-- 1 obo obo 35802 Aug  4 12:44 2009.csv
+	  -rw-r--r-- 1 obo obo 36192 Aug  4 12:44 2010.csv
+	  -rw-r--r-- 1 obo obo 35880 Aug  4 12:44 2011.csv
+	  -rw-r--r-- 1 obo obo 36095 Aug  4 12:44 2012.csv
+	  -rw-r--r-- 1 obo obo 36095 Aug  4 12:44 2013.csv
+	  -rw-r--r-- 1 obo obo 35774 Aug  4 12:44 2014.csv
+	  -rw-r--r-- 1 obo obo 35704 Aug  4 12:44 2015.csv
+	  -rw-r--r-- 1 obo obo 35849 Aug  4 12:44 2016.csv
+	  -rw-r--r-- 1 obo obo 35731 Aug  4 12:44 2017.csv
+	  -rw-r--r-- 1 obo obo 35519 Aug  4 12:44 2018.csv
+	  -rw-r--r-- 1 obo obo 36019 Aug  4 12:44 2019.csv
+	  -rw-r--r-- 1 obo obo 36129 Aug  4 12:44 2020.csv
+	  
 
 
 
