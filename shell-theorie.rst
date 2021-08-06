@@ -22,7 +22,7 @@ Lorsque l'on lance une console ou un terminal, on se retrouve généralement fac
 
 .. image:: figures/terminal.png
 
-Le message de bienvenue peut varier d'un ordinateur à l'autre. Il peut aussi dépendre de l'état du système ou afficher des informations mises en avant par son gestionnaire. Dans l'exemple ci-dessus, il indique que l'on se connecte sur un serveur utilisant Linux version 4.19 (Debian). Il affiche le copyright t les contraintes d'utilisation et indique la date de la dernière connexion. La ligne ``obo@ovh-obo:~$``  est l'endroit où l'on peut taper les différentes commandes.
+Le message de bienvenue peut varier d'un ordinateur à l'autre. Il peut aussi dépendre de l'état du système ou afficher des informations mises en avant par son gestionnaire. Dans l'exemple ci-dessus, il indique que l'on se connecte sur un serveur utilisant Linux version 4.19 (Debian). Il affiche le copyright et les contraintes d'utilisation et indique la date de la dernière connexion. La ligne ``obo@ovh-obo:~$``  est l'endroit où l'on peut taper les différentes commandes.
 
 
 Une des commandes les plus simples de Unix est `echo(1)`_ qui permet d'afficher de l'information à l'écran. La capture d'écran ci-dessous présente trois exemples d'utilisation de `echo(1)`_. Comme toutes les commandes Unix, `echo(1)`_ prend un ou plusieurs arguments qui sont ici séparés par des espaces. La première invocation de `echo(1)`_ affiche 123 sur le terminal. Sous Unix, le terminal est aussi appelé la sortie standard, nous y reviendrons bientôt. La deuxième commande affiche Bonjour. Enfin, la troisième permet d'afficher une très longue phrase qui se termine par une longue suite de points.
@@ -183,7 +183,7 @@ Deux autres options peuvent être intéressantes. L'option ``-v`` demande à `gr
    $ grep -c -i je fichier.txt 
    3
 
-Il est aussi possible de préciser plus finement les lignes que l'on veut extraire d'un fichier texteavec `grep(1)`_. Cela se fait en donnant comme argument à `grep(1)`_ une `expression régulière` au lieu d'une simple chaîne de caractères. A titre d'exemple, le caractère ``^`` dans une expression régulière indique qu'il faut rechercher le mot qui la suit en début de ligne. Le caractère ``$`` indique qu'il faut rechercher le mot qui le précède uniquement en fin de ligne.
+Il est aussi possible de préciser plus finement les lignes que l'on veut extraire d'un fichier texte avec `grep(1)`_. Cela se fait en donnant comme argument à `grep(1)`_ une `expression régulière` au lieu d'une simple chaîne de caractères. A titre d'exemple, le caractère ``^`` dans une expression régulière indique qu'il faut rechercher le mot qui la suit en début de ligne. Le caractère ``$`` indique qu'il faut rechercher le mot qui le précède uniquement en fin de ligne.
 
 .. code:: console
 
@@ -196,7 +196,7 @@ Il est aussi possible de préciser plus finement les lignes que l'on veut extrai
    Et je m’en vais
 
 
-Pour présenter les dernières commandes, nous allons ajouter un deuxième fichier. Celui-ci a comme nom ``points.csv``. Il est au format ``comma-separated values``, c'est-à-dire qu'il contient des mots et des valuers qui sont séparées par une virgule. La plupart des tableurs permettent de manipuler de tels fichiers, tout comme les commandes Unix comme nous allons le voir. 
+Pour présenter les dernières commandes, nous allons ajouter un deuxième fichier. Celui-ci a comme nom ``points.csv``. Il est au format ``comma-separated values``, c'est-à-dire qu'il contient des mots et des valeurs qui sont séparés par une virgule. La plupart des tableurs permettent de manipuler de tels fichiers, tout comme les commandes Unix comme nous allons le voir. 
 
 .. code:: console
 
@@ -297,7 +297,8 @@ Parfois, il est nécessaire d'extraire certains champs d'un fichier en format ``
 
 
    
-   .. Une description détaillée de l'ensemble de ces utilitaires sort du cadre de ce cours. De nombreux livres et ressources Internet fournissent une description détaillée. Voici cependant une brève présentation de quelques utilitaires de manipulation de texte qui peuvent s'avérer très utiles en pratique.
+.. 
+ Une description détaillée de l'ensemble de ces utilitaires sort du cadre de ce cours. De nombreux livres et ressources Internet fournissent une description détaillée. Voici cependant une brève présentation de quelques utilitaires de manipulation de texte qui peuvent s'avérer très utiles en pratique.
 
 Notre dernier exemple est la commande `uniq(1)`_ qui permet de retirer d'un fichier *trié* les lignes qui sont identiques. A titre d'exemple, considérons le nouveau fichier ``noms.txt`` qui contient tous les noms de famille du fichier ``points.csv`` en ordre alphabétique.
 
@@ -382,7 +383,7 @@ Utilisée sans options et sans arguments, la commande `ls(1)`_ affiche les noms 
 
 La première ligne indique l'espace disque occupé par les fichiers du répertoire (dans ce cas, 8 KBytes). Ensuite, pour chaque fichier on trouve ses permissions, son propriétaire et le groupe auquel il appartient, la date de dernière modification et le nom du fichier.
 
-Il est possible de modifier l'ordre dans lequel `ls(1)`_ affiche les différents fichiers d'un répertoire. Ainsi, l'option ``-S`` permet de les afficher par ordre décroissant de taille, bien pratique lorsqu'il faut rechercher les gros fichiers qui occupent de la place sur le disque due. L'option ``-t`` permet d'afficher d'abord les fichiers les plus récents. Très pratique pour retrouver le dernier fichier téléchargé par exemple.
+Il est possible de modifier l'ordre dans lequel `ls(1)`_ affiche les différents fichiers d'un répertoire. Ainsi, l'option ``-S`` permet de les afficher par ordre décroissant de taille, bien pratique lorsqu'il faut rechercher les gros fichiers qui occupent de la place sur le disque dur. L'option ``-t`` permet d'afficher d'abord les fichiers les plus récents. Très pratique pour retrouver le dernier fichier téléchargé par exemple.
 
 Une commande intéressante de manipulation des fichiers est `touch(1)`_. Elle permet de mettre à jour la date de modification d'un fichier sans changer son contenu.
 
@@ -409,7 +410,7 @@ Utilisée sans argument, la commande `touch(1)`_ permet de créer un fichier vid
    -rw-r--r-- 1 obo obo 283 Aug  3 14:11 fichier.txt
    -rw-r--r-- 1 obo obo 181 Aug  3 10:18 points.csv
    
-Pour organiser tous ces fichiers, il est important de pouvoir les regrouper dans des répertoires. Prenons l'exemple d'une étudiante bien organisée qui doit gérer toutes les informations relatives à chacun de ses cours. Il va créer un répertoire pour chaque année académique et un sous-répertoire pour chaque cours. La commande `mkdir(1)`_ lui permet de créer un répertoire pour l'année ``2021-2022``. Elle va ensuite y créer les répertoires des cours d'informatiques, d'anglais et de mathématiques. Pour cela, elle devra aller dans le répertoire ``2021-2022`` en utilisant la commande `cd(1)`_ (change directory). Cette commande permet de changer de répertoire courant.
+Pour organiser tous ces fichiers, il est important de pouvoir les regrouper dans des répertoires. Prenons l'exemple d'une étudiante bien organisée qui doit gérer toutes les informations relatives à chacun de ses cours. Elle va créer un répertoire pour chaque année académique et un sous-répertoire pour chaque cours. La commande `mkdir(1)`_ lui permet de créer un répertoire pour l'année ``2021-2022``. Elle va ensuite y créer les répertoires des cours d'informatiques, d'anglais et de mathématiques. Pour cela, elle devra aller dans le répertoire ``2021-2022`` en utilisant la commande `cd(1)`_ (change directory). Cette commande permet de changer de répertoire courant.
 
 .. code:: console
 
@@ -433,7 +434,7 @@ Pour organiser tous ces fichiers, il est important de pouvoir les regrouper dans
    drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 math
 
 
-On les répertoires avec la lettre d comme première permission dans l'information affichée par la commande ``ls -l``. La commande `pwd(1)`_ indique quel est le répertoire courant, c'est-à-dire le répertoire dans lequel les commandes sont exécutées.
+On signale les répertoires avec la lettre d comme première permission dans l'information affichée par la commande ``ls -l``. La commande `pwd(1)`_ indique quel est le répertoire courant, c'est-à-dire le répertoire dans lequel les commandes sont exécutées.
 
 .. code:: console
 
@@ -531,7 +532,8 @@ Enfin, notez que l'option ``R`` de la commande `ls(1)`_ permet de parcourir auto
 
 .. note:: Raccourcis clavier
 
-   La ligne de commande supporte de nombreux raccourcis clavier qui peuvent vous permettre d'être encore plus rapide. La flèche vers le haut vous permet par exemple de récupérer les commandes précédentes. Vous pouvez ensuite utiliser les flèches gauche et droite pour éditer l'ancienne commande avant de taper sur Return pour l'exécuter. Lorsque vous tapez les premières lettres d'une commande, il suffit de taper sur la touche de tabulation pour que la commande soit complétée si elle est reconnue. Ainsi, si vous tapez ``mkd`` suivi de tabulation, les caractères ``ir`` manquants seront automatiquement ajouté. Ce mécanisme de complétion de la ligne de commande s'applique aussi aux arguments losque ceux-ci sont des fichiers ou des répertoires. Ainsi, si vous tapez ``cat fi`` suivi de tabulation dans le répLorsque l'on travaille en ligne de commande, 	  
+   La ligne de commande supporte de nombreux raccourcis clavier qui peuvent vous permettre d'être encore plus rapide. La flèche vers le haut vous permet par exemple de récupérer les commandes précédentes. Vous pouvez ensuite utiliser les flèches gauche et droite pour éditer l'ancienne commande avant de taper sur Return pour l'exécuter. Lorsque vous tapez les premières lettres d'une commande, il suffit de taper sur la touche de tabulation pour que la commande soit complétée si elle est reconnue. Ainsi, si vous tapez ``mkd`` suivi de tabulation, les caractères ``ir`` manquants seront automatiquement ajouté. Ce mécanisme de complétion de la ligne de commande s'applique aussi aux arguments losque ceux-ci sont des fichiers ou des répertoires. Ainsi, si vous tapez ``cat fi`` suivi de tabulation dans le répertoire contenant le contenant le fichier ``fichier.txt`` les caractères manquants ``chier.txt`` seront automatiquement compléter. 
+.. Lorsque l'on travaille en ligne de commande, 	  
 
 .. cp, mv, rmdir, rm
    
@@ -628,7 +630,7 @@ La plupart des utilitaires fournis avec un système Unix ont été conçus pour 
  - une sortie standard (:term:`stdout` en anglais) qui est un flux d'informations sur lequel le processus écrit le résultat de son traitement. Par défaut, la sortie standard est associée au terminal.
  - une sortie d'erreur standard (:term:`stderr` en anglais) qui est un flux de données sur lequel le processus écrira les messages d'erreur éventuels. Par défaut, la sortie d'erreur standard est associée au même terminal que :term:`stdout`.
 
-La puissance du :term:`shell` vient de la possibilité de combiner des commandes en redirigeant les entrées et sorties standards. Les shells Unix supportent différentes formes de redirection. Tout d'abord, il est possible de forcer un programme à lire son entrée standard depuis un fichier plutôt que depuis le clavier. Cela se fait en ajoutant à la fin de la ligne de commande le caractère ``<`` suivi du nom du fichier à lire. Ensuite, il est possible de rediriger la sortie standard vers un fichier. Cela se fait en utilisant ``>`` ou ``>>``. Lorsqu'une commande est suivie de ``> file``, le fichier ``file`` est créé si il n'existait pas et remis à zéro si il existait, et la sortie standard de cette commande est redirigée vers le fichier ``file``. Lorsqu'un commande est suivie de ``>> file``, la sortie standard est sauvegardée à la fin du fichier ``file`` (si ``file`` n'existait pas, il est créé).
+La puissance du :term:`shell` vient de la possibilité de combiner des commandes en redirigeant les entrées et sorties standards. Les shells Unix supportent différentes formes de redirection. Tout d'abord, il est possible de forcer un programme à lire son entrée standard depuis un fichier plutôt que depuis le clavier. Cela se fait en ajoutant à la fin de la ligne de commande le caractère ``<`` suivi du nom du fichier à lire. Ensuite, il est possible de rediriger la sortie standard vers un fichier. Cela se fait en utilisant ``>`` ou ``>>``. Lorsqu'une commande est suivie de ``> file``, le fichier ``file`` est créé s'il n'existait pas et remis à zéro s'il existait, et la sortie standard de cette commande est redirigée vers le fichier ``file``. Lorsqu'un commande est suivie de ``>> file``, la sortie standard est sauvegardée à la fin du fichier ``file`` (si ``file`` n'existait pas, il est créé).
 
 Voici un exemple d'utilisation des redirections :
 
@@ -689,7 +691,7 @@ Considérons un deuxième exemple qui concerne les données météorologiques. L
    2009-01-03,-1,-4,13,-5,-1,-5,0,84,9,1031,21,0,0,-9,143,113,113,0,2,8.1,météo très défavorable
 
    
-Chacun de ces fichiers contient une entête avec trois lignes de commentaires et les données de chaque jour sous séparées par une virgule. Chaque ligne contient les informations suivantes:
+Chacun de ces fichiers contient une entête avec trois lignes de commentaires et les données de chaque jour sont séparées par une virgule. Chaque ligne contient les informations suivantes:
 
 .. code:: console
 
@@ -716,7 +718,7 @@ Sous Unix, on peut être plus rapide en utilisant les `wildcards` ce sont des ca
  - ``?`` qui remplace n'importe quel caractère
  - ``*`` qui remplace un ou plusieurs caractères
 
-Lorsque l'on tape un de ces caractères spéciaux en ligne de commande, Unix essaye de voir si il y a un ou plusieurs fichiers qui correspondent. A titre d'exemple, considérons le répertoire qui contient les fichiers suivants
+Lorsque l'on tape un de ces caractères spéciaux en ligne de commande, Unix essaye de voir s'il y a un ou plusieurs fichiers qui correspondent. A titre d'exemple, considérons le répertoire qui contient les fichiers suivants
 
  - ``A.txt`` ``Bb.txt`` ```Ccc.csv```
 
@@ -739,7 +741,7 @@ Unix supporte d'autres caractères spéciaux, vous trouverez plus de détails da
 Archiver et comprimer des fichiers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Lorsque l'on manipule de gros fichiers, comme des données qu'il faut analyser à des fins statistiques, on se retrouve parfois à consommer beaucoup d'espace sur le disque. Celui-ci étant infini, on doit parfois libérer de l'espace. La solution la plus courante est de supprimer les fichiers qui ne sont plus utiles. Une autre solution est de comprimer les très gros fichiers pour qu'ils prennent moins de place. C'est ce que les utilitaires `gzip(1)`_, `gunzip(1)`_ et `zcat(1)`_ permettent de faire.
+Lorsque l'on manipule de gros fichiers, comme des données qu'il faut analyser à des fins statistiques, on se retrouve parfois à consommer beaucoup d'espace sur le disque. Celui-ci n'étant pas infini, on doit parfois libérer de l'espace. La solution la plus courante est de supprimer les fichiers qui ne sont plus utiles. Une autre solution est de comprimer les très gros fichiers pour qu'ils prennent moins de place. C'est ce que les utilitaires `gzip(1)`_, `gunzip(1)`_ et `zcat(1)`_ permettent de faire.
 
 
 .. code:: console
@@ -761,7 +763,7 @@ Lorsque l'on manipule de gros fichiers, comme des données qu'il faut analyser �
    $ zcat 2*csv.gz | grep -v "#"  | sort -r -g -t ',' -k 2 | head -1 2019-07-25,38,30,13,24,35,35,0,55,10,1016,6.25,39,20,30,116,116,116,0,8,14.5,météo favorable
 
 
-Lorsque l'on travaille sur des projets qui regroupent plusieurs fichiers, il est parfois nécessaire de les échanger avec des collègues ou de les envoyer au professeur. Même si il est possible d'attacher plusieurs fichiers à un email, c'est une opération manuelle qui prend vite du temps. Une meilleure solution est de placer l'ensemble des fichiers dans une archive. Sous Unix, la solution standard pour créer de telles archives est le programme `tar(1)`_. Il prend supporte différents options. Les plus courantes sont :
+Lorsque l'on travaille sur des projets qui regroupent plusieurs fichiers, il est parfois nécessaire de les échanger avec des collègues ou de les envoyer au professeur. Même s'il est possible d'attacher plusieurs fichiers à un email, c'est une opération manuelle qui prend vite du temps. Une meilleure solution est de placer l'ensemble des fichiers dans une archive. Sous Unix, la solution standard pour créer de telles archives est le programme `tar(1)`_. Il supporte différents options. Les plus courantes sont :
 
  - ```v`` qui active le mode "verbeux", c'est-à-dire que `tar(1)`_ donne sur la sortie standard la liste de tous les fichiers qu'il a traité
  - ``c`` qui demande de créer une archive et d'y place des fichiers
@@ -846,7 +848,7 @@ Tout shell Unix peut également s'utiliser comme un interpréteur de commande qu
  - des programmes exécutables en langage machine. C'est le cas de la plupart des utilitaires dont nous avons parlé jusqu'ici.
  - des programmes écrits dans un langage interprété. C'est le cas des programmes écrits pour le shell, mais également pour d'autres langages interprétés comme python_ ou perl_.
 
-Lors de l'exécution d'un programme, le système d'exploitation reconnaît [#fexecbit]_ si il s'agit d'un programme directement exécutable ou d'un programme interprété en analysant les premiers octets du fichier. Par convention, sous Unix, les deux premiers caractères d'un programme écrit dans un langage qui doit être interprété sont ``#!``. Ils sont suivis par le nom complet de l'interpréteur qui doit être utilisé pour interpréter le programme.
+Lors de l'exécution d'un programme, le système d'exploitation reconnaît [#fexecbit]_ s'il s'agit d'un programme directement exécutable ou d'un programme interprété en analysant les premiers octets du fichier. Par convention, sous Unix, les deux premiers caractères d'un programme écrit dans un langage qui doit être interprété sont ``#!``. Ils sont suivis par le nom complet de l'interpréteur qui doit être utilisé pour interpréter le programme.
 
 Le programme `bash(1)`_ le plus simple est le suivant :
 
