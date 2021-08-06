@@ -12,21 +12,24 @@ Dans cette section, nous allons décrire comment utiliser un système Unix tel q
 Utilitaires
 ^^^^^^^^^^^
 
-Unix a été conçu à l'époque des mini-ordinateurs. Un mini-ordinateur servait plusieurs utilisateurs en même temps. Ceux-ci y étaient connectés par l'intermédiaire d'un terminal équipé d'un écran et d'un clavier. Les programmes traitaient les données entrées par l'utilisateur via le clavier ou stockées sur le disque. Les résultats de l'exécution des ces programmes étaient affichés à l'écran, sauvegardés sur disque ou parfois imprimés sur papier.
+Unix a été conçu à l'époque des mini-ordinateurs. Un mini-ordinateur servait plusieurs utilisateurs en même temps. Ceux-ci y étaient connectés par l'intermédiaire d'un terminal équipé d'un écran et d'un clavier. Les programmes traitaient les données entrées par l'utilisateur via le clavier ou stockées sur le disque. Les résultats de l'exécution de ces programmes étaient affichés à l'écran, sauvegardés sur disque ou parfois imprimés sur papier.
 
-Unix ayant été initialement développé pour manipuler des documents contenant du texte, il comprend de nombreux utilitaires facilitant ces traitements. Chaque utilitaire Unix a été conçu pour réaliser correctement une fonction principale. Comme nous le verrons ensuite, il est possible de combiner intelligemment ces différents utilitaires pour réaliser des traitements plus complexes pour lesquel il n'existe pas d'utilitaire spécifiques.
-
-Les utilitaires Unix permettant avant tout de manipuler des fichiers. La plupart permettent de traiter des fichiers contenant du texte.
+Unix ayant été initialement développé pour manipuler des documents contenant du texte, il comprend de nombreux utilitaires facilitant le traitement de tels fichiers. Chaque utilitaire (nous verrons plus tard ce qu'un utilitaire est précisément, pour l'instant on peut le comprendre comme un programme) Unix a été conçu pour réaliser correctement une fonction principale. Comme nous le verrons ensuite, il est possible de combiner intelligemment ces différents utilitaires pour réaliser des traitements plus complexes pour lesquels il n'existe pas d'utilitaire spécifiques.
 
 Lorsque l'on lance une console ou un terminal, on se retrouve généralement face à une fenêtre qui affiche un message de bienvenue comme dans l'exemple ci-dessous.
 
 .. image:: figures/terminal.png
 
-Le message de bienvenue peut varier d'un ordinateur à l'autre. Il peut aussi dépendre de l'état du système ou afficher des informations mises en avant par son gestionnaire. Dans l'exemple ci-dessus, il indique que l'on se connecte sur un serveur utilisant Linux version 4.19 (Debian). Il affiche le copyright t les contraintes d'utilisation et indique la date de la dernière connexion. La ligne ``obo@ovh-obo:~$``  est l'endroit où l'on peut taper les différentes commandes.
+Le message de bienvenue peut varier d'un ordinateur à l'autre. Il peut aussi dépendre de l'état du système ou afficher des informations mises en avant par son gestionnaire. Dans l'exemple ci-dessus, il indique que l'on se connecte sur un serveur utilisant Linux version 4.19 (Debian). Il affiche le copyright et les contraintes d'utilisation et indique la date de la dernière connexion. La ligne ``obo@ovh-obo:~$``  est l'endroit où l'on peut taper les différentes commandes.
 
 
-Une des commandes les plus simples de Unix est `echo(1)`_ qui permet d'afficher de l'information à l'écran. La capture d'écran ci-dessous présente trois exemples d'utilisation de `echo(1)`_. Comme toutes les commandes Unix, `echo(1)`_ prend un ou plusieurs arguments qui sont ici séparés par des espaces. La première invocation de `echo(1)`_ affiche 123 sur le terminal. Sous Unix, le terminal est aussi appelé la sortie standard, nous y reviendrons bientôt. La deuxième commande affiche Bonjour. Enfin, la troisième permet d'afficher une très longue phrase qui se termine par une longue suite de points.
+Une des commandes les plus simples de Unix est `echo(1)`_ qui permet d'afficher de l'information à l'écran (sous format textuel). La capture d'écran ci-dessous présente trois exemples d'utilisation de `echo(1)`_. Comme toutes les commandes Unix, `echo(1)`_ prend un ou plusieurs arguments qui sont ici séparés par des espaces. 
 
+* La première invocation de `echo(1)`_ affiche 123 sur le terminal. 
+* La deuxième commande affiche Bonjour. 
+* Enfin, la troisième permet d'afficher une très longue phrase qui se termine par une longue suite de points.
+
+*Note* : Sous Unix, le terminal est aussi appelé la sortie standard, nous y reviendrons bientôt. 
 
 .. image:: figures/terminal2.png
 
@@ -55,7 +58,13 @@ Nous reviendrons sur `echo(1)`_ un peu plus tard car vous verrez que c'est une c
    Pareil à la
    Feuille morte.
 	   
-Ce poème de Paul Verlaine a servi de signal du lancement du débarquement allié qui a mis fin à la seconde guerre mondiale. Plusieurs utilitaires permettent de manipuler de tels fichiers textes. Plutôt que de présenter une copie d'écran pour chaque exemple, nous présentons à partir de maintenant la commande précédée du symbôle ``$`` suivie par les messages qui sont affichés sur le terminal.
+Ce poème de Paul Verlaine a servi de signal du lancement du débarquement allié qui a mis fin à la seconde guerre mondiale. Plusieurs utilitaires permettent de manipuler de tels fichiers. 
+A partir de maintenant, nous ne représenteront plus les exemples avec une copie d'écran mais sous ce format ci :
+
+.. code:: console 
+
+   $ <commande> 
+   <résultat> 
 
 Une des premières commandes que l'on utilise pour manipuler des fichiers textes est la commande `cat(1)`_. Celle-ci affiche simplement sur le terminal le contenu du fichier. Dans l'exemple ci-dessous, Unix exécute la commande `cat(1)`_ avec comme argument le nom ```fichier.txt``. Lors de son exécution, la commande `cat(1)`_ ouvre le fichier dont le nom est ``fichier.txt`` et affiche son contenu.
 
@@ -84,7 +93,7 @@ Une des premières commandes que l'on utilise pour manipuler des fichiers textes
    Feuille morte.
 
 
-Les commandes Unix telles que `cat(1)`_ prennent des arguments comme présentés ci-dessus. Le comportement de ces commandes peut aussi être modifié en spécifiant une ou plusieurs options. Ces options commencent généralement par un ou deux tirets (caractère ``-``). Un première exemple est le message d'aide succinct que ``cat(1)`_ affiche lorsque l'on l'exécute avec ```--help`` comme option. 
+Les commandes Unix telles que `cat(1)`_ prennent des arguments comme présentés ci-dessus. Le comportement de ces commandes peut aussi être modifié en spécifiant une ou plusieurs options. Ces options commencent généralement par un ou deux tirets (caractère ``-``). Un première exemple est le message d'aide succinct que `cat(1)`_ affiche lorsque l'on l'exécute avec ``--help`` comme option. 
 
 .. code:: console
 
@@ -120,7 +129,7 @@ La quasi totalité des commandes Unix affichent un message d'aide de ce type lor
 
 .. ajouter l'exercice https://inginious.org/course/cli-linux/ccm-cat
 
-Il y a trois commandes qui sont très proches de `cat(1)`_ et qui peuvent être utiles lorsque l'on doit consulter de longs fichiers texte. Tout d'abord, la commande `head(1)`_ permet de consulter le début d'un fichier. Sans option, `head(1)`_ affiche les dix premières lignes du fichier. Avec l'option ``-n `` suivie d'un entier (``x``), `head(1)`_ affiche les ``x`` premières lignes du fichier. La commande `tail(1)`_ fait la même chose pour la fin du fichier. Si vous consultez la page de manuel de `tail(1)`_, vous verrez qu'elle a beaucoup plus d'options que `head(1)`_. Il y a en effet plusieurs cas pratiques dans lesquels il est utile de lire la fin d'un fichier que son début, mais ceux-ci sortent du cadre de cette brève introduction à la ligne de commande.
+Il y a trois commandes qui sont très proches de `cat(1)`_ et qui peuvent être utiles lorsque l'on doit consulter de longs fichiers texte. Tout d'abord, la commande `head(1)`_ permet de consulter le début d'un fichier. Sans option, `head(1)`_ affiche les dix premières lignes du fichier. Avec l'option ``-n`` suivie d'un entier (``x``), `head(1)`_ affiche les ``x`` premières lignes du fichier (voir exemple ci-dessous). La commande `tail(1)`_ fait la même chose pour la fin du fichier. Si vous consultez la page de manuel de `tail(1)`_, vous verrez qu'elle a beaucoup plus d'options que `head(1)`_. Il y a en effet plusieurs cas pratiques dans lesquels il est utile de lire la fin d'un fichier que son début, mais ceux-ci sortent du cadre de cette brève introduction à la ligne de commande.
 
 .. code:: console
 
@@ -134,9 +143,9 @@ Il y a trois commandes qui sont très proches de `cat(1)`_ et qui peuvent être 
    Pareil à la
    Feuille morte.
 
-La commande `more(1)`_ permet de visualiser tout un long fichier "page par page". Elle afiche la première page du fichier et invite l'utilisateur à taper un caractère pour poursuivre l'affichage du fichier. Si vous tapez sur espace, `more(1)`_ avancera d'un écran. Si vous tapez sur le retour à la ligne, `more(1)`_ avancera d'une ligne. Si vous tapez sur ``/``, vous pouvez indiquer un mot à rechercher dans le fichier. `more(1)`_ lira le fichier jusqu'à trouver le mot que vous recherchez et l'affichera. Enfin en tapan ``h``, `more(1)`_ vous affichera une page d'aide précisant toutes les touches que vous pouvez presser durant l'exécution de `more(1)`_ et le rôle de chacune d'entre elles.
+La commande `more(1)`_ permet de visualiser tout un long fichier "page par page". Elle afiche la première page du fichier et invite l'utilisateur à taper un caractère pour poursuivre l'affichage du fichier. Si vous tapez sur espace, `more(1)`_ avancera d'un écran. Si vous tapez sur le retour à la ligne, `more(1)`_ avancera d'une ligne. Si vous tapez sur ``/``, vous pouvez indiquer un mot à rechercher dans le fichier (*Vim-search*). `more(1)`_ lira le fichier jusqu'à trouver le mot que vous recherchez et l'affichera. Enfin en tapant ``h``, `more(1)`_ vous affichera une page d'aide précisant toutes les touches que vous pouvez presser durant l'exécution de `more(1)`_ et le rôle de chacune d'entre elles.
    
-Plusieurs commandes permettent de faire des manipulations plus avancées sur les fichiers. `wc(1)`_ permet d'extraire différents compteurs (nombre de lignes, nombre de mots et nombre de caractères) d'un fichier texte.
+Plusieurs commandes permettent de faire des manipulations plus avancées sur les fichiers. `wc(1)`_ (pour *word-count*) permet d'extraire différents compteurs (nombre de lignes, nombre de mots et nombre de caractères) d'un fichier texte.
 
 .. code:: console
 
@@ -159,7 +168,7 @@ Une autre commande très utile est `grep(1)`_. Elle permet notamment d'extraire 
    Et je pleure;
    Et je m’en vais
 
-`grep(1)`_ est une des commandes les plus puissantes de Unix. Nous n'aurons pas l'occasion de la présenter complètement. Elle supporte de nombreuses options comme par exemple ``-i`` qui considère les majuscules et minuscules comme équivalentes.
+`grep(1)`_ est une des commandes les plus puissantes de Unix. Nous n'aurons pas l'occasion de la présenter complètement. Elle supporte de nombreuses options comme par exemple ``-i`` (pour *ignore-case*) qui considère les majuscules et minuscules comme équivalentes.
 
 .. code:: console
           
@@ -168,7 +177,7 @@ Une autre commande très utile est `grep(1)`_. Elle permet notamment d'extraire 
    Et je pleure;
    Et je m’en vais
 
-Deux autres options peuvent être intéressantes. L'option ``-v`` demande à `grep(1)`_ d'afficher les lignes qui ne contiennent pas la chaîne de caractères passée en argument. L'option ``-c`` elle compte les lignes qui correspondent plutôt que de les afficher. Les options peuvent être combinées comme dans les exemples ci-dessous.
+Deux autres options peuvent être intéressantes. L'option ``-v`` (pour *invert*) demande à `grep(1)`_ d'afficher les lignes qui ne contiennent pas la chaîne de caractères passée en argument. L'option ``-c`` (pour *count*) compte les lignes qui correspondent plutôt que de les afficher. Les options peuvent être combinées comme dans les exemples ci-dessous.
 
 .. code:: console
 
@@ -183,7 +192,7 @@ Deux autres options peuvent être intéressantes. L'option ``-v`` demande à `gr
    $ grep -c -i je fichier.txt 
    3
 
-Il est aussi possible de préciser plus finement les lignes que l'on veut extraire d'un fichier texteavec `grep(1)`_. Cela se fait en donnant comme argument à `grep(1)`_ une `expression régulière` au lieu d'une simple chaîne de caractères. A titre d'exemple, le caractère ``^`` dans une expression régulière indique qu'il faut rechercher le mot qui la suit en début de ligne. Le caractère ``$`` indique qu'il faut rechercher le mot qui le précède uniquement en fin de ligne.
+Il est aussi possible de préciser plus finement les lignes que l'on veut extraire d'un fichier texte avec `grep(1)`_. Cela se fait en donnant comme argument à `grep(1)`_ une `expression régulière` (aussi appelée *re* ou *regex*) au lieu d'une simple chaîne de caractères. A titre d'exemple dans une expression régulière, le caractère ``"^"`` indique qu'il faut rechercher le mot en début de ligne alors que le caractère ``"$"`` indique qu'il faut rechercher le mot uniquement en fin de ligne.
 
 .. code:: console
 
@@ -196,7 +205,7 @@ Il est aussi possible de préciser plus finement les lignes que l'on veut extrai
    Et je m’en vais
 
 
-Pour présenter les dernières commandes, nous allons ajouter un deuxième fichier. Celui-ci a comme nom ``points.csv``. Il est au format ``comma-separated values``, c'est-à-dire qu'il contient des mots et des valuers qui sont séparées par une virgule. La plupart des tableurs permettent de manipuler de tels fichiers, tout comme les commandes Unix comme nous allons le voir. 
+Pour présenter les dernières commandes, nous allons ajouter un deuxième fichier. Celui-ci a comme nom ``points.csv``. Il est au format ``comma-separated values``, c'est-à-dire qu'il contient des mots et des valeurs qui sont séparées par une virgule. La plupart des tableurs permettent de manipuler de tels fichiers, tout comme les commandes Unix que nous allons le voir. 
 
 .. code:: console
 
@@ -433,7 +442,7 @@ Pour organiser tous ces fichiers, il est important de pouvoir les regrouper dans
    drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 math
 
 
-On les répertoires avec la lettre d comme première permission dans l'information affichée par la commande ``ls -l``. La commande `pwd(1)`_ indique quel est le répertoire courant, c'est-à-dire le répertoire dans lequel les commandes sont exécutées.
+On les répertoires avec la lettre d comme première permission dans l'information affichée par la commande ``ls -l``. La commande `pwd(1)`_ (pour *print working directory*) indique quel est le répertoire courant, c'est-à-dire le répertoire dans lequel les commandes sont exécutées.
 
 .. code:: console
 
@@ -611,8 +620,8 @@ Lorsqu'un utilisateur se connecte à un système Unix, en direct ou à travers u
 
 Voici quelques exemples d'utilisation de commandes externes.
 
-.. literalinclude:: src/exemple.out
-        :language: console
+.. include:: src/exemple.out
+        :code: console
 
 .. spelling::
 
@@ -632,8 +641,8 @@ La puissance du :term:`shell` vient de la possibilité de combiner des commandes
 
 Voici un exemple d'utilisation des redirections :
 
-.. literalinclude:: src/exemple2.out
-        :language: console
+.. include:: src/exemple2.out
+        :code: console
 
 .. note:: Rediriger la sortie d'erreur standard
 
@@ -645,8 +654,8 @@ Voici un exemple d'utilisation des redirections :
 
 Les shells Unix supportent un second mécanisme qui est encore plus intéressant pour combiner plusieurs programmes. Il s'agit de la redirection de la sortie standard d'un programme vers l'entrée standard d'un autre sans passer par un fichier intermédiaire. Cela se réalise avec le symbole ``|`` (:term:`pipe` en anglais). L'exemple suivant illustre quelques combinaisons d'utilitaires de manipulation de texte.
 
-.. literalinclude:: src/exemple3.out
-        :language: console
+.. include:: src/exemple3.out
+        :code: console
 
 Le premier exemple utilise `echo(1)`_ pour générer du texte et le passer directement à `wc(1)`_ qui compte le nombre de caractères. Le deuxième exemple utilise `cat(1)`_ pour afficher sur la sortie standard le contenu d'un fichier. Cette sortie est reliée à `sort(1)`_ qui trie le texte reçu sur son entrée standard en ordre alphabétique croissant. Cette sortie en ordre alphabétique est reliée à `uniq(1)`_ qui la filtre pour en retirer les lignes dupliquées.
 
@@ -850,35 +859,35 @@ Lors de l'exécution d'un programme, le système d'exploitation reconnaît [#fex
 
 Le programme `bash(1)`_ le plus simple est le suivant :
 
-.. literalinclude:: src/hello.sh
-   :language: bash
+.. include:: src/hello.sh
+   :code: bash
 
 L'exécution de ce script shell retourne la sortie suivante :
 
-.. literalinclude:: src/hello.sh.out
-        :language: console
+.. include:: src/hello.sh.out
+   :code: console
 
 Par convention en `bash(1)`_, le caractère ``#`` marque le début d'un commentaire en début ou en cours de ligne. Comme tout langage, `bash(1)`_ permet à l'utilisateur de définir des variables. Celles-ci peuvent contenir des chaînes de caractères ou des nombres. Le script ci-dessous utilise deux variables, ``PROG`` et ``COURS`` et les utilise pour afficher un texte avec la commande ``echo``.
 
-.. literalinclude:: src/hellovar.sh
-   :language: bash
+.. include:: src/hellovar.sh
+   :code: bash
    
 On note dans l'exemple ci-dessus l'utilisation du symbole ``$`` pour référer à la valeur de la variable. Dans la majorité des cas, cette notation suffit. Il y a une subtilité auxquelles ont doit faire attention : si il y a une ambiguïté possible sur le nom de la variable pour l'interpréteur il convient d'entourer son nom d'accolades ``{ }``. Par exemple, ``milieu = "mi"; echo do$milieuno`` affichera ``do`` seulement car l'interpréteur considère la seconde partie comme la variable ``$milieuno`` non définie et donc égale à la chaîne vide (et cela sans générer de message d'erreur). Avec ``echo do${milieu}no``, par contre, le résultat est celui attendu.
 
 Un script `bash(1)`_ peut également prendre des arguments passés en ligne de commande. Par convention, ceux-ci ont comme noms ``$1``, ``$2``, ``$3``, ... Le nombre d'arguments s'obtient avec ``$#`` et la liste complète avec ``$@``. L'exemple ci-dessous illustre l'utilisation de ces arguments.
 
-.. literalinclude:: src/args.sh
-   :language: bash
+.. include:: src/args.sh
+   :code: bash
 
 L'exécution de ce script produit la sortie suivante :
 
-.. literalinclude:: src/args.sh.out
-        :language: console
+.. include:: src/args.sh.out
+   :code: console
 
 Concernant le traitement des arguments par un script bash, il est utile de noter que lorsque l'on appelle un script en redirigeant son entrée ou sa sortie standard, le script n'est pas informé de cette redirection. Ainsi, si l'on exécute le script précédent en faisant ``args.sh arg1 > args.out``, le fichier ``args.out`` contient les lignes suivantes :
 
-.. literalinclude:: src/args.out
-        :language: console
+.. include:: src/args.out
+   :code: console
 
 Scripts : conditionnelles
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -895,15 +904,15 @@ Un script permet d'utiliser des structures de contrôle comme dans tout langage 
 
 D'autres types de test sont définis dans la page de manuel : `bash(1)`_. Le script ci-dessous fournit un premier exemple d'utilisation de tests avec `bash(1)`_.
 
-.. literalinclude:: src/eq.sh
-   :language: bash
+.. include:: src/eq.sh
+   :code: bash
 
-Tout d'abord, ce script vérifie qu'il a bien été appelé avec deux arguments. Vérifier qu'un programme reçoit bien les arguments qu'il attend est une règle de bonne pratique qu'il est bon de respecter dès le début. Si le script n'est pas appelé avec le bon nombre d'arguments, un message d'erreur est affiché sur la sortie d'erreur standard et le script se termine avec un code de retour. Ces codes de retour sont importants car ils permettent à un autre programme, par exemple un autre script `bash(1)`_ de vérifier le bon déroulement d'un programme appelé. Le script :download:`src/eq.sh` utilise des appels explicites à `exit(1posix)`_ même si par défaut, un script `bash(1)`_  qui n'en contient pas retourne un code de retour nul à la fin de son exécution.
+Tout d'abord, ce script vérifie qu'il a bien été appelé avec deux arguments. Vérifier qu'un programme reçoit bien les arguments qu'il attend est une règle de bonne pratique qu'il est bon de respecter dès le début. Si le script n'est pas appelé avec le bon nombre d'arguments, un message d'erreur est affiché sur la sortie d'erreur standard et le script se termine avec un code de retour. Ces codes de retour sont importants car ils permettent à un autre programme, par exemple un autre script `bash(1)`_ de vérifier le bon déroulement d'un programme appelé. Le script ``src/eq.sh`` utilise des appels explicites à `exit(1posix)`_ même si par défaut, un script `bash(1)`_  qui n'en contient pas retourne un code de retour nul à la fin de son exécution.
 
-Un autre exemple d'utilisation des codes de retour est le script :download:`src/wordin.sh` repris ci-dessous qui utilise `grep(1)`_ pour déterminer si un mot passé en argument est présent dans un fichier texte. Pour cela, il exploite la variable spéciale ``$?`` dans laquelle `bash(1)`_ sauve le code de retour du dernier programme exécuté par le script.
+Un autre exemple d'utilisation des codes de retour est le script ``src/wordin.sh`` repris ci-dessous qui utilise `grep(1)`_ pour déterminer si un mot passé en argument est présent dans un fichier texte. Pour cela, il exploite la variable spéciale ``$?`` dans laquelle `bash(1)`_ sauve le code de retour du dernier programme exécuté par le script.
 
-.. literalinclude:: src/wordin.sh
-   :language: bash
+.. include:: src/wordin.sh
+   :code: bash
 
 Ce programme utilise le fichier spécial ``/dev/null``. Celui-ci est en pratique l'équivalent d'un trou noir. Il accepte toutes les données en écriture mais celles-ci ne peuvent jamais être relues. ``/dev/null`` est très utile lorsque l'on veut ignorer la sortie d'un programme et éviter qu'elle ne s'affiche sur le terminal. `bash(1)`_ supporte également ``/dev/stdin`` pour représenter l'entrée standard, ``/dev/stdout`` pour la sortie standard et ``/dev/stderr`` pour l'erreur standard.
 
@@ -916,8 +925,8 @@ Les scripts servent souvent à réaliser des opérations sur des fichiers, et il
  
 L'exemple ci-dessous illustre l'utilisation des conditions sur les fichiers :
 
-.. literalinclude:: src/exemple_if_files.sh
-   :language: bash
+.. include:: src/exemple_if_files.sh
+   :code: bash
 
 On note l'utilisation du combinateur logique de négation ``!`` pour la troisième condition. Deux autres opérateurs logiques sont disponibles : ``-a`` est le ET logique (AND) et le ``-o`` est le OU logique (OR) :
 
@@ -926,8 +935,8 @@ On note l'utilisation du combinateur logique de négation ``!`` pour la troisiè
 
 La deuxième et la troisième condition de l'exemple ci-dessus peuvent ainsi être combinées de la manière suivante :
 
-.. literalinclude:: src/exemple_if_files_compact.sh
-   :language: bash
+.. include:: src/exemple_if_files_compact.sh
+   :code: bash
 
 La structure ``case`` permet de vérifier une entrée contre une série de motifs. Cela est souvent utile, par exemple, pour l'analyse des paramètres fournis à un script (en utilisant ``-`` et ``--``). La description de ``case`` dépasse cependant le cadre de ce cours.
 
@@ -936,11 +945,11 @@ Scripts : boucles
 
 On utilise régulièrement des boucles pour répéter une opération pour plusieurs argument. Voici un exemple d'utilisation de la boucle ``for`` :
 
-.. literalinclude:: src/exemple_for.sh
-   :language: bash
+.. include:: src/exemple_for.sh
+   :code: bash
 
-.. literalinclude:: src/exemple_for.sh.out
-        :language: console
+.. include:: src/exemple_for.sh.out
+   :code: console
 
 Une utilisation courante de la boucle ``for`` est pour répéter un même traitement sur tous les fichiers présents dans une liste. La boucle est alors un itérateur : pour chaque itération la variable `s` prend une des valeurs des éléments de la liste séparés par des espaces. 
 
@@ -953,11 +962,11 @@ La boucle ``for`` peut aussi prendre comme entrée (liste sur laquelle itérer) 
  
 Voici un exemple de l'utilisation du caractère ``*``, qui calcule une signature de chaque fichier sous la forme d'un *hash*  `SHA-1 <https://fr.wikipedia.org/wiki/SHA-1>`_ :
 
-.. literalinclude:: src/exemple_for2.sh
-   :language: bash
+.. include:: src/exemple_for2.sh
+   :code: bash
 
-.. literalinclude:: src/exemple_for2.sh.out
-        :language: console
+.. include:: src/exemple_for2.sh.out
+   :code: console
 
 `bash(1)`_ permet aussi l'utilisation de boucles ``while`` et ``until`` sur un principe similaire, mais nous ne les couvrirons pas dans ce cours.
 
