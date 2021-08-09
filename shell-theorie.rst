@@ -5,7 +5,7 @@
 .. _shell:
 
 Utilisation d'un système Unix
-=============================
+==============================
 
 Dans cette section, nous allons décrire comment utiliser un système Unix tel que GNU/Linux en mettant l'accent sur l'utilisation de la ligne de commande.
 
@@ -369,7 +369,7 @@ La commande `uniq(1)`_ permet de retirer toutes les lignes qui sont identiques d
   Dans la version en-ligne de ces notes, toutes les références vers un programme Unix, un appel système ou une fonction de la librairie pointent vers la page de manuel Linux correspondante. Les pages de manuel sont également disponibles sur de nombreux sites web, comme par exemple `https://www.man7.org/linux/man-pages/index.html <https://www.man7.org/linux/man-pages/index.html>`_ qui présente les dernières versions des pages de manuel de Linux en anglais. Certaines de ces pages de manuel ont étés traduite (parfois partiellement en français). Vous les trouverez notamment sur `https://man.cx/ <https://man.cx/>`_.
 
 Fichiers et répertoires
-^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Nous avons travaillé sur quelques fichiers. En pratique, un ordinateur contient souvent des milliers de fichiers. Les deux fichiers que nous avons utilisé dans la section précédente sont dans un répertoire. Un répertoire est une structure logique qui regroupe des fichiers et/ou d'autres répertoires. On peut imaginer le disque dur ou le SSD d'un ordinateur comme étant une grand armoire remplie de tiroirs. Chaque tiroir est un répertoire qui peut contenir des fichiers ou d'autres répertoires.
 
@@ -620,8 +620,8 @@ Lorsqu'un utilisateur se connecte à un système Unix, en direct ou à travers u
 
 Voici quelques exemples d'utilisation de commandes externes.
 
-.. include:: src/exemple.out
-        :code: console
+.. literalinclude:: src/exemple.out
+        :language: console
 
 .. spelling::
 
@@ -641,8 +641,8 @@ La puissance du :term:`shell` vient de la possibilité de combiner des commandes
 
 Voici un exemple d'utilisation des redirections :
 
-.. include:: src/exemple2.out
-        :code: console
+.. literalinclude:: src/exemple2.out
+        :language: console
 
 .. note:: Rediriger la sortie d'erreur standard
 
@@ -654,8 +654,8 @@ Voici un exemple d'utilisation des redirections :
 
 Les shells Unix supportent un second mécanisme qui est encore plus intéressant pour combiner plusieurs programmes. Il s'agit de la redirection de la sortie standard d'un programme vers l'entrée standard d'un autre sans passer par un fichier intermédiaire. Cela se réalise avec le symbole ``|`` (:term:`pipe` en anglais). L'exemple suivant illustre quelques combinaisons d'utilitaires de manipulation de texte.
 
-.. include:: src/exemple3.out
-        :code: console
+.. literalinclude:: src/exemple3.out
+        :language: console
 
 Le premier exemple utilise `echo(1)`_ pour générer du texte et le passer directement à `wc(1)`_ qui compte le nombre de caractères. Le deuxième exemple utilise `cat(1)`_ pour afficher sur la sortie standard le contenu d'un fichier. Cette sortie est reliée à `sort(1)`_ qui trie le texte reçu sur son entrée standard en ordre alphabétique croissant. Cette sortie en ordre alphabétique est reliée à `uniq(1)`_ qui la filtre pour en retirer les lignes dupliquées.
 
@@ -859,35 +859,35 @@ Lors de l'exécution d'un programme, le système d'exploitation reconnaît [#fex
 
 Le programme `bash(1)`_ le plus simple est le suivant :
 
-.. include:: src/hello.sh
-   :code: bash
+.. literalinclude:: src/hello.sh
+   :language: bash
 
 L'exécution de ce script shell retourne la sortie suivante :
 
-.. include:: src/hello.sh.out
-   :code: console
+.. literalinclude:: src/hello.sh.out
+   :language: console
 
 Par convention en `bash(1)`_, le caractère ``#`` marque le début d'un commentaire en début ou en cours de ligne. Comme tout langage, `bash(1)`_ permet à l'utilisateur de définir des variables. Celles-ci peuvent contenir des chaînes de caractères ou des nombres. Le script ci-dessous utilise deux variables, ``PROG`` et ``COURS`` et les utilise pour afficher un texte avec la commande ``echo``.
 
-.. include:: src/hellovar.sh
-   :code: bash
+.. literalinclude:: src/hellovar.sh
+   :language: bash
    
 On note dans l'exemple ci-dessus l'utilisation du symbole ``$`` pour référer à la valeur de la variable. Dans la majorité des cas, cette notation suffit. Il y a une subtilité auxquelles ont doit faire attention : si il y a une ambiguïté possible sur le nom de la variable pour l'interpréteur il convient d'entourer son nom d'accolades ``{ }``. Par exemple, ``milieu = "mi"; echo do$milieuno`` affichera ``do`` seulement car l'interpréteur considère la seconde partie comme la variable ``$milieuno`` non définie et donc égale à la chaîne vide (et cela sans générer de message d'erreur). Avec ``echo do${milieu}no``, par contre, le résultat est celui attendu.
 
 Un script `bash(1)`_ peut également prendre des arguments passés en ligne de commande. Par convention, ceux-ci ont comme noms ``$1``, ``$2``, ``$3``, ... Le nombre d'arguments s'obtient avec ``$#`` et la liste complète avec ``$@``. L'exemple ci-dessous illustre l'utilisation de ces arguments.
 
-.. include:: src/args.sh
-   :code: bash
+.. literalinclude:: src/args.sh
+   :language: bash
 
 L'exécution de ce script produit la sortie suivante :
 
-.. include:: src/args.sh.out
-   :code: console
+.. literalinclude:: src/args.sh.out
+   :language: console
 
 Concernant le traitement des arguments par un script bash, il est utile de noter que lorsque l'on appelle un script en redirigeant son entrée ou sa sortie standard, le script n'est pas informé de cette redirection. Ainsi, si l'on exécute le script précédent en faisant ``args.sh arg1 > args.out``, le fichier ``args.out`` contient les lignes suivantes :
 
-.. include:: src/args.out
-   :code: console
+.. literalinclude:: src/args.out
+   :language: console
 
 Scripts : conditionnelles
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -904,15 +904,15 @@ Un script permet d'utiliser des structures de contrôle comme dans tout langage 
 
 D'autres types de test sont définis dans la page de manuel : `bash(1)`_. Le script ci-dessous fournit un premier exemple d'utilisation de tests avec `bash(1)`_.
 
-.. include:: src/eq.sh
-   :code: bash
+.. literalinclude:: src/eq.sh
+   :language: bash
 
-Tout d'abord, ce script vérifie qu'il a bien été appelé avec deux arguments. Vérifier qu'un programme reçoit bien les arguments qu'il attend est une règle de bonne pratique qu'il est bon de respecter dès le début. Si le script n'est pas appelé avec le bon nombre d'arguments, un message d'erreur est affiché sur la sortie d'erreur standard et le script se termine avec un code de retour. Ces codes de retour sont importants car ils permettent à un autre programme, par exemple un autre script `bash(1)`_ de vérifier le bon déroulement d'un programme appelé. Le script ``src/eq.sh`` utilise des appels explicites à `exit(1posix)`_ même si par défaut, un script `bash(1)`_  qui n'en contient pas retourne un code de retour nul à la fin de son exécution.
+Tout d'abord, ce script vérifie qu'il a bien été appelé avec deux arguments. Vérifier qu'un programme reçoit bien les arguments qu'il attend est une règle de bonne pratique qu'il est bon de respecter dès le début. Si le script n'est pas appelé avec le bon nombre d'arguments, un message d'erreur est affiché sur la sortie d'erreur standard et le script se termine avec un code de retour. Ces codes de retour sont importants car ils permettent à un autre programme, par exemple un autre script `bash(1)`_ de vérifier le bon déroulement d'un programme appelé. Le script :download:`src/eq.sh` utilise des appels explicites à `exit(1posix)`_ même si par défaut, un script `bash(1)`_  qui n'en contient pas retourne un code de retour nul à la fin de son exécution.
 
-Un autre exemple d'utilisation des codes de retour est le script ``src/wordin.sh`` repris ci-dessous qui utilise `grep(1)`_ pour déterminer si un mot passé en argument est présent dans un fichier texte. Pour cela, il exploite la variable spéciale ``$?`` dans laquelle `bash(1)`_ sauve le code de retour du dernier programme exécuté par le script.
+Un autre exemple d'utilisation des codes de retour est le script :download:`src/wordin.sh` repris ci-dessous qui utilise `grep(1)`_ pour déterminer si un mot passé en argument est présent dans un fichier texte. Pour cela, il exploite la variable spéciale ``$?`` dans laquelle `bash(1)`_ sauve le code de retour du dernier programme exécuté par le script.
 
-.. include:: src/wordin.sh
-   :code: bash
+.. literalinclude:: src/wordin.sh
+   :language: bash
 
 Ce programme utilise le fichier spécial ``/dev/null``. Celui-ci est en pratique l'équivalent d'un trou noir. Il accepte toutes les données en écriture mais celles-ci ne peuvent jamais être relues. ``/dev/null`` est très utile lorsque l'on veut ignorer la sortie d'un programme et éviter qu'elle ne s'affiche sur le terminal. `bash(1)`_ supporte également ``/dev/stdin`` pour représenter l'entrée standard, ``/dev/stdout`` pour la sortie standard et ``/dev/stderr`` pour l'erreur standard.
 
@@ -925,8 +925,8 @@ Les scripts servent souvent à réaliser des opérations sur des fichiers, et il
  
 L'exemple ci-dessous illustre l'utilisation des conditions sur les fichiers :
 
-.. include:: src/exemple_if_files.sh
-   :code: bash
+.. literalinclude:: src/exemple_if_files.sh
+   :language: bash
 
 On note l'utilisation du combinateur logique de négation ``!`` pour la troisième condition. Deux autres opérateurs logiques sont disponibles : ``-a`` est le ET logique (AND) et le ``-o`` est le OU logique (OR) :
 
@@ -935,8 +935,8 @@ On note l'utilisation du combinateur logique de négation ``!`` pour la troisiè
 
 La deuxième et la troisième condition de l'exemple ci-dessus peuvent ainsi être combinées de la manière suivante :
 
-.. include:: src/exemple_if_files_compact.sh
-   :code: bash
+.. literalinclude:: src/exemple_if_files_compact.sh
+   :language: bash
 
 La structure ``case`` permet de vérifier une entrée contre une série de motifs. Cela est souvent utile, par exemple, pour l'analyse des paramètres fournis à un script (en utilisant ``-`` et ``--``). La description de ``case`` dépasse cependant le cadre de ce cours.
 
@@ -945,11 +945,11 @@ Scripts : boucles
 
 On utilise régulièrement des boucles pour répéter une opération pour plusieurs argument. Voici un exemple d'utilisation de la boucle ``for`` :
 
-.. include:: src/exemple_for.sh
-   :code: bash
+.. literalinclude:: src/exemple_for.sh
+   :language: bash
 
-.. include:: src/exemple_for.sh.out
-   :code: console
+.. literalinclude:: src/exemple_for.sh.out
+   :language: console
 
 Une utilisation courante de la boucle ``for`` est pour répéter un même traitement sur tous les fichiers présents dans une liste. La boucle est alors un itérateur : pour chaque itération la variable `s` prend une des valeurs des éléments de la liste séparés par des espaces. 
 
@@ -962,11 +962,11 @@ La boucle ``for`` peut aussi prendre comme entrée (liste sur laquelle itérer) 
  
 Voici un exemple de l'utilisation du caractère ``*``, qui calcule une signature de chaque fichier sous la forme d'un *hash*  `SHA-1 <https://fr.wikipedia.org/wiki/SHA-1>`_ :
 
-.. include:: src/exemple_for2.sh
-   :code: bash
+.. literalinclude:: src/exemple_for2.sh
+   :language: bash
 
-.. include:: src/exemple_for2.sh.out
-   :code: console
+.. literalinclude:: src/exemple_for2.sh.out
+   :language: console
 
 `bash(1)`_ permet aussi l'utilisation de boucles ``while`` et ``until`` sur un principe similaire, mais nous ne les couvrirons pas dans ce cours.
 
