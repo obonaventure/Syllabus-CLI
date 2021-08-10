@@ -664,7 +664,7 @@ Le premier exemple utilise `echo(1)`_ pour générer du texte et le passer direc
 Traitement de plusieurs fichiers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Dans les exemples précédents, nous avons vu comment une commande Unix pouvait traiter un fichier ou un répertoire passé en argument. Cela permettait de présenter des exemples simples et faciles à visualiser. En pratique, on doit souvent traiter plusieurs fichiers avec une même commande. Toutes les commandes Unix sont prévues pour recevoir un nombre quelconque d'arguments. Si une commande reçoit deux arguments, elle va d'avoir traiter le premier et ensuite le second. Si elle reçoit 17 arguments, elle fera de même. Dans l'exemple ci-dessous, la commande touch est appliquée aux fichiers ``fichier.txt`` et ``points.csv```.
+Dans les exemples précédents, nous avons vu comment une commande Unix pouvait traiter un fichier ou un répertoire passé en argument. Cela permettait de présenter des exemples simples et faciles à visualiser. En pratique, on doit souvent traiter plusieurs fichiers avec une même commande. Toutes les commandes Unix sont prévues pour recevoir un nombre quelconque d'arguments. Si une commande reçoit deux arguments, elle va d'abord traiter le premier et ensuite le second. Si elle reçoit 17 arguments, elle fera de même. Dans l'exemple ci-dessous, la commande touch est appliquée aux fichiers ``fichier.txt`` et ``points.csv```.
 
 .. code:: console
 
@@ -889,89 +889,10 @@ Concernant le traitement des arguments par un script bash, il est utile de noter
 .. literalinclude:: src/args.out
    :language: console
 
-Scripts : conditionnelles
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Pour les plus rapides, nous vous invitons à parcourir le syllabus de systèmes informatiques abordant :
 
-Un script permet d'utiliser des structures de contrôle comme dans tout langage de programmation.
-
-`bash(1)`_ supporte tout d'abord la construction conditionnelle ``if [ condition ]; then ... fi`` qui permet notamment de comparer les valeurs de variables. `bash(1)`_ définit de nombreuses conditions différentes, dont notamment :
-
- - ``$i -eq $j`` est vraie lorsque les deux variables ``$i`` et ``$j`` contiennent le même nombre.
- - ``$i -lt $j`` est vraie lorsque la valeur de la variable ``$i`` est numériquement strictement inférieure à celle de la variable ``$j``
- - ``$i -ge $j`` est vraie lorsque la valeur de la variable ``$i`` est numériquement supérieure ou égale à celle de la variable ``$j``
- -  ``$s = $t`` est vraie lorsque la chaîne de caractères contenue dans la variable ``$s`` est égale à celle qui est contenue dans la variable ``$t``
- - ``-z $s`` est vraie lorsque la chaîne de caractères contenue dans la variable ``$s`` est vide
-
-D'autres types de test sont définis dans la page de manuel : `bash(1)`_. Le script ci-dessous fournit un premier exemple d'utilisation de tests avec `bash(1)`_.
-
-.. literalinclude:: src/eq.sh
-   :language: bash
-
-Tout d'abord, ce script vérifie qu'il a bien été appelé avec deux arguments. Vérifier qu'un programme reçoit bien les arguments qu'il attend est une règle de bonne pratique qu'il est bon de respecter dès le début. Si le script n'est pas appelé avec le bon nombre d'arguments, un message d'erreur est affiché sur la sortie d'erreur standard et le script se termine avec un code de retour. Ces codes de retour sont importants car ils permettent à un autre programme, par exemple un autre script `bash(1)`_ de vérifier le bon déroulement d'un programme appelé. Le script :download:`src/eq.sh` utilise des appels explicites à `exit(1posix)`_ même si par défaut, un script `bash(1)`_  qui n'en contient pas retourne un code de retour nul à la fin de son exécution.
-
-Un autre exemple d'utilisation des codes de retour est le script :download:`src/wordin.sh` repris ci-dessous qui utilise `grep(1)`_ pour déterminer si un mot passé en argument est présent dans un fichier texte. Pour cela, il exploite la variable spéciale ``$?`` dans laquelle `bash(1)`_ sauve le code de retour du dernier programme exécuté par le script.
-
-.. literalinclude:: src/wordin.sh
-   :language: bash
-
-Ce programme utilise le fichier spécial ``/dev/null``. Celui-ci est en pratique l'équivalent d'un trou noir. Il accepte toutes les données en écriture mais celles-ci ne peuvent jamais être relues. ``/dev/null`` est très utile lorsque l'on veut ignorer la sortie d'un programme et éviter qu'elle ne s'affiche sur le terminal. `bash(1)`_ supporte également ``/dev/stdin`` pour représenter l'entrée standard, ``/dev/stdout`` pour la sortie standard et ``/dev/stderr`` pour l'erreur standard.
-
-Les scripts servent souvent à réaliser des opérations sur des fichiers, et il est parfois nécessaire de pouvoir tester si un fichier est présent, n'est pas vide, etc. On peut alors utiliser les conditions suivantes :
-
- - ``-f file`` est vraie si ``file`` existe et est un fichier;
- - ``-s file`` est vraie si ``file`` n'est pas vide;
- - ``-r file``, ``-w file``, ``-x file`` est vraie si ``file`` peut, respectivement, être *lu*, *écrit* ou *exécuté* par l'utilisateur lançant le script;
- - ``-s file`` est vraie si ``file`` est le nom d'un répertoire.
- 
-L'exemple ci-dessous illustre l'utilisation des conditions sur les fichiers :
-
-.. literalinclude:: src/exemple_if_files.sh
-   :language: bash
-
-On note l'utilisation du combinateur logique de négation ``!`` pour la troisième condition. Deux autres opérateurs logiques sont disponibles : ``-a`` est le ET logique (AND) et le ``-o`` est le OU logique (OR) :
-
- - ``-a`` renvoie une valeur positive (faux) si au moins une des deux conditions renvoie une valeur positive, et 0 sinon (vrai);
- - ``-o`` renvoie une valeur positive (faux) si les deux conditions renvoient une valeur positive, et 0 sinon (vrai).
-
-La deuxième et la troisième condition de l'exemple ci-dessus peuvent ainsi être combinées de la manière suivante :
-
-.. literalinclude:: src/exemple_if_files_compact.sh
-   :language: bash
-
-La structure ``case`` permet de vérifier une entrée contre une série de motifs. Cela est souvent utile, par exemple, pour l'analyse des paramètres fournis à un script (en utilisant ``-`` et ``--``). La description de ``case`` dépasse cependant le cadre de ce cours.
-
-Scripts : boucles
-^^^^^^^^^^^^^^^^^
-
-On utilise régulièrement des boucles pour répéter une opération pour plusieurs argument. Voici un exemple d'utilisation de la boucle ``for`` :
-
-.. literalinclude:: src/exemple_for.sh
-   :language: bash
-
-.. literalinclude:: src/exemple_for.sh.out
-   :language: console
-
-Une utilisation courante de la boucle ``for`` est pour répéter un même traitement sur tous les fichiers présents dans une liste. La boucle est alors un itérateur : pour chaque itération la variable `s` prend une des valeurs des éléments de la liste séparés par des espaces. 
-
-Cet exemple utilise, par ailleurs, une autre construction utile de `bash(1)`_ : les symboles d'apostrophe inversée ``\```. Ceux-ci permettent d'obtenir le résultat (envoyé sur :term:`stdout`) de l'exécution de la commande qu'il englobent. Examinons en détail cette commande. Celle-ci combine en utilisant un :term:`pipe` les commandes `wc(1)`_ et `cut(1)`_. La première permet d'obtenir le nombre de ligne du fichier fourni en paramètre (utilisation de l'option ``-l``). Toutefois, la sortie de la commande contient trop d'information (par exemple, ``wc -l TP1-Hakim.txt`` renvoie ``      28 TP1-Hakim.txt``). Afin d'isoler l'information qui nous intéressent, l'utilitaire `cut(1)`_ est utilisé. Celui-ci permet ici de sélectionner quelle colonne (la première ici) conserver, lorsque les colonnes sont séparées par des espaces (comme spécifié en utilisant l'option ``-d' '`).
-
-La boucle ``for`` peut aussi prendre comme entrée (liste sur laquelle itérer) une expression utilisant des caractères *joker* ``*`` ou ``?``. `bash(1)`_ transforme alors l'expression en la liste des noms de fichiers et répertoires dans le répertoire courant correspondant à l'expression :
-
- - ``*`` représente n'importe quelle suite de caractères (y compris la chaîne vide). ``ab*xyz`` correspond à, par exemple, ``abcdxyz`` ou ``abcxyz`` mais pas à ``abcdyz``.
- - ``?`` représente un caractère unique inconnu (mais pas la chaîne vide). ``ab?de`` correspond, ainsi, à ``abcde``, ``abXde`` mais pas à ``abde``.
- 
-Voici un exemple de l'utilisation du caractère ``*``, qui calcule une signature de chaque fichier sous la forme d'un *hash*  `SHA-1 <https://fr.wikipedia.org/wiki/SHA-1>`_ :
-
-.. literalinclude:: src/exemple_for2.sh
-   :language: bash
-
-.. literalinclude:: src/exemple_for2.sh.out
-   :language: console
-
-`bash(1)`_ permet aussi l'utilisation de boucles ``while`` et ``until`` sur un principe similaire, mais nous ne les couvrirons pas dans ce cours.
-
-De nombreuses références sont disponibles pour aller plus loin dans la maîtrise de `bash(1)`_ [Cooper2011]_.
-
+- `Les conditionnelles <https://sites.uclouvain.be/SystInfo/notes/Theorie/shell/shell.html#scripts-conditionnelles>`_
+- `Les boucles <https://sites.uclouvain.be/SystInfo/notes/Theorie/shell/shell.html#scripts-boucles>`_
 .. rubric:: Footnotes
 
 .. [#fexecbit] Sous Unix et contrairement à d'autres systèmes d'exploitation, le suffixe d'un nom de fichier ne joue pas de rôle particulier pour indiquer si un fichier contient un programme exécutable ou non. Comme nous le verrons ultérieurement, le système de fichiers Unix contient des bits de permission qui indiquent notamment si un fichier est exécutable ou non.
