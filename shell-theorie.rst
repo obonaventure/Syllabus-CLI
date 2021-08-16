@@ -122,6 +122,12 @@ La quasi totalité des commandes Unix affichent un message d'aide de ce type lor
 
 Il y a trois commandes qui sont très proches de `cat(1)`_ et qui peuvent être utiles lorsque l'on doit consulter de longs fichiers texte. Tout d'abord, la commande `head(1)`_ permet de consulter le début d'un fichier. Sans option, `head(1)`_ affiche les dix premières lignes du fichier. Avec l'option ``-n `` suivie d'un entier (``x``), `head(1)`_ affiche les ``x`` premières lignes du fichier. La commande `tail(1)`_ fait la même chose pour la fin du fichier. Si vous consultez la page de manuel de `tail(1)`_, vous verrez qu'elle a beaucoup plus d'options que `head(1)`_. Il y a en effet plusieurs cas pratiques dans lesquels il est utile de lire la fin d'un fichier que son début, mais ceux-ci sortent du cadre de cette brève introduction à la ligne de commande.
 
+
+.. inginious:: cat-base
+
+
+.. inginious:: ccm-cat
+
 .. code:: console
 
    $head -n 4 fichier.txt 
@@ -137,6 +143,8 @@ Il y a trois commandes qui sont très proches de `cat(1)`_ et qui peuvent être 
 La commande `more(1)`_ permet de visualiser tout un long fichier "page par page". Elle afiche la première page du fichier et invite l'utilisateur à taper un caractère pour poursuivre l'affichage du fichier. Si vous tapez sur espace, `more(1)`_ avancera d'un écran. Si vous tapez sur le retour à la ligne, `more(1)`_ avancera d'une ligne. Si vous tapez sur ``/``, vous pouvez indiquer un mot à rechercher dans le fichier. `more(1)`_ lira le fichier jusqu'à trouver le mot que vous recherchez et l'affichera. Enfin en tapan ``h``, `more(1)`_ vous affichera une page d'aide précisant toutes les touches que vous pouvez presser durant l'exécution de `more(1)`_ et le rôle de chacune d'entre elles.
    
 Plusieurs commandes permettent de faire des manipulations plus avancées sur les fichiers. `wc(1)`_ permet d'extraire différents compteurs (nombre de lignes, nombre de mots et nombre de caractères) d'un fichier texte.
+
+.. inginious:: head-base
 
 .. code:: console
 
@@ -195,6 +203,7 @@ Il est aussi possible de préciser plus finement les lignes que l'on veut extrai
    Et je pleure;
    Et je m’en vais
 
+.. inginious:: grep-base
 
 Pour présenter les dernières commandes, nous allons ajouter un deuxième fichier. Celui-ci a comme nom ``points.csv``. Il est au format ``comma-separated values``, c'est-à-dire qu'il contient des mots et des valeurs qui sont séparés par une virgule. La plupart des tableurs permettent de manipuler de tels fichiers, tout comme les commandes Unix comme nous allons le voir. 
 
@@ -279,6 +288,9 @@ Malheureusement, ce dernier tri ne donne pas le résultat attendu. On voudrait a
    Antoine, Marchand, 15, 15
    Vanessa, Dupond, 14, 12
    Simon, Sanzot, 8, 9
+   
+
+.. inginious:: qcm-sort
 
 
 Parfois, il est nécessaire d'extraire certains champs d'un fichier en format ``csv``. La commande `cut(1)`_ peut être très utile dans ce cas. Elle supporte plusieurs options. L'option ``-d`` permet d'indiquer le séparateur entre les différents champs du fichier. L'option ``-f`` est suivie de la liste des champs qu'il faut extraire du fichier.
@@ -398,6 +410,10 @@ Une commande intéressante de manipulation des fichiers est `touch(1)`_. Elle pe
    total 8
    -rw-r--r-- 1 obo obo 283 Aug  3 14:11 fichier.txt
    -rw-r--r-- 1 obo obo 181 Aug  3 10:18 points.csv
+   
+
+.. inginious:: ls-base
+
 
 Utilisée sans argument, la commande `touch(1)`_ permet de créer un fichier vide.
 
@@ -409,6 +425,14 @@ Utilisée sans argument, la commande `touch(1)`_ permet de créer un fichier vid
    -rw-r--r-- 1 obo obo   0 Aug  3 14:13 vide.txt
    -rw-r--r-- 1 obo obo 283 Aug  3 14:11 fichier.txt
    -rw-r--r-- 1 obo obo 181 Aug  3 10:18 points.csv
+   
+
+.. inginious:: creationfichier-base
+
+
+.. inginious:: touch-pratique
+
+.. inginious::  creationfichier-qcm
    
 Pour organiser tous ces fichiers, il est important de pouvoir les regrouper dans des répertoires. Prenons l'exemple d'une étudiante bien organisée qui doit gérer toutes les informations relatives à chacun de ses cours. Elle va créer un répertoire pour chaque année académique et un sous-répertoire pour chaque cours. La commande `mkdir(1)`_ lui permet de créer un répertoire pour l'année ``2021-2022``. Elle va ensuite y créer les répertoires des cours d'informatiques, d'anglais et de mathématiques. Pour cela, elle devra aller dans le répertoire ``2021-2022`` en utilisant la commande `cd(1)`_ (change directory). Cette commande permet de changer de répertoire courant.
 
@@ -432,7 +456,13 @@ Pour organiser tous ces fichiers, il est important de pouvoir les regrouper dans
    drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 anglais
    drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 info
    drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 math
+   
 
+
+.. inginious::  mkdir-base
+
+
+.. inginious::  mkdir-pratique
 
 On signale les répertoires avec la lettre d comme première permission dans l'information affichée par la commande ``ls -l``. La commande `pwd(1)`_ indique quel est le répertoire courant, c'est-à-dire le répertoire dans lequel les commandes sont exécutées.
 
@@ -575,6 +605,10 @@ La commande `mv(1)`_ permet de renommer un fichier ou de le déplacer dans un au
 
 Parfois il est nécessaire de supprimer des fichiers ou des répertoires. Cela peut se faire un utilisant les commandes `rm(1)`_ et `rmdir(1)`_. Il faut noter que `rmdir(1)`_ ne peut effacer qu'un sous répertoire vide. Vous devez donc d'abord effacer les fichiers qui se trouvent dans un sous-répertoire avant de pouvoir l'effacer lui-même.
 
+
+.. inginious::  mv-pratique
+
+
 .. code:: console
 
    $ rm a_effacer.txt 
@@ -592,7 +626,15 @@ Parfois il est nécessaire de supprimer des fichiers ou des répertoires. Cela p
    $ rmdir backup/
 
    
-   
+
+.. inginious::  rm-base
+
+
+.. inginious::  rm-qcm
+
+
+
+  
   
 Shell
 ^^^^^
