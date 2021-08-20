@@ -13,6 +13,7 @@ Introduction à la ligne de commande Unix/Linux
    intro
    shell-theorie
    shell
+   glossary
 
 Indices and tables
 ==================
