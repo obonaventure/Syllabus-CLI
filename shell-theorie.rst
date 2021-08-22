@@ -235,7 +235,17 @@ Comment faire pour remonter l'arborescence des fichiers vers la racine ? Pour ce
 
 * Le sous-répertoire ``.`` est un synonyme du répertoire courant. Il est peu utilisé. 
 * Le sous-répertoire ``..`` est un `lien` vers le répertoire père du répertoire courant. En utilisant le répertoire ``..`` il est donc possible de remonter vers le répertoire racine. 
- 
+
+L'exercice suivant va vous permettre de tester vos connaissances sur les commandes de bases de navigation (n'hésitez surtout pas à consulter les pages de manuel) :
+
+.. inginious:: ls-cd-mcq
+
+Ceux-ci vous apprendront à créer des répertoires :
+
+.. inginious:: mkdir-base
+
+.. inginious:: mkdir-pratique
+
 
 Plus sur la commande ``ls``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -306,6 +316,9 @@ Enfin, notez que l'option ``-R`` de la commande `ls(1)`_ permet de parcourir aut
    drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 .
    drwxr-xr-x 5 obo obo 4096 Aug  3 16:18 ..
 
+Cet exercice vous permettra de vous familiariser avec l'utilisation pratique de `ls(1)`_
+
+.. inginious:: ls-base
 
 Commandes de déplacement de fichiers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -346,6 +359,8 @@ La commande `mv(1)`_ permet quant à elle de renommer un fichier ou de le dépla
    $ ls -l backup/
    total 4
    -rw-r--r-- 1 obo obo 283 Aug  3 16:52 fichier.txt.bak
+
+.. inginious:: mv-pratique
    
 Commandes de suppression de fichiers/répertoires
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -368,6 +383,10 @@ Parfois il est nécessaire de supprimer des fichiers ou des répertoires. Cela p
    backup$ cd ..
    $ rmdir backup/
    
+.. inginious:: rm-qcm
+
+.. inginious:: rm-base 
+
 
 Traitements de fichiers
 -----------------------
@@ -427,6 +446,10 @@ Une des premières commandes que l'on utilise pour manipuler des fichiers textes
    Pareil à la
    Feuille morte.
 
+.. inginious:: ccm-cat
+
+.. inginious:: cat-base 
+
 .. note:: Raccourcis clavier
 
    La ligne de commande supporte de nombreux raccourcis clavier qui peuvent vous permettre d'être encore plus rapide. La flèche vers le haut vous permet par exemple de récupérer les commandes précédentes. Vous pouvez ensuite utiliser les flèches gauche et droite pour éditer l'ancienne commande avant de taper sur Return pour l'exécuter. Lorsque vous tapez les premières lettres d'une commande, il suffit de taper sur la touche de tabulation pour que la commande soit complétée si elle est reconnue. Ainsi, si vous tapez ``mkd`` suivi de tabulation, les caractères ``ir`` manquants seront automatiquement ajouté. Ce mécanisme de complétion de la ligne de commande s'applique aussi aux arguments lorsque ceux-ci sont des fichiers ou des répertoires. Ainsi, si vous tapez ``cat fi`` suivi de tabulation dans le répertoire, la commande se complétera en ``cat fichier.txt``.
@@ -446,6 +469,8 @@ Il y a trois commandes qui sont très proches de `cat(1)`_ et qui peuvent être 
    Deçà, delà,
    Pareil à la
    Feuille morte.
+
+.. inginious:: head-base
 
 La commande `more(1)`_ permet de visualiser tout un long fichier "page par page". Elle afiche la première page du fichier et invite l'utilisateur à taper un caractère pour poursuivre l'affichage du fichier. Si vous tapez sur espace, `more(1)`_ avancera d'un écran. Si vous tapez sur le retour à la ligne, `more(1)`_ avancera d'une ligne. Si vous tapez sur ``/``, vous pouvez indiquer un mot à rechercher dans le fichier (*Vim-search*). `more(1)`_ lira le fichier jusqu'à trouver le mot que vous recherchez et l'affichera. Enfin en tapant ``h``, `more(1)`_ vous affichera une page d'aide précisant toutes les touches que vous pouvez presser durant l'exécution de `more(1)`_ et le rôle de chacune d'entre elles.
    
@@ -511,6 +536,7 @@ Il est aussi possible de préciser plus finement les lignes que l'on veut extrai
    Et je pleure;
    Et je m’en vais
 
+.. inginious:: grep-base 
 
 Pour présenter les dernières commandes, nous allons utiliser notre second fichier ``points.csv``. Celui-ci est au format ``comma-separated values``, c'est-à-dire qu'il contient des mots et des valeurs qui sont séparées par une virgule. La plupart des tableurs permettent de manipuler de tels fichiers, tout comme les commandes Unix que nous allons le voir. 
 
@@ -682,7 +708,15 @@ Le premier exemple utilise `echo(1)`_ pour générer du texte et le passer direc
 .. - `tar(1)`_ : utilitaire permettant de regrouper plusieurs fichiers dans une archive. Souvent utilisé en combinaison avec `gzip(1)`_ pour réaliser des backups ou distribuer des logiciels.
 .. - `sed(1)`_ : utilitaire permettant d'éditer, c'est-à-dire de modifier les caractères présents dans un flux de données.
 .. - `awk(1)`_ : utilitaire incluant un petit langage de programmation et qui permet d'écrire rapidement de nombreux programmes de manipulation de fichiers de texte.
-      
+
+Voici quelques exercices vous permettant de vous familiariser avec les redirections :
+
+.. inginious:: appendtofile
+
+.. inginious:: Patterninfile
+
+.. inginious:: pipe-base
+
 Traitement de fichiers multiples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -864,6 +898,17 @@ A titre d'exemple, nous allons placer tous les fichiers de données météorolog
 	  -rw-r--r-- 1 obo obo 36019 Aug  4 12:44 2019.csv
 	  -rw-r--r-- 1 obo obo 36129 Aug  4 12:44 2020.csv
 	
+.. inginious:: tri-fichier-pratique
+
+Exercices de synthèses : Les CTF (capture the flag)
+---------------------------------------------------
+
+Pour terminer cette séance et tester vos compétences nouvellement acquises, nous vous proposons de résoudre deux CTF. 
+
+.. inginious:: CTF1
+
+.. inginious:: ctf2
+
 
 Scripts : les bases
 ^^^^^^^^^^^^^^^^^^^
