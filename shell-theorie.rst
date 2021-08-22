@@ -20,18 +20,7 @@ Lorsque l'on lance une console ou un terminal, on se retrouve généralement fac
 Le message de bienvenue peut varier d'un ordinateur à l'autre. Il peut aussi dépendre de l'état du système ou afficher des informations mises en avant par son gestionnaire. Dans l'exemple ci-dessus, il indique que l'on se connecte sur un serveur utilisant Linux version 4.19 (Debian). Il affiche le copyright et les contraintes d'utilisation et indique la date de la dernière connexion. La ligne ``obo@ovh-obo:~$``  est l'endroit où l'on peut taper les différentes commandes.
 
 Syntaxe des commandes et utilisation des *man-pages*
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Toutes les *commandes* sont dotées d'une syntaxe intuitive présentée ci-dessous.
-
-.. code:: terminal
-
-   $ <commande> -[Options] [Arguments]
-
-* La *Commande* est ce que vous voulez faire.
-* Les *Arguments* permettent de choisir sur quoi la commande va agir.
-* Les *Options* vous permettent de modifier le comportement de la commande, de manière à pouvoir faire plus de choses. Les options peuvent souvent demander elles aussi un argument.
-
+----------------------------------------------------
 
 Une des commandes les plus simples de Unix est `echo(1)`_ qui permet d'afficher de l'information à l'écran (sous format textuel). La capture d'écran ci-dessous présente trois exemples d'utilisation de `echo(1)`_. Comme toutes les commandes Unix, `echo(1)`_ prend un ou plusieurs arguments qui sont ici séparés par des espaces. 
 
@@ -39,7 +28,8 @@ Une des commandes les plus simples de Unix est `echo(1)`_ qui permet d'afficher 
 * La deuxième commande affiche Bonjour. 
 * Enfin, la troisième permet d'afficher une très longue phrase qui se termine par une longue suite de points.
 
-*Note* : Sous Unix, le terminal est aussi appelé la sortie standard, nous y reviendrons bientôt. 
+.. Note:: 
+   Sous Unix, le terminal est aussi appelé la sortie standard, nous y reviendrons bientôt. 
 
 .. image:: figures/terminal2.png
 
@@ -51,47 +41,118 @@ Dans ce syllabus, nous ne présenteront pas les exemples avec une copie d'écran
    $ <commande> 
    <résultat> 
    
+Toutes les *commandes* sont dotées d'une syntaxe intuitive présentée ci-dessous.
+
+.. code:: console 
+
+   $ <commande> -[Options courtes [Arguments]] --[Options longues [Arguments]] [Arguments]
+
+* La *Commande* est ce que vous voulez faire.
+* Les *Arguments* permettent de choisir sur quoi la commande va agir.
+* Les *Options* vous permettent de modifier le comportement de la commande, de manière à pouvoir faire plus de choses. Les options peuvent souvent demander elles aussi un argument.
+
+De plus les options *courtes* peuvent être présentées sous différentes formes, la forme implicite et la forme explicite. La forme implicite consiste à mettre toutes les options sous le même tiret, de cette manière :
+
+.. code:: console
+
+   $ <commande> -[Option1][Options2][...] [Arguments]
+
+Cette forme ne fonctionne que pour les options ne nécéssitant pas d'arguments. La forme explicite quant à elle fonctionne pour les options nécéssitant des arguments et est écrite en spécifiant un seul tiret par option, de cette manière :
+
+.. code:: console 
+
+   $ <commande> -[Option1 [Argument]] -[Option2 [Argument]] [...] [Arguments]
+
+Ceci peut paraître un peu abstrait aux premiers abords mais lorque vous taperez vos premières commandes, vous verrez que ce n'est pas si compliqué. Nous vous invitons à relire ces quelques explications sur la syntaxe vers la fin de la séance, vous verrez que ce sera déjà bien plus clair.
+
+Les commandes Unix telles que `echo(1)`_ ou `cat(1)`_ prennent des arguments comme présentés ci-dessus. Le comportement de ces commandes peut aussi être modifié en spécifiant une ou plusieurs options. Ces options commencent généralement par un ou deux tirets (caractère ``-``). Un premier exemple est le message d'aide succinct que `cat(1)`_ affiche lorsque l'on l'exécute avec ``--help`` comme option. 
+
+.. code:: console
+
+   $ cat --help
+   Usage: cat [OPTION]... [FILE]...
+   Concatenate FILE(s) to standard output.
    
+   With no FILE, or when FILE is -, read standard input.
+
+     -A, --show-all           equivalent to -vET
+     -b, --number-nonblank    number nonempty output lines, overrides -n
+     -e                       equivalent to -vE
+     -E, --show-ends          display $ at end of each line
+     -n, --number             number all output lines
+     -s, --squeeze-blank      suppress repeated empty output lines
+     -t                       equivalent to -vT
+     -T, --show-tabs          display TAB characters as ^I
+     -u                       (ignored)
+     -v, --show-nonprinting   use ^ and M- notation, except for LFD and TAB
+     --help     display this help and exit
+     --version  output version information and exit
+
+   Examples:
+     cat f - g  Output f's contents, then standard input, then g's contents.
+     cat        Copy standard input to standard output.
+
+   GNU coreutils online help: <https://www.gnu.org/software/coreutils/>
+   Full documentation at: <https://www.gnu.org/software/coreutils/cat>
+   or available locally via: info '(coreutils) cat invocation'
+
+
+La quasi totalité des commandes Unix affichent un message d'aide de ce type lorsqu'elles sont appelées avec ``--help`` ou parfois ``-h`` comme option.   
+ 
 .. topic:: Pages de manuel
    
-   Chaque commande possède sa *Man-page* (ou *Page de manuel* en français) expliquant ce que fait la commande, comment l'utiliser et quelles sont toutes ses options. 
+   Chaque commande possède sa *Man-page* (ou *Page de manuel* en français) expliquant ce que fait la commande, comment l'utiliser et quelles sont ses options. 
    L'accès à une page de manuel se fait via la commande `man(1)`_ avec comme argument le nom de la commande concernée. La commande `man(1)`_ supporte plusieurs paramètres qui sont décrits dans sa page de manuel accessible via ``man man``.  
 
    Vous pourrez remarquer que les commandes sont écrites avec un nombre de 1 à 8 à leur côté (par exemple : `echo(1)`_). Ce nombre correspond à la section à laquelle appartient la page de manuel. Dans ce syllabus nous aborderons uniquement les commandes de la première section, correspondant aux utilitaires disponibles aux utilisateurs.   
 
-   Outre les pages de manuel accessibles via ``man``, il existe également de nombreux sites web où l'on peut accéder aux pages de manuels de différentes versions de Unix dont notamment :
+   Outre les pages de manuel accessibles via `man(1)`_, il existe également de nombreux sites web où l'on peut accéder aux pages de manuels de différentes versions de Unix dont notamment :
    
    - les pages de manuel de `Debian GNU/Linux <http://manpages.debian.net/>`_
    - les pages de manuel de `FreeBSD <http://www.freebsd.org/cgi/man.cgi>`_
    - les pages de manuel de `MacOS <http://developer.apple.com/documentation/Darwin/Reference/ManPages/index.html>`_
    
   Les man-pages sont une source d'informations très importantes lors de l'utilisation d'un système Unix. Il ne faut surtout pas hésiter à les utiliser.
+
   Dans la version en-ligne de ces notes, toutes les références vers un programme Unix, un appel système ou une fonction de la librairie pointent vers la page de manuel Linux correspondante. Les pages de manuel sont également disponibles sur de nombreux sites web, comme par exemple `https://www.man7.org/linux/man-pages/index.html <https://www.man7.org/linux/man-pages/index.html>`_ qui présente les dernières versions des pages de manuel de Linux en anglais. Certaines de ces pages de manuel ont étés traduite (parfois partiellement en français). Vous les trouverez notamment sur `https://man.cx/ <https://man.cx/>`_.
 
 Navigation dans un arbre de fichiers Unix
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------------------
 
-La première commande utile pour manipuler les fichiers qui sont stockés dans des répertoires est la commande `ls(1)`_ (pour `list`). Cette commande permet de lister les fichiers qui se trouvent dans le répertoire courant par défaut ou dans un quelconque répertoire dont le nom est passé en argument. Une seconde commande fondamentale, mais moins utilisée est la commande `pwd(1)`_ (pour *print-working-directory*) qui permet d'afficher à l'écran le répertoire courant.
+En pratique, un ordinateur contient souvent des milliers de fichiers. Les deux fichiers que nous allons utiliser dans les sections suivantes -``fichier.txt`` et ``points.csv``- sont dans un répertoire. Un répertoire est une structure logique qui regroupe des fichiers et/ou d'autres répertoires. On peut imaginer le disque dur ou le SSD d'un ordinateur comme étant une grand armoire remplie de tiroirs. Chaque tiroir est un répertoire qui peut contenir des fichiers ou d'autres répertoires.
+
+Dans cette section, nous allons aborder les commandes de gestions de fichiers. Nous allons expliquer comment se déplacer dans les répertoires, mais aussi comment en créer ou encore en supprimer.
+
+La commande ``ls`` 
+^^^^^^^^^^^^^^^^^^
+
+La commande `ls(1)`_ (pour `list`) est une commande fondamentale lorsqu'il s'agit de se déplacer dans les répertoires de l'ordinateur. Celle-ci permet de lister les fichiers et répertoires qui se trouvent dans le répertoire courant par défaut ou dans un quelconque répertoire dont le nom est passé en argument. Ceci est particulièrement intéressant lorsque vous n'avez pas accès à une interface graphique, car c'est le seul moyen que vous aurez de connaître le contenu du système rapidement. 
 
 .. code:: console
-
+   
    $ ls
    fichier.txt  points.csv
+   
+L'exemple ci-dessus montre les deux fichiers nommés ``fichier.txt`` et ``points.csv``, se trouvant tous deux dans le répertoire courant. Le répertoire courant est le répertoire dans lequel les commandes que vous tapez vont s'exécuter. 
 
-Utilisée sans options et sans arguments, la commande `ls(1)`_ affiche les noms des fichiers et répertoires présents dans le répertoire actuel. L'exemple ci-dessus montre les deux fichiers nommés ``fichier.txt`` et ``points.csv``. La commande `ls(1)`_ supporte un grand nombre d'options. En voici quelques unes qui sont assez utiles en pratique. Les autres sont décrites dans la page de manuel de `ls(1)`_. L'option ``-l`` affiche des informations complémentaires sur chaque fichier comme le nom de son propriétaire, le groupe auquel celui-ci appartient, la date de dernière modification, la taille et les permissions du fichier.
+La commande `ls(1)`_ supporte un grand nombre d'options. En voici quelques unes qui sont assez utiles en pratique. Les autres sont décrites dans la page de manuel de `ls(1)`_. L'option ``-l`` affiche des informations complémentaires sur chaque fichier comme le nom de son propriétaire, le groupe auquel celui-ci appartient, la date de dernière modification, la taille et les permissions du fichier.
 
 .. code:: console
 
-          $ ls -l
-          total 8
-          -rw-r--r-- 1 obo obo 283 Aug  2 15:34 fichier.txt
-          -rw-r--r-- 1 obo obo 181 Aug  3 10:18 points.csv
+   $ ls -l
+   total 8 -> taille totale du répertoire
+   -rw-r--r--            1             obo         obo         283      Aug    2       15:34   fichier.txt
+   -rw-r--r--            1             obo         obo         181      Aug    3       10:18   points.csv
+        ^                ^              ^           ^           ^        ^     ^         ^         ^
+        |                |              |           |           |        |     |         |         |
+   Permissions   nombre de liens   Propriétaire  groupe  taille (bytes) Mois  jour  heure/année    Nom
 
-La première ligne indique l'espace disque occupé par les fichiers du répertoire (dans ce cas, 8 KBytes). Ensuite, pour chaque fichier on trouve ses permissions, son propriétaire et le groupe auquel il appartient, la date de dernière modification et le nom du fichier.
+La première ligne indique l'espace disque occupé par les fichiers du répertoire (dans ce cas, 8 KBytes). Ensuite, pour chaque fichier on trouve ses permissions, son propriétaire et le groupe auquel il appartient, la date de dernière modification et le nom du fichier. Il y a là dedans de nombreuses informations utiles, dont certaines d'entre elles ne seront pas vue dans ce cours d'introduction.
 
 Il est possible de modifier l'ordre dans lequel `ls(1)`_ affiche les différents fichiers d'un répertoire. Ainsi, l'option ``-S`` permet de les afficher par ordre décroissant de taille, bien pratique lorsqu'il faut rechercher les gros fichiers qui occupent de la place sur le disque due. L'option ``-t`` permet d'afficher d'abord les fichiers les plus récents. Très pratique pour retrouver le dernier fichier téléchargé par exemple.
 
-Les commandes agissent souvent sur des fichiers (et principalement des fichiers textes), il est donc nécéssaire de comprendre et de savoir naviguer à travers un arbre de fichier Unix.
+Structure d'un arbre de fichier Unix
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 La racine (correspondant au répertoire ``/``) contient différents sous-répertoires dont la plupart sont nécessaires au bon fonctionnement du système. 
  
@@ -102,25 +163,88 @@ La racine (correspondant au répertoire ``/``) contient différents sous-répert
    boot  initrd.img      lib64       mnt    run   tmp  vmlinuz.old
    dev   initrd.img.old  libx32      opt    sbin  usr
    etc   lib             lost+found  proc   srv   var	  
-	 
+	
 Les trois répertoires qui nous intéresseront le plus sont ``/home`` qui contient un répertoire appartenant à chaque utilisateur. C'est dans ce répertoire qu'un utilisateur pourra stocker ses fichiers privés. Le répertoire ``/media`` est celui dans lequel des dispositifs externes tels que des clés USB seront accessibles. Enfin, le répertoire ``/tmp`` contient des fichiers temporaires qui sont automatiquement effacés à chaque arrêt de l'ordinateur.
+
+.. Note:: 
+
+   Sous Unix, il y a deux manières différentes de donner des chemins d'accès aux fichiers : les chemins *relatifs* et les chemins *absolus*.
+
+   #. Les chemins relatifs sont donnés par rapport au répertoire courant : ``./path/from/current/directory``
+   #. Les chemins absolus sont donnés par rapport à la racine : ``/path/from/root``
+   
+   Les chemins relatifs permettent d'aller plus rapidement (les chemins d'accès sont moins longs) mais ne permettent pas d'atteindre les fichiers parents facilement, ce que permet par contre le chemin absolu.
+
+Commandes de création de fichiers et répertoires 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Une commande intéressante de manipulation des fichiers est `touch(1)`_. Elle permet de créer un fichier qui n'existe pas ou de mettre à jour la date de modification d'un fichier existant sans changer son contenu.
 
 .. code:: console
 
-   ~/2021-2022$ cd math/
-   ~/2021-2022/math$ pwd
-   /home/obo/2021-2022/math
-   ~/2021-2022$ cd ..
-   ~/2021-2022$ pwd
-   /home/obo/2021-2022/
-
+   $ ls -lt
+   total 8
+   -rw-r--r-- 1 obo obo 181 Aug  3 10:18 points.csv
+   -rw-r--r-- 1 obo obo 283 Aug  2 15:34 fichier.txt
+   $ touch fichier.txt 
+   $ ls -lt
+   total 8
+   -rw-r--r-- 1 obo obo 283 Aug  3 14:11 fichier.txt
+   -rw-r--r-- 1 obo obo 181 Aug  3 10:18 points.csv
+   $ touch vide.txt 
+   $ ls -lt 
+   total 8
+   -rw-r--r-- 1 obo obo   0 Aug  3 14:13 vide.txt
+   -rw-r--r-- 1 obo obo 283 Aug  3 14:11 fichier.txt
+   -rw-r--r-- 1 obo obo 181 Aug  3 10:18 points.csv
    
-Ci-dessus on peut observer que la commande `cd(1)`_ permet de descendre l'arborescence des fichiers, depuis la racine vers les répertoires feuille (un répertoire feuille est un répertoire n'ayant pas de sous-répertoire). Comment faire pour remonter l'arborescence des fichiers vers la racine ? Pour cela, Unix utilise deux sous-répertoires *cachés* qui sont présents dans tous les répertoires. Le sous-répertoire ``.`` est un synonyme du répertoire courant. Il est peu utilisé. Par contre, le sous-répertoire ``..`` est un `lien` vers le répertoire père du répertoire courant. En utilisant le répertoire ``..`` il est donc possible de remonter vers le répertoire racine.
+
+Pour organiser tous ces fichiers (nous en avons déjà 3 !), il est important de pouvoir les regrouper dans des répertoires. Prenons l'exemple d'une étudiante bien organisée qui doit gérer toutes les informations relatives à chacun de ses cours. Elle va créer un répertoire pour chaque année académique et un sous-répertoire pour chaque cours. La commande `mkdir(1)`_ (pour *make-directory*) lui permet de créer un répertoire pour l'année ``2021-2022``. 
+
+.. code:: console
+
+   $ mkdir 2021-2022/
+   $ ls -l
+   total 12
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:10 2021-2022
+   -rw-r--r-- 1 obo obo  283 Aug  3 14:11 fichier.txt
+   -rw-r--r-- 1 obo obo  181 Aug  3 10:18 points.csv
+   -rw-r--r-- 1 obo obo    0 Aug  3 14:13 vide.txt
+
+Elle va ensuite y créer les répertoires des cours d'informatiques, d'anglais et de mathématiques. Pour cela, elle devra aller dans le répertoire ``2021-2022`` en utilisant la commande `cd(1posix)`_. 
+
+.. code:: console 
+
+   $ cd 2021-2022/
+   ~/2021-2022$ ls -l
+   total 0
+   ~/2021-2022$ mkdir anglais
+   ~/2021-2022$ mkdir info
+   ~/2021-2022$ mkdir math
+   ~/2021-2022$ ls -l
+   total 12
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 anglais
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 info
+   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 math
+   ~/2021-2022$ pwd 
+   home/obo/2021/2022
+
+Ci-dessus on peut observer que la commande `cd(1posix)`_ (pour *change-directory*) permet de descendre l'arborescence des fichiers, depuis la racine vers les répertoires feuille (un répertoire feuille est un répertoire n'ayant pas de sous-répertoire). Tandis que la commande `pwd(1)`_ (pour *print-working-directory*) permet d'afficher à l'écran le répertoire courant. 
+
+Comment faire pour remonter l'arborescence des fichiers vers la racine ? Pour cela, Unix utilise deux sous-répertoires *cachés* qui sont présents dans tous les répertoires : 
+
+* Le sous-répertoire ``.`` est un synonyme du répertoire courant. Il est peu utilisé. 
+* Le sous-répertoire ``..`` est un `lien` vers le répertoire père du répertoire courant. En utilisant le répertoire ``..`` il est donc possible de remonter vers le répertoire racine. 
+ 
+
+Plus sur la commande ``ls``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Nous vous invitons à chercher l'utilité de l'option ``-a`` de `ls(1)`_ dans sa page de manuel.   
 
 .. code:: console
 
    ~/2021-2022/math$ ls -l
-   $ ls -l
    total 0
    ~/2021-2022/math$ ls -la
    total 8
@@ -135,7 +259,7 @@ Ci-dessus on peut observer que la commande `cd(1)`_ permet de descendre l'arbore
    drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 info
    drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 math
    ~/2021-2022$ cd ..
-   $ ls -la
+   ~$ ls -la
    total 20
    drwxr-xr-x  3 obo obo 4096 Aug  3 16:10 .
    drwxr-xr-x 14 obo obo 4096 Aug  3 14:04 ..
@@ -145,11 +269,11 @@ Ci-dessus on peut observer que la commande `cd(1)`_ permet de descendre l'arbore
    -rw-r--r--  1 obo obo    0 Aug  3 14:13 vide.txt
 
 
-Enfin, notez que l'option ``R`` de la commande `ls(1)`_ permet de parcourir automatiquement tous les sous-répertoires (et leurs sous-répertoires).    
+Enfin, notez que l'option ``-R`` de la commande `ls(1)`_ permet de parcourir automatiquement tous les sous-répertoires (et leurs sous-répertoires). N'utilisez pas cette option sur des fichiers dont vous ne connaissez pas la taille ou la profondeur, par exemple, utiliser cette option sur la racine du système (nous expliquons ce que cela signifie ci-dessous) va permettre de lister TOUS les fichiers de votre ordinateur, ce qui pourrait prendre du temps.
 
 .. code:: console
 
-   $ ls -lRa
+   ~$ ls -lRa
    .:
    total 20
    drwxr-xr-x  3 obo obo 4096 Aug  3 16:10 .
@@ -183,15 +307,12 @@ Enfin, notez que l'option ``R`` de la commande `ls(1)`_ permet de parcourir auto
    drwxr-xr-x 5 obo obo 4096 Aug  3 16:18 ..
 
 
-.. Note:: 
+Commandes de déplacement de fichiers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-   Sous Unix, il y a deux manières différentes de donner des chemins d'accès aux fichiers : les chemins *relatifs* et les chemins *absolus*.
-   #. Les chemins relatifs sont donnés par rapport au répertoire courant : ``./path/from/current/directory``
-   #. Les chemins absolus sont donnés par rapport à la racine : ``/path/from/root``
-   Les chemins relatifs permettent d'aller plus rapidement (les chemins d'accès sont moins longs) mais ne permettent pas d'atteindre les fichiers parents facilement, ce que permet par contre le chemin absolu.
+Maintenant que vous savez comment vous retrouver dans un arbre de fichier, nous pouvons commencer à *manipuler* celui-ci, c'est à dire déplacer/créer des fichiers et/ou des répertoires.
 
-
-D'autres commandes permettent de manipuler les fichiers qui sont stockés sur l'ordinateur. La commande `cp(1)`_ permet de copier un fichier sous un autre nom ou de le copier dans un autre répertoire en conservant son nom original. On peut par exemple faire un backup d'un fichier avant de le modifier afin de pouvoir récupérer son état original en cas de problème.
+La commande `cp(1)`_ (pour *copy*) permet de copier un fichier sous un autre nom ou de le copier dans un autre répertoire en conservant son nom original. On peut par exemple faire un backup d'un fichier avant de le modifier afin de pouvoir récupérer son état original en cas de problème.
 
 .. code:: console
 
@@ -207,8 +328,8 @@ D'autres commandes permettent de manipuler les fichiers qui sont stockés sur l'
    $ ls -l 2021-2022/info/
    total 4
    -rw-r--r-- 1 obo obo 283 Aug  3 16:52 fichier.txt
-	  
-La commande `mv(1)`_ permet de renommer un fichier ou de le déplacer dans un autre répertoire.
+
+La commande `mv(1)`_ permet quant à elle de renommer un fichier ou de le déplacer dans un autre répertoire.
 
 .. code:: console
 
@@ -225,33 +346,11 @@ La commande `mv(1)`_ permet de renommer un fichier ou de le déplacer dans un au
    $ ls -l backup/
    total 4
    -rw-r--r-- 1 obo obo 283 Aug  3 16:52 fichier.txt.bak
+   
+Commandes de suppression de fichiers/répertoires
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Pour organiser tous ces fichiers, il est important de pouvoir les regrouper dans des répertoires. Prenons l'exemple d'une étudiante bien organisée qui doit gérer toutes les informations relatives à chacun de ses cours. Elle va créer un répertoire pour chaque année académique et un sous-répertoire pour chaque cours. La commande `mkdir(1)`_ (pour *make-directory*) lui permet de créer un répertoire pour l'année ``2021-2022``. Elle va ensuite y créer les répertoires des cours d'informatiques, d'anglais et de mathématiques. Pour cela, elle devra aller dans le répertoire ``2021-2022`` en utilisant la commande `cd(1)`_. 
-
-
-.. code:: console
-
-   $ mkdir 2021-2022/
-   $ ls -l
-   total 12
-   drwxr-xr-x 2 obo obo 4096 Aug  3 16:10 2021-2022
-   -rw-r--r-- 1 obo obo  283 Aug  3 14:11 fichier.txt
-   -rw-r--r-- 1 obo obo  181 Aug  3 10:18 points.csv
-   -rw-r--r-- 1 obo obo    0 Aug  3 14:13 vide.txt
-   $ cd 2021-2022/
-   ~/2021-2022$ ls -l
-   total 0
-   ~/2021-2022$ mkdir anglais
-   ~/2021-2022$ mkdir info
-   ~/2021-2022$ mkdir math
-   ~/2021-2022$ ls -l
-   total 12
-   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 anglais
-   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 info
-   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 math
-
-
-Parfois il est nécessaire de supprimer des fichiers ou des répertoires. Cela peut se faire un utilisant les commandes `rm(1)`_ et `rmdir(1)`_. Il faut noter que `rmdir(1)`_ ne peut effacer qu'un sous répertoire vide. Vous devez donc d'abord effacer les fichiers qui se trouvent dans un sous-répertoire avant de pouvoir l'effacer lui-même.
+Parfois il est nécessaire de supprimer des fichiers ou des répertoires. Cela peut se faire un utilisant les commandes `rm(1)`_ (pour *remove*) et `rmdir(1)`_ (pour *remove-directory*). Il faut noter que `rmdir(1)`_ ne peut effacer qu'un sous répertoire vide. Vous devez donc d'abord effacer les fichiers qui se trouvent dans un sous-répertoire avant de pouvoir l'effacer lui-même.
 
 .. code:: console
 
@@ -268,11 +367,15 @@ Parfois il est nécessaire de supprimer des fichiers ou des répertoires. Cela p
    $ rm fichier.txt.bak 
    backup$ cd ..
    $ rmdir backup/
-  
+   
 
 Traitements de fichiers
-^^^^^^^^^^^^^^^^^^^^^^^
-Imaginons que nous avons à notre disposition un fichier texte nommé ```fichier.txt`` et contenant le texte suivant :
+-----------------------
+
+Observer le contenu d'un fichier 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Imaginons que le fichier ``fichier.txt`` à notre disposition contient le texte suivant :
 
 .. code:: console 
 
@@ -298,7 +401,7 @@ Imaginons que nous avons à notre disposition un fichier texte nommé ```fichier
    Feuille morte.
 
 
-Une des premières commandes que l'on utilise pour manipuler des fichiers textes est la commande `cat(1)`_. Celle-ci affiche simplement sur le terminal le contenu du fichier passé en argument. Dans l'exemple ci-dessous, Unix exécute la commande `cat(1)`_ avec comme argument le nom ```fichier.txt``. Lors de son exécution, la commande `cat(1)`_ ouvre le fichier dont le nom est ``fichier.txt`` et affiche son contenu.
+Une des premières commandes que l'on utilise pour manipuler des fichiers textes est la commande `cat(1)`_. Celle-ci affiche simplement sur le terminal le contenu du fichier passé en argument. Dans l'exemple ci-dessous, Unix exécute la commande `cat(1)`_ avec comme argument le nom ``fichier.txt``. Lors de son exécution, la commande `cat(1)`_ ouvre le fichier dont le nom est ``fichier.txt`` et affiche son contenu.
 
 .. code:: console
 
@@ -324,40 +427,9 @@ Une des premières commandes que l'on utilise pour manipuler des fichiers textes
    Pareil à la
    Feuille morte.
 
+.. note:: Raccourcis clavier
 
-Les commandes Unix telles que `cat(1)`_ prennent des arguments comme présentés ci-dessus. Le comportement de ces commandes peut aussi être modifié en spécifiant une ou plusieurs options. Ces options commencent généralement par un ou deux tirets (caractère ``-``). Un premier exemple est le message d'aide succinct que `cat(1)`_ affiche lorsque l'on l'exécute avec ``--help`` comme option. 
-
-.. code:: console
-
-   $ cat --help
-   Usage: cat [OPTION]... [FILE]...
-   Concatenate FILE(s) to standard output.
-   
-   With no FILE, or when FILE is -, read standard input.
-
-     -A, --show-all           equivalent to -vET
-     -b, --number-nonblank    number nonempty output lines, overrides -n
-     -e                       equivalent to -vE
-     -E, --show-ends          display $ at end of each line
-     -n, --number             number all output lines
-     -s, --squeeze-blank      suppress repeated empty output lines
-     -t                       equivalent to -vT
-     -T, --show-tabs          display TAB characters as ^I
-     -u                       (ignored)
-     -v, --show-nonprinting   use ^ and M- notation, except for LFD and TAB
-     --help     display this help and exit
-     --version  output version information and exit
-
-   Examples:
-     cat f - g  Output f's contents, then standard input, then g's contents.
-     cat        Copy standard input to standard output.
-
-   GNU coreutils online help: <https://www.gnu.org/software/coreutils/>
-   Full documentation at: <https://www.gnu.org/software/coreutils/cat>
-   or available locally via: info '(coreutils) cat invocation'
-
-
-La quasi totalité des commandes Unix affichent un message d'aide de ce type lorsqu'elles sont appelées avec ```--help`` ou parfois ```-h`` comme option.   
+   La ligne de commande supporte de nombreux raccourcis clavier qui peuvent vous permettre d'être encore plus rapide. La flèche vers le haut vous permet par exemple de récupérer les commandes précédentes. Vous pouvez ensuite utiliser les flèches gauche et droite pour éditer l'ancienne commande avant de taper sur Return pour l'exécuter. Lorsque vous tapez les premières lettres d'une commande, il suffit de taper sur la touche de tabulation pour que la commande soit complétée si elle est reconnue. Ainsi, si vous tapez ``mkd`` suivi de tabulation, les caractères ``ir`` manquants seront automatiquement ajouté. Ce mécanisme de complétion de la ligne de commande s'applique aussi aux arguments lorsque ceux-ci sont des fichiers ou des répertoires. Ainsi, si vous tapez ``cat fi`` suivi de tabulation dans le répertoire, la commande se complétera en ``cat fichier.txt``.
 
 .. ajouter l'exercice https://inginious.org/course/cli-linux/ccm-cat
 
@@ -377,6 +449,9 @@ Il y a trois commandes qui sont très proches de `cat(1)`_ et qui peuvent être 
 
 La commande `more(1)`_ permet de visualiser tout un long fichier "page par page". Elle afiche la première page du fichier et invite l'utilisateur à taper un caractère pour poursuivre l'affichage du fichier. Si vous tapez sur espace, `more(1)`_ avancera d'un écran. Si vous tapez sur le retour à la ligne, `more(1)`_ avancera d'une ligne. Si vous tapez sur ``/``, vous pouvez indiquer un mot à rechercher dans le fichier (*Vim-search*). `more(1)`_ lira le fichier jusqu'à trouver le mot que vous recherchez et l'affichera. Enfin en tapant ``h``, `more(1)`_ vous affichera une page d'aide précisant toutes les touches que vous pouvez presser durant l'exécution de `more(1)`_ et le rôle de chacune d'entre elles.
    
+Obtenir des informations sur le fichier ou son contenu
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Plusieurs commandes permettent de faire des manipulations plus avancées sur les fichiers. `wc(1)`_ (pour *word-count*) permet d'extraire différents compteurs (nombre de lignes, nombre de mots et nombre de caractères) d'un fichier texte.
 
 .. code:: console
@@ -437,7 +512,7 @@ Il est aussi possible de préciser plus finement les lignes que l'on veut extrai
    Et je m’en vais
 
 
-Pour présenter les dernières commandes, nous allons ajouter un deuxième fichier. Celui-ci a comme nom ``points.csv``. Il est au format ``comma-separated values``, c'est-à-dire qu'il contient des mots et des valeurs qui sont séparées par une virgule. La plupart des tableurs permettent de manipuler de tels fichiers, tout comme les commandes Unix que nous allons le voir. 
+Pour présenter les dernières commandes, nous allons utiliser notre second fichier ``points.csv``. Celui-ci est au format ``comma-separated values``, c'est-à-dire qu'il contient des mots et des valeurs qui sont séparées par une virgule. La plupart des tableurs permettent de manipuler de tels fichiers, tout comme les commandes Unix que nous allons le voir. 
 
 .. code:: console
 
@@ -567,11 +642,51 @@ La commande `uniq(1)`_ permet de retirer toutes les lignes qui sont identiques d
    Marchand
    Michel
    Sanzot
-       
-Traitement de plusieurs fichiers
+
+   
+Combiner des commandes
+^^^^^^^^^^^^^^^^^^^^^^
+
+La plupart des utilitaires fournis avec un système Unix ont été conçus pour être utilisés en combinaison avec d'autres. Cette combinaison efficace de plusieurs petits utilitaires est un des points forts des systèmes Unix par rapport à d'autres systèmes d'exploitation. On peut imaginer par exemple associer `sort(1)`_ et `head(1)`_ pour n'afficher que les premiers noms en ordre alphabétique d'une liste d'étudiants disponible initialement sous forme non triée. Afin de permettre cette combinaison, chaque programme Unix en cours d'exécution (appelé un *processus*) est associé à trois *flux* standards :
+
+ - une entrée standard (:term:`stdin` en anglais) qui est un flux d'informations par lequel le processus reçoit les données à traiter. Par défaut, l'entrée standard est associée au clavier.
+ - une sortie standard (:term:`stdout` en anglais) qui est un flux d'informations sur lequel le processus écrit le résultat de son traitement. Par défaut, la sortie standard est associée au terminal.
+ - une sortie d'erreur standard (:term:`stderr` en anglais) qui est un flux de données sur lequel le processus écrira les messages d'erreur éventuels. Par défaut, la sortie d'erreur standard est associée au même terminal que :term:`stdout`.
+
+La puissance du :term:`shell` vient de la possibilité de combiner des commandes en redirigeant les entrées et sorties standards. Les shells Unix supportent différentes formes de redirection. Tout d'abord, il est possible de forcer un programme à lire son entrée standard depuis un fichier plutôt que depuis le clavier. Cela se fait en ajoutant à la fin de la ligne de commande le caractère ``<`` suivi du nom du fichier à lire. Ensuite, il est possible de rediriger la sortie standard vers un fichier. Cela se fait en utilisant ``>`` ou ``>>``. Lorsqu'une commande est suivie de ``> file``, le fichier ``file`` est créé si il n'existait pas et remis à zéro si il existait, et la sortie standard de cette commande est redirigée vers le fichier ``file``. Lorsqu'un commande est suivie de ``>> file``, la sortie standard est sauvegardée à la fin du fichier ``file`` (si ``file`` n'existait pas, il est créé).
+
+Voici un exemple d'utilisation des redirections :
+
+.. literalinclude:: src/exemple2.out
+        :language: console
+
+.. note:: Rediriger la sortie d'erreur standard
+
+ La redirection `> file` redirige par défaut la sortie standard vers le fichier `file`. La sortie d'erreur standard reste dirigé, quand à elle, vers le terminal de l'utilisateur. Il arrive toutefois que l'on souhaite diriger les messages d'erreur vers un fichier différent. On peut pour cela utiliser la notation `2> file_errors` (le  flux :term:`stdout` est numéroté 1 et le flux :term:`stderr` est numéroté 2; la notation `> file` est implicitement équivalente à `1> file`). 
+ 
+ Si l'on souhaite rediriger à la fois :term:`stdout` et :term:`stderr` vers le même fichier on ne peux pas utiliser `> file 2> file` ! Il faut d'abord rediriger la sortie :term:`stderr` vers :term:`stdout`, puis diriger ce dernier vers le fichier. Le flux :term:`stdout` est noté `&1`, on utilise donc `2>&1 > file`.
+  
+ Des informations plus complètes sur les mécanismes de redirection de `bash(1)`_ peuvent être obtenues dans le `chapitre 20 <http://tldp.org/LDP/abs/html/io-redirection.html>`_ de [ABS]_.
+
+Les shells Unix supportent un second mécanisme qui est encore plus intéressant pour combiner plusieurs programmes. Il s'agit de la redirection de la sortie standard d'un programme vers l'entrée standard d'un autre sans passer par un fichier intermédiaire. Cela se réalise avec le symbole ``|`` (:term:`pipe` en anglais). L'exemple suivant illustre quelques combinaisons d'utilitaires de manipulation de texte.
+
+.. literalinclude:: src/exemple3.out
+        :language: console
+
+Le premier exemple utilise `echo(1)`_ pour générer du texte et le passer directement à `wc(1)`_ qui compte le nombre de caractères. Le deuxième exemple utilise `cat(1)`_ pour afficher sur la sortie standard le contenu d'un fichier. Cette sortie est reliée à `sort(1)`_ qui trie le texte reçu sur son entrée standard en ordre alphabétique croissant. Cette sortie en ordre alphabétique est reliée à `uniq(1)`_ qui la filtre pour en retirer les lignes dupliquées.
+
+.. Ajouter l'exercice https://inginious.org/course/cli-linux/qcm-sort
+   
+.. - `uniq(1)`_ : utilitaire permettant de filtrer le contenu d'un fichier texte afin d'en extraire les lignes qui sont uniques ou dupliquées (cela requiert que le fichier d'entrée soit trié, car ne compare que les lignes consécutives).
+.. - `gzip(1)`_ et `gunzip(1)`_ : utilitaires permettant respectivement de compresser et de décompresser des fichiers. Les fichiers compressés prennent moins de place sur le disque que les fichiers standard et ont par convention un nom qui se termine par ``.gz``.
+.. - `tar(1)`_ : utilitaire permettant de regrouper plusieurs fichiers dans une archive. Souvent utilisé en combinaison avec `gzip(1)`_ pour réaliser des backups ou distribuer des logiciels.
+.. - `sed(1)`_ : utilitaire permettant d'éditer, c'est-à-dire de modifier les caractères présents dans un flux de données.
+.. - `awk(1)`_ : utilitaire incluant un petit langage de programmation et qui permet d'écrire rapidement de nombreux programmes de manipulation de fichiers de texte.
+      
+Traitement de fichiers multiples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Dans les exemples précédents, nous avons vu comment une commande Unix pouvait traiter un fichier ou un répertoire passé en argument. Cela permettait de présenter des exemples simples et faciles à visualiser. En pratique, on doit souvent traiter plusieurs fichiers avec une même commande. Toutes les commandes Unix sont prévues pour recevoir un nombre quelconque d'arguments. Si une commande reçoit deux arguments, elle va d'abord traiter le premier et ensuite le second. Si elle reçoit 17 arguments, elle fera de même. Dans l'exemple ci-dessous, la commande touch est appliquée aux fichiers ``fichier.txt`` et ``points.csv```.
+Dans les exemples précédents, nous avons vu comment une commande Unix pouvait traiter un fichier ou un répertoire passé en argument. Cela permettait de présenter des exemples simples et faciles à visualiser. En pratique, on doit souvent traiter plusieurs fichiers avec une même commande. Toutes les commandes Unix sont prévues pour recevoir un nombre quelconque d'arguments. Si une commande reçoit deux arguments, elle va d'abord traiter le premier et ensuite le second. Si elle reçoit 17 arguments, elle fera de même. Dans l'exemple ci-dessous, la commande `touch(1)`_ est appliquée aux fichiers ``fichier.txt`` et ``points.csv```.
 
 .. code:: console
 
@@ -605,7 +720,7 @@ Considérons un deuxième exemple qui concerne les données météorologiques. L
    2009-01-03,-1,-4,13,-5,-1,-5,0,84,9,1031,21,0,0,-9,143,113,113,0,2,8.1,météo très défavorable
 
    
-Chacun de ces fichiers contient une entête avec trois lignes de commentaires et les données de chaque jour sous séparées par une virgule. Chaque ligne contient les informations suivantes:
+Chacun de ces fichiers contient une entête avec trois lignes de commentaires et les données de chaque jour sont séparées par une virgule. Chaque ligne contient les informations suivantes:
 
 .. code:: console
 
@@ -653,9 +768,9 @@ Unix supporte d'autres caractères spéciaux, vous trouverez plus de détails da
 
 
 Archiver et comprimer des fichiers
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------------
 
-Lorsque l'on manipule de gros fichiers, comme des données qu'il faut analyser à des fins statistiques, on se retrouve parfois à consommer beaucoup d'espace sur le disque. Celui-ci étant infini, on doit parfois libérer de l'espace. La solution la plus courante est de supprimer les fichiers qui ne sont plus utiles. Une autre solution est de comprimer les très gros fichiers pour qu'ils prennent moins de place. C'est ce que les utilitaires `gzip(1)`_, `gunzip(1)`_ et `zcat(1)`_ permettent de faire.
+Lorsque l'on manipule de gros fichiers, comme des données qu'il faut analyser à des fins statistiques, on se retrouve parfois à consommer beaucoup d'espace sur le disque. Celui-ci étant fini, on doit parfois libérer de l'espace. La solution la plus courante est de supprimer les fichiers qui ne sont plus utiles. Une autre solution est de comprimer les très gros fichiers pour qu'ils prennent moins de place. C'est ce que les utilitaires `gzip(1)`_, `gunzip(1)`_ et `zcat(1)`_ permettent de faire.
 
 .. code:: console
 
@@ -668,7 +783,7 @@ Lorsque l'on manipule de gros fichiers, comme des données qu'il faut analyser �
    $ ls -l 2009*
    -rw-r--r-- 1 obo obo 35802 Aug  4 12:44 2009.csv
 
-`gzip(1)`_ permet donc de compresser un fichier, c'est-à-dire de modifier la façon dont il est stocké sur le disque pour qu'il prenne moins de place. Par convention, les fichiers qu'il a comprimé ont comme extension ``.gz``. La commande ``gunzip(1)`_ fait l'opération inverse et récupère le fichier original. La commande `zcat(1)`_ est équivalente à `cat(1)`_, mais elle prend en entrée un ou des fichiers compressés qu'elle décompresse avant d'afficher sur la sortie standard.
+`gzip(1)`_ permet donc de compresser un fichier, c'est-à-dire de modifier la façon dont il est stocké sur le disque pour qu'il prenne moins de place. Par convention, les fichiers qu'il a comprimé ont comme extension ``.gz``. La commande `gunzip(1)`_ fait l'opération inverse et récupère le fichier original. La commande `zcat(1)`_ est équivalente à `cat(1)`_, mais elle prend en entrée un ou des fichiers compressés qu'elle décompresse avant d'afficher sur la sortie standard.
 
 .. code:: console
 
@@ -749,126 +864,6 @@ A titre d'exemple, nous allons placer tous les fichiers de données météorolog
 	  -rw-r--r-- 1 obo obo 36019 Aug  4 12:44 2019.csv
 	  -rw-r--r-- 1 obo obo 36129 Aug  4 12:44 2020.csv
 	
-Combiner des commandes
-^^^^^^^^^^^^^^^^^^^^^^
-
-La plupart des utilitaires fournis avec un système Unix ont été conçus pour être utilisés en combinaison avec d'autres. Cette combinaison efficace de plusieurs petits utilitaires est un des points forts des systèmes Unix par rapport à d'autres systèmes d'exploitation. On peut imaginer par exemple associer `sort(1)`_ et `head(1)`_ pour n'afficher que les premiers noms en ordre alphabétique d'une liste d'étudiants disponible initialement sous forme non triée. Afin de permettre cette combinaison, chaque programme Unix en cours d'exécution (appelé un *processus*) est associé à trois *flux* standards :
-
- - une entrée standard (:term:`stdin` en anglais) qui est un flux d'informations par lequel le processus reçoit les données à traiter. Par défaut, l'entrée standard est associée au clavier.
- - une sortie standard (:term:`stdout` en anglais) qui est un flux d'informations sur lequel le processus écrit le résultat de son traitement. Par défaut, la sortie standard est associée au terminal.
- - une sortie d'erreur standard (:term:`stderr` en anglais) qui est un flux de données sur lequel le processus écrira les messages d'erreur éventuels. Par défaut, la sortie d'erreur standard est associée au même terminal que :term:`stdout`.
-
-La puissance du :term:`shell` vient de la possibilité de combiner des commandes en redirigeant les entrées et sorties standards. Les shells Unix supportent différentes formes de redirection. Tout d'abord, il est possible de forcer un programme à lire son entrée standard depuis un fichier plutôt que depuis le clavier. Cela se fait en ajoutant à la fin de la ligne de commande le caractère ``<`` suivi du nom du fichier à lire. Ensuite, il est possible de rediriger la sortie standard vers un fichier. Cela se fait en utilisant ``>`` ou ``>>``. Lorsqu'une commande est suivie de ``> file``, le fichier ``file`` est créé si il n'existait pas et remis à zéro si il existait, et la sortie standard de cette commande est redirigée vers le fichier ``file``. Lorsqu'un commande est suivie de ``>> file``, la sortie standard est sauvegardée à la fin du fichier ``file`` (si ``file`` n'existait pas, il est créé).
-
-Voici un exemple d'utilisation des redirections :
-
-.. literalinclude:: src/exemple2.out
-        :language: console
-
-.. note:: Rediriger la sortie d'erreur standard
-
- La redirection `> file` redirige par défaut la sortie standard vers le fichier `file`. La sortie d'erreur standard reste dirigé, quand à elle, vers le terminal de l'utilisateur. Il arrive toutefois que l'on souhaite diriger les messages d'erreur vers un fichier différent. On peut pour cela utiliser la notation `2> file_errors` (le  flux :term:`stdout` est numéroté 1 et le flux :term:`stderr` est numéroté 2; la notation `> file` est implicitement équivalente à `1> file`). 
- 
- Si l'on souhaite rediriger à la fois :term:`stdout` et :term:`stderr` vers le même fichier on ne peux pas utiliser `> file 2> file` ! Il faut d'abord rediriger la sortie :term:`stderr` vers :term:`stdout`, puis diriger ce dernier vers le fichier. Le flux :term:`stdout` est noté `&1`, on utilise donc `2>&1 > file`.
-  
- Des informations plus complètes sur les mécanismes de redirection de `bash(1)`_ peuvent être obtenues dans le `chapitre 20 <http://tldp.org/LDP/abs/html/io-redirection.html>`_ de [ABS]_.
-
-Les shells Unix supportent un second mécanisme qui est encore plus intéressant pour combiner plusieurs programmes. Il s'agit de la redirection de la sortie standard d'un programme vers l'entrée standard d'un autre sans passer par un fichier intermédiaire. Cela se réalise avec le symbole ``|`` (:term:`pipe` en anglais). L'exemple suivant illustre quelques combinaisons d'utilitaires de manipulation de texte.
-
-.. literalinclude:: src/exemple3.out
-        :language: console
-
-Le premier exemple utilise `echo(1)`_ pour générer du texte et le passer directement à `wc(1)`_ qui compte le nombre de caractères. Le deuxième exemple utilise `cat(1)`_ pour afficher sur la sortie standard le contenu d'un fichier. Cette sortie est reliée à `sort(1)`_ qui trie le texte reçu sur son entrée standard en ordre alphabétique croissant. Cette sortie en ordre alphabétique est reliée à `uniq(1)`_ qui la filtre pour en retirer les lignes dupliquées.
-
-.. Ajouter l'exercice https://inginious.org/course/cli-linux/qcm-sort
-   
-.. - `uniq(1)`_ : utilitaire permettant de filtrer le contenu d'un fichier texte afin d'en extraire les lignes qui sont uniques ou dupliquées (cela requiert que le fichier d'entrée soit trié, car ne compare que les lignes consécutives).
-.. - `gzip(1)`_ et `gunzip(1)`_ : utilitaires permettant respectivement de compresser et de décompresser des fichiers. Les fichiers compressés prennent moins de place sur le disque que les fichiers standard et ont par convention un nom qui se termine par ``.gz``.
-.. - `tar(1)`_ : utilitaire permettant de regrouper plusieurs fichiers dans une archive. Souvent utilisé en combinaison avec `gzip(1)`_ pour réaliser des backups ou distribuer des logiciels.
-.. - `sed(1)`_ : utilitaire permettant d'éditer, c'est-à-dire de modifier les caractères présents dans un flux de données.
-.. - `awk(1)`_ : utilitaire incluant un petit langage de programmation et qui permet d'écrire rapidement de nombreux programmes de manipulation de fichiers de texte.
-
-Fichiers et répertoires
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-Nous avons travaillé sur quelques fichiers. En pratique, un ordinateur contient souvent des milliers de fichiers. Les deux fichiers que nous avons utilisé dans la section précédente sont dans un répertoire. Un répertoire est une structure logique qui regroupe des fichiers et/ou d'autres répertoires. On peut imaginer le disque dur ou le SSD d'un ordinateur comme étant une grand armoire remplie de tiroirs. Chaque tiroir est un répertoire qui peut contenir des fichiers ou d'autres répertoires.
-
-
-Une commande intéressante de manipulation des fichiers est `touch(1)`_. Elle permet de mettre à jour la date de modification d'un fichier sans changer son contenu.
-
-.. code:: console
-
-   $ ls -lt
-   total 8
-   -rw-r--r-- 1 obo obo 181 Aug  3 10:18 points.csv
-   -rw-r--r-- 1 obo obo 283 Aug  2 15:34 fichier.txt
-   $ touch fichier.txt 
-   $ ls -lt
-   total 8
-   -rw-r--r-- 1 obo obo 283 Aug  3 14:11 fichier.txt
-   -rw-r--r-- 1 obo obo 181 Aug  3 10:18 points.csv
-
-Utilisée sans argument, la commande `touch(1)`_ permet de créer un fichier vide.
-
-.. code:: console
-
-   $ touch vide.txt
-   $ ls -lt
-   total 8
-   -rw-r--r-- 1 obo obo   0 Aug  3 14:13 vide.txt
-   -rw-r--r-- 1 obo obo 283 Aug  3 14:11 fichier.txt
-   -rw-r--r-- 1 obo obo 181 Aug  3 10:18 points.csv
-   
-
-On signale les répertoires avec la lettre d comme première permission dans l'information affichée par la commande ``ls -l``. La commande `pwd(1)`_ (pour *print working directory*) indique quel est le répertoire courant, c'est-à-dire le répertoire dans lequel les commandes sont exécutées.
-
-.. code:: console
-
-   ~/2021-2022$ pwd
-   /home/obo/2021-2022
-
-
-
-   
-
-.. note:: Raccourcis clavier
-
-   La ligne de commande supporte de nombreux raccourcis clavier qui peuvent vous permettre d'être encore plus rapide. La flèche vers le haut vous permet par exemple de récupérer les commandes précédentes. Vous pouvez ensuite utiliser les flèches gauche et droite pour éditer l'ancienne commande avant de taper sur Return pour l'exécuter. Lorsque vous tapez les premières lettres d'une commande, il suffit de taper sur la touche de tabulation pour que la commande soit complétée si elle est reconnue. Ainsi, si vous tapez ``mkd`` suivi de tabulation, les caractères ``ir`` manquants seront automatiquement ajouté. Ce mécanisme de complétion de la ligne de commande s'applique aussi aux arguments losque ceux-ci sont des fichiers ou des répertoires. Ainsi, si vous tapez ``cat fi`` suivi de tabulation dans le répLorsque l'on travaille en ligne de commande, 	  
-
-.. cp, mv, rmdir, rm
-   
-
-
-   
-   
-  
-Shell
-^^^^^
-
-Avant le développement des interfaces graphiques telles que :term:`X11`, :term:`Gnome` ou :term:`Aqua`, l'utilisateur interagissait exclusivement avec l'ordinateur par l'intermédiaire d'un interpréteur de commandes. Dans le monde Unix, le terme anglais :term:`shell` est le plus souvent utilisé pour désigner cet interpréteur et nous ferons de même.
-
-Un :term:`shell` est un programme qui a été spécialement conçu pour faciliter l'utilisation d'un système Unix via le clavier. De nombreux shells Unix existent. Les plus simples permettent à l'utilisateur de taper une série de commandes à exécuter en les combinant. Les plus avancés sont des interpréteurs de commandes qui supportent un langage complet permettant le développement de scripts plus ou moins ambitieux. Dans le cadre de ce cours, nous utiliserons `bash(1)`_ qui est un des shells les plus populaires et les plus complets. La plupart des commandes `bash(1)`_ que nous utiliserons sont cependant compatibles avec de nombreux autres shells tels que `zsh <http://www.zsh.org>`_ ou `csh <https://github.com/tcsh-org/tcsh>`_.
-
-Bien que les interfaces graphiques se soient désormais généralisées, le shell reste un moyen d'interaction avec le système parfaitement complémentaire, particulièrement utile pour les informaticiens, ou toute personne devant automatiser des traitements et opérations sur un système informatique. Avec les interfaces graphiques actuelles, le shell est accessible par l'intermédiaire d'une application qui est généralement appelée ``terminal`` ou ``console``.
-
-Lorsqu'un utilisateur se connecte à un système Unix, en direct ou à travers une connexion réseau, le système vérifie son mot de passe puis exécute automatiquement le shell qui est associé à cet utilisateur depuis son répertoire par défaut. Ce shell permet à l'utilisateur d'exécuter et de combiner des commandes. Un shell supporte deux types de commande : les commandes internes qu'il implémente directement et les commandes externes qui font appel à un utilitaire stocké sur disque. Un exemple de commande interne est `cd(1posix)`_ qui prend comme argument un chemin (relatif ou absolu) et y positionne le répertoire courant. Les utilitaires présentés dans la section précédente sont des exemples de commandes externes.
-
-.. .. note:: Obtenir de l'aide sur une commande
-..
-..  La commande `man(1)`_ permet d'obtenir la documentation associée à une commande externe. Par exemple, `man ls` permet d'obtenir la documentation de la commande `ls` et en particulier de lister les arguments et paramètres reconnus par cette commande.
-..
-..  **Attention :** `man(1)`_ permet de spécifier dans quel section de la documentation la page de documentation doit être recherchée. Il existe en effet 8 sections. La page de manuel de `man(1)`_ liste ces sections : on l'obtient avec la commande `man man`. Par exemple, `printf` peut référer aussi bien en section (1) à une commande externe qu'en section (3) à la fonction de la librairie standard du langage C. `man printf` présente par défaut la première occurence, celle en section (1). Pour obtenir la documentation de la fonction `printf` de la librairie standard C il faut spécifier la section avec la commande `man 3 printf`.
-
-Voici quelques exemples d'utilisation de commandes externes.
-
-.. literalinclude:: src/exemple.out
-        :language: console
-
-.. spelling::
-
-   supercalculateurs
-   quadrimestre
-
 
 Scripts : les bases
 ^^^^^^^^^^^^^^^^^^^
@@ -916,6 +911,7 @@ Pour les plus rapides, nous vous invitons à parcourir le syllabus de systèmes 
 
 - `Les conditionnelles <https://sites.uclouvain.be/SystInfo/notes/Theorie/shell/shell.html#scripts-conditionnelles>`_
 - `Les boucles <https://sites.uclouvain.be/SystInfo/notes/Theorie/shell/shell.html#scripts-boucles>`_
+
 .. rubric:: Footnotes
 
 .. [#fexecbit] Sous Unix et contrairement à d'autres systèmes d'exploitation, le suffixe d'un nom de fichier ne joue pas de rôle particulier pour indiquer si un fichier contient un programme exécutable ou non. Comme nous le verrons ultérieurement, le système de fichiers Unix contient des bits de permission qui indiquent notamment si un fichier est exécutable ou non.
