@@ -654,10 +654,6 @@ Parfois, il est nécessaire d'extraire certains champs d'un fichier en format ``
    Vanessa, 14
    Simon, 8
 
-
-   
-   .. Une description détaillée de l'ensemble de ces utilitaires sort du cadre de ce cours. De nombreux livres et ressources Internet fournissent une description détaillée. Voici cependant une brève présentation de quelques utilitaires de manipulation de texte qui peuvent s'avérer très utiles en pratique.
-
 Notre dernier exemple est la commande `uniq(1)`_ qui permet de retirer d'un fichier *trié* les lignes qui sont identiques. A titre d'exemple, considérons le nouveau fichier ``noms.txt`` qui contient tous les noms de famille du fichier ``points.csv`` en ordre alphabétique.
 
 .. code:: console
@@ -806,6 +802,10 @@ En se souvenant qu'il existe des wildcards, nous pouvons réécrire la commande 
 
 La première commande va travailler sur tous les fichiers dont le nom commence par "2" tandis que la seconde va travailler sur tout ceux de 2000 à 2009
 
+Pour tester votre compréhension de ces concepts, nous vous proposons de travailler sur cet exercice :
+
+.. inginious:: curl-hard
+
 Archiver et comprimer des fichiers
 ----------------------------------
 
@@ -904,6 +904,52 @@ A titre d'exemple, nous allons placer tous les fichiers de données météorolog
 	  -rw-r--r-- 1 obo obo 36129 Aug  4 12:44 2020.csv
 	
 .. inginious:: tri-fichier-pratique
+
+
+Base de la gestion de processus 
+-------------------------------
+
+L'interface en ligne de commande permet également de gérer les processus de manière efficace. La commande `ps(1)`_ permet notamment d'afficher les processus s'exécutant sur la machine.
+
+.. code:: console 
+
+    $ ps -e 
+    PID TTY          TIME CMD
+      1 ?        00:00:00 init
+      6 ?        00:00:00 init
+      7 ?        00:00:00 init
+      8 pts/0    00:00:00 bash
+    117 pts/0    00:00:00 ps
+
+La colonne PID donne l'identité des processus, celle-ci sera utile pour la commande que nous verrons jsute après. TTY permet de savoir à partir de quel terminal le processus à été appelé. CMD permet de connaître la commande qui a démarré le processus.
+
+Il est parfois utile de terminer (*kill*) des processus. Cela arrive dans le cas de processus malveillant, ou simplement dans le cas d'un processus qui n'est plus nécéssaire et qui utilise de la mémoire et du temps de processus. On utilise pour cela la commande `kill(1)`_.
+
+.. code:: console 
+
+    $ bash run.sh &
+    [2] 148
+    $ ps
+    PID TTY          TIME CMD
+      8 pts/0    00:00:00 bash
+    146 pts/0    00:00:00 bash
+    147 pts/0    00:00:00 sleep
+    148 pts/0    00:00:00 bash
+    149 pts/0    00:00:00 sleep
+    150 pts/0    00:00:00 ps
+    $ kill 148
+    $ ps
+    PID TTY          TIME CMD
+      8 pts/0    00:00:00 bash
+    146 pts/0    00:00:00 bash
+    147 pts/0    00:00:00 sleep
+    149 pts/0    00:00:00 sleep
+    151 pts/0    00:00:00 ps
+    [2]-  Terminated              bash run.sh
+
+Dans cet exemple on voit que l'on démarre un processus grâce à la commande `bash(1)`_, qui renvoie le PID du processus créé. On voit ensuite ce processus s'exécuter grâce à la commande `ps(1)`_ et on peut le terminer grâce à la commande `kill(1)`_ et le PID.
+
+.. inginious:: psandkill
 
 Exercices de synthèses : Les CTF (capture the flag)
 ---------------------------------------------------
