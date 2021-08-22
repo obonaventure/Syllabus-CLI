@@ -227,7 +227,7 @@ Elle va ensuite y créer les répertoires des cours d'informatiques, d'anglais e
    drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 info
    drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 math
    ~/2021-2022$ pwd 
-   home/obo/2021/2022
+   home/obo/2021-2022
 
 Ci-dessus on peut observer que la commande `cd(1posix)`_ (pour *change-directory*) permet de descendre l'arborescence des fichiers, depuis la racine vers les répertoires feuille (un répertoire feuille est un répertoire n'ayant pas de sous-répertoire). Tandis que la commande `pwd(1)`_ (pour *print-working-directory*) permet d'afficher à l'écran le répertoire courant. 
 
@@ -359,6 +359,23 @@ La commande `mv(1)`_ permet quant à elle de renommer un fichier ou de le dépla
    $ ls -l backup/
    total 4
    -rw-r--r-- 1 obo obo 283 Aug  3 16:52 fichier.txt.bak
+
+.. Note:: 
+   
+   Pour être plus efficace et être capable de sélectionner plusieurs fichiers en même temps, il existe ce que l'on appelle des caractères *wildcards*. Ces caractères servent en fait de jokers, ils peuvent prendre la place d'un ou plusieurs autres caractères.
+
+   Par exemple, si vous souhaitez déplacer tous les fichiers commençant par les caractères "test" dans le répertoire ``destination``. Disons ``test-python.py``, ``test-c.c`` et ``test-text.txt``. Il vous suffirait de taper la commande :
+
+   .. code:: console
+
+      $ mv test* destination
+
+   Pour être plus précis, il existe 2 wildcards très souvent utilisés : ``?`` et ``*`` utilisable dans de nombreuses commandes.
+
+   #. Le joker "unique" : ``?`` ne permet de remplacer qu'un seul caractère.
+   #. Le joker "multiple" : ``*`` permet de remplacer quand à lui plusieurs caractères.
+
+   Il existe d'autres caractères spéciaux, vous trouverez plus de détails dans les pages de manuels.
 
 .. inginious:: mv-pratique
    
@@ -720,7 +737,7 @@ Voici quelques exercices vous permettant de vous familiariser avec les redirecti
 Traitement de fichiers multiples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Dans les exemples précédents, nous avons vu comment une commande Unix pouvait traiter un fichier ou un répertoire passé en argument. Cela permettait de présenter des exemples simples et faciles à visualiser. En pratique, on doit souvent traiter plusieurs fichiers avec une même commande. Toutes les commandes Unix sont prévues pour recevoir un nombre quelconque d'arguments. Si une commande reçoit deux arguments, elle va d'abord traiter le premier et ensuite le second. Si elle reçoit 17 arguments, elle fera de même. Dans l'exemple ci-dessous, la commande `touch(1)`_ est appliquée aux fichiers ``fichier.txt`` et ``points.csv```.
+Dans les exemples précédents, nous avons vu comment une commande Unix pouvait traiter un fichier ou un répertoire passé en argument. Cela permettait de présenter des exemples simples et faciles à visualiser. En pratique, on doit souvent traiter plusieurs fichiers avec une même commande. Toutes les commandes Unix sont prévues pour recevoir un nombre quelconque d'arguments. Si une commande reçoit deux arguments, elle va d'abord traiter le premier et ensuite le second. Si elle reçoit 17 arguments, elle fera de même. Dans l'exemple ci-dessous, la commande `touch(1)`_ est appliquée aux fichiers ``fichier.txt`` et ``points.csv``.
 
 .. code:: console
 
@@ -761,7 +778,7 @@ Chacun de ces fichiers contient une entête avec trois lignes de commentaires et
    DATE,MAX_TEMPERATURE_C,MIN_TEMPERATURE_C,WINDSPEED_MAX_KMH,TEMPERATURE_MORNING_C,TEMPERATURE_NOON_C,TEMPERATURE_EVENING_C,PRECIP_TOTAL_DAY_MM,HUMIDITY_MAX_PERCENT,VISIBILITY_AVG_KM,PRESSURE_MAX_MB,CLOUDCOVER_AVG_PERCENT,HEATINDEX_MAX_C,DEWPOINT_MAX_C,WINDTEMP_MAX_C,WEATHER_CODE_MORNING,WEATHER_CODE_NOON,WEATHER_CODE_EVENING,TOTAL_SNOW_MM,UV_INDEX,SUNHOUR,OPINION   
 
 
-Essayons par exemple de voir quel est le jour durant lequel il a fait le plus chaud à Charleroi sur les douze dernières années. La quantité de précipitations est dans la deuxième colonne. On peut donc utiliser `sort(1)`_ pour trier le fichier et en extraire l'information qui nous intéresse. Cependant, les trois premières lignes qui ne contiennent pas de données utiles peuvent perturber notre tri. Nous pouvons les "retirer" du fichier avant le tri en utilisant `grep(1)`_ pour soit ne prendre que le lignes qui commencent par ``2009``` soit retirer les lignes qui commencent par ``#`` qui est un caractères fréquemment utilisé pour indiquer des commentaires.
+Essayons par exemple de voir quel est le jour durant lequel il a fait le plus chaud à Charleroi sur les douze dernières années. La quantité de précipitations est dans la deuxième colonne. On peut donc utiliser `sort(1)`_ pour trier le fichier et en extraire l'information qui nous intéresse. Cependant, les trois premières lignes qui ne contiennent pas de données utiles peuvent perturber notre tri. Nous pouvons les "retirer" du fichier avant le tri en utilisant `grep(1)`_ pour soit ne prendre que les lignes qui commencent par ``2009`` soit retirer les lignes qui commencent par ``#`` qui est un caractère fréquemment utilisé pour indiquer des commentaires.
 
 .. code:: console
 	  
@@ -773,33 +790,21 @@ Pour analyser de la même façon toutes les mesures ou les mesures d'une décenn
 
 .. code:: console
 
-   $ grep -v "#" 2001.csv 2002.csv 2003.csv 2004.csv 2005.csv 2006.csv 2007.csv 2008.csv 2009.csv | sort -r -g -t ',' -k 2 | head -1
-   2009-08-20,32,27,25,24,32,20,1.9,60,9.75,1019,28.375,34,19,28,116,113,200,0,6,\13.4,météo idéale
+   $ grep -v "#" 2010.csv 2011.csv 2012.csv 2013.csv 2014.csv 2015.csv 2016.csv 2017.csv 2018.csv 2019.csv | sort -r -g -t ',' -k 2 | head -1
+   2019.csv:2019-07-25,38,30,13,24,35,35,0,55,10,1016,6.25,39,20,30,116,116,116,0,8,14.5,météo favorable
 
-Sous Unix, on peut être plus rapide en utilisant les `wildcards` ce sont des caractères spéciaux qui peuvent être remplacés par un ou plusieurs caractères. Les plus courants sont :
+Remarquez que dans ce cas particulier, le fichier dans lequel la température la plus élevée à été trouvée est stipulé en début de ligne. Cela est dû au fait que lorsque plusieurs fichiers sont fournis en entrée à `grep(1)`_, celui-ci précise dans quel fichier se trouvent les patterns trouvés.
 
- - ``?`` qui remplace n'importe quel caractère
- - ``*`` qui remplace un ou plusieurs caractères
-
-Lorsque l'on tape un de ces caractères spéciaux en ligne de commande, Unix essaye de voir si il y a un ou plusieurs fichiers qui correspondent. A titre d'exemple, considérons le répertoire qui contient les fichiers suivants
-
- - ``A.txt`` ``Bb.txt`` ```Ccc.csv```
-
-Si vous tapez ``*`` comme argument, Unix le remplacera automatiquement ``A.txt BB.txt Ccc.csv``.
-
-Si vous tapez ``*.txt`` comme argument, Unix le remplacera automatiquement en ``A.txt BB.txt``.
-
-Si vous tapez ``?.txt`` ou ``?.???`` comme argument, Unix le remplacera automatiquement en ``A.txt``.
-
-Unix supporte d'autres caractères spéciaux, vous trouverez plus de détails dans les pages de manuel`.
+En se souvenant qu'il existe des wildcards, nous pouvons réécrire la commande comme ceci :
 
 .. code:: console
    
    $ grep -v "#" 2*.csv | sort -r -g -t ',' -k 2 | head -1
    2019.csv:2019-07-25,38,30,13,24,35,35,0,55,10,1016,6.25,39,20,30,116,116,116,0,8,14.5,météo favorable
-   $ grep -v "#" 200?.csv | sort -r -g -t ',' -k 2 | head -12009-08-20,32,27,25,24,32,20,1.9,60,9.75,1019,28.375,34,19,28,116,113,200,0,6,13.4,météo idéale
+   $ grep -v "#" 200?.csv | sort -r -g -t ',' -k 2 | head -1
+   2009-08-20,32,27,25,24,32,20,1.9,60,9.75,1019,28.375,34,19,28,116,113,200,0,6,13.4,météo idéale
 
-
+La première commande va travailler sur tous les fichiers dont le nom commence par "2" tandis que la seconde va travailler sur tout ceux de 2000 à 2009
 
 Archiver et comprimer des fichiers
 ----------------------------------
