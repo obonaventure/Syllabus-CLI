@@ -2,7 +2,7 @@
 .. Copyright |copy| 2012, 2020 by `Olivier Bonaventure <http://perso.uclouvain.be/olivier.bonaventure>`_, Etienne Rivière, Christoph Paasch, Grégory Detal
 .. Ce fichier est distribué sous une licence `creative commons <http://creativecommons.org/licenses/by-sa/3.0/>`_
 
-.. _shell:
+.. _Unix:
 
 Utilisation d'un système Unix
 ==============================
@@ -423,29 +423,9 @@ Traitements de fichiers
 Observer le contenu d'un fichier 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. conflict main
-Imaginons que le fichier ``fichier.txt`` à notre disposition contient le texte suivant :
-=======
 Il est possible de modifier l'ordre dans lequel `ls(1)`_ affiche les différents fichiers d'un répertoire. Ainsi, l'option ``-S`` permet de les afficher par ordre décroissant de taille, bien pratique lorsqu'il faut rechercher les gros fichiers qui occupent de la place sur le disque dur. L'option ``-t`` permet d'afficher d'abord les fichiers les plus récents. Très pratique pour retrouver le dernier fichier téléchargé par exemple.
 
 
-.. code:: console 
-
-   Les sanglots longs
-   Des violons
-   De l’automne
-   Blessent mon coeur
-   D’une langueur
-   Monotone.
-
-.. conflict main
-   Tout suffocant
-   Et blême, quand
-   Sonne l’heure,
-   Je me souviens
-   Des jours anciens
-   Et je pleure;
-=======
    $ ls -lt
    total 8
    -rw-r--r-- 1 obo obo 181 Aug  3 10:18 points.csv
@@ -457,19 +437,6 @@ Il est possible de modifier l'ordre dans lequel `ls(1)`_ affiche les différents
    -rw-r--r-- 1 obo obo 181 Aug  3 10:18 points.csv
    
 
-.. inginious:: ls-base
-
-.. conflict main
-
-   Et je m’en vais
-   Au vent mauvais
-   Qui m’emporte
-   Deçà, delà,
-   Pareil à la
-   Feuille morte.
-
-
-.. conflict main
 Une des premières commandes que l'on utilise pour manipuler des fichiers textes est la commande `cat(1)`_. Celle-ci affiche simplement sur le terminal le contenu du fichier passé en argument. Dans l'exemple ci-dessous, Unix exécute la commande `cat(1)`_ avec comme argument le nom ``fichier.txt``. Lors de son exécution, la commande `cat(1)`_ ouvre le fichier dont le nom est ``fichier.txt`` et affiche son contenu.
 
 .. code:: console
@@ -504,17 +471,10 @@ Une des premières commandes que l'on utilise pour manipuler des fichiers textes
 
    La ligne de commande supporte de nombreux raccourcis clavier qui peuvent vous permettre d'être encore plus rapide. La flèche vers le haut vous permet par exemple de récupérer les commandes précédentes. Vous pouvez ensuite utiliser les flèches gauche et droite pour éditer l'ancienne commande avant de taper sur Return pour l'exécuter. Lorsque vous tapez les premières lettres d'une commande, il suffit de taper sur la touche de tabulation pour que la commande soit complétée si elle est reconnue. Ainsi, si vous tapez ``mkd`` suivi de tabulation, les caractères ``ir`` manquants seront automatiquement ajouté. Ce mécanisme de complétion de la ligne de commande s'applique aussi aux arguments lorsque ceux-ci sont des fichiers ou des répertoires. Ainsi, si vous tapez ``cat fi`` suivi de tabulation dans le répertoire, la commande se complétera en ``cat fichier.txt``.
 
-.. ajouter l'exercice https://inginious.org/course/cli-linux/ccm-cat
+.. inginious:: ccm-cat
 
 Il y a trois commandes qui sont très proches de `cat(1)`_ et qui peuvent être utiles lorsque l'on doit consulter de longs fichiers texte. Tout d'abord, la commande `head(1)`_ permet de consulter le début d'un fichier. Sans option, `head(1)`_ affiche les dix premières lignes du fichier. Avec l'option ``-n`` suivie d'un entier (``x``), `head(1)`_ affiche les ``x`` premières lignes du fichier (voir exemple ci-dessous). La commande `tail(1)`_ fait la même chose pour la fin du fichier. Si vous consultez la page de manuel de `tail(1)`_, vous verrez qu'elle a beaucoup plus d'options que `head(1)`_. Il y a en effet plusieurs cas pratiques dans lesquels il est utile de lire la fin d'un fichier que son début, mais ceux-ci sortent du cadre de cette brève introduction à la ligne de commande.
-=======
-   $ touch vide.txt
-   $ ls -lt
-   total 8
-   -rw-r--r-- 1 obo obo   0 Aug  3 14:13 vide.txt
-   -rw-r--r-- 1 obo obo 283 Aug  3 14:11 fichier.txt
-   -rw-r--r-- 1 obo obo 181 Aug  3 10:18 points.csv
-   
+
 
 .. inginious:: creationfichier-base
 
@@ -523,7 +483,7 @@ Il y a trois commandes qui sont très proches de `cat(1)`_ et qui peuvent être 
 
 .. inginious::  creationfichier-qcm
    
-Pour organiser tous ces fichiers, il est important de pouvoir les regrouper dans des répertoires. Prenons l'exemple d'une étudiante bien organisée qui doit gérer toutes les informations relatives à chacun de ses cours. Elle va créer un répertoire pour chaque année académique et un sous-répertoire pour chaque cours. La commande `mkdir(1)`_ lui permet de créer un répertoire pour l'année ``2021-2022``. Elle va ensuite y créer les répertoires des cours d'informatiques, d'anglais et de mathématiques. Pour cela, elle devra aller dans le répertoire ``2021-2022`` en utilisant la commande `cd(1)`_ (change directory). Cette commande permet de changer de répertoire courant.
+Pour organiser tous ces fichiers, il est important de pouvoir les regrouper dans des répertoires. Prenons l'exemple d'une étudiante bien organisée qui doit gérer toutes les informations relatives à chacun de ses cours. Elle va créer un répertoire pour chaque année académique et un sous-répertoire pour chaque cours. La commande `mkdir(1)`_ lui permet de créer un répertoire pour l'année ``2021-2022``. Elle va ensuite y créer les répertoires des cours d'informatiques, d'anglais et de mathématiques. Pour cela, elle devra aller dans le répertoire ``2021-2022`` en utilisant la commande `cd(1posix)`_ (change directory). Cette commande permet de changer de répertoire courant.
 
 .. code:: console
 
@@ -554,19 +514,7 @@ Pour organiser tous ces fichiers, il est important de pouvoir les regrouper dans
 .. inginious::  mkdir-pratique
 
 On signale les répertoires avec la lettre d comme première permission dans l'information affichée par la commande ``ls -l``. La commande `pwd(1)`_ indique quel est le répertoire courant, c'est-à-dire le répertoire dans lequel les commandes sont exécutées.
-.. conflict main
 
-.. code:: console
-
-   $head -n 4 fichier.txt 
-   Les sanglots longs
-   Des violons
-   De l’automne
-   Blessent mon coeur
-   $ tail --lines 3 fichier.txt 
-   Deçà, delà,
-   Pareil à la
-   Feuille morte.
 
 .. inginious:: head-base
 
@@ -665,8 +613,6 @@ Une première commande intéressante pour manipuler de tels fichiers est la comm
    Vanessa, Dupond, 14, 12
 
 
-.. keep?   La ligne de commande supporte de nombreux raccourcis clavier qui peuvent vous permettre d'être encore plus rapide. La flèche vers le haut vous permet par exemple de récupérer les commandes précédentes. Vous pouvez ensuite utiliser les flèches gauche et droite pour éditer l'ancienne commande avant de taper sur Return pour l'exécuter. Lorsque vous tapez les premières lettres d'une commande, il suffit de taper sur la touche de tabulation pour que la commande soit complétée si elle est reconnue. Ainsi, si vous tapez ``mkd`` suivi de tabulation, les caractères ``ir`` manquants seront automatiquement ajouté. Ce mécanisme de complétion de la ligne de commande s'applique aussi aux arguments losque ceux-ci sont des fichiers ou des répertoires. Ainsi, si vous tapez ``cat fi`` suivi de tabulation dans le répertoire contenant le contenant le fichier ``fichier.txt`` les caractères manquants ``chier.txt`` seront automatiquement compléter. 
-
 
 `sort(1)`_ a trié les étudiants sur base de leur prénom. L'option ``-r`` permet d'avoir les lignes dans l'ordre alphabétique inverse. Pour pouvoir trier sur base du nom de famille ou des points obtenus, il suffit d'indiquer à `sort(1)`_ la structure du fichier. Dans un fichier ``csv``, les champs sont séparés par une virgule. Par convention, le premier champ dans chaque ligne est le champ ``1``, le second le ``2``, ... L'option ``-t`` permet d'indiquer le séparateur des champs et l'option ``-k`` le numéro du champ à utiliser pour le tri. 
 
@@ -713,35 +659,8 @@ On peut maintenant trier sur base des noms de famille ou des points obtenus.
    Antoine, Marchand, 15, 15
    Vanessa, Dupond, 14, 12
 
-.. conflict main
+
 Malheureusement, ce dernier tri ne donne pas le résultat attendu. On voudrait avoir en première ligne l'étudiant ou l'étudiante qui a le mieux réussi le cours. Or, ce n'est pas ce que la commande `sort(1)`_ affiche. C'est parce que la commande `sort(1)`_ fait un tri par ordre alphabétique par défaut. Pour obtenir un tri qui prend en compte les nombres (entiers ou réels), il faut utiliser l'option ``-g``.    
-
-.. code:: console
-=======
-   
-
-.. inginious::  rm-base
-
-
-.. inginious::  rm-qcm
-
-
-
-  
-  
-Shell
-^^^^^
-.. conflict main
-
-   $ sort -g -r -t "," -k 4 points.csv
-   Emilie, Michel, 17, 19
-   Laurence, Dupont, 14, 18
-   Jean, Dubois, 12, 17
-   Marc, Michel, 11, 16
-   Julie, Durant, 19, 16
-   Antoine, Marchand, 15, 15
-   Vanessa, Dupond, 14, 12
-   Simon, Sanzot, 8, 9
 
 
 Parfois, il est nécessaire d'extraire certains champs d'un fichier en format ``csv``. La commande `cut(1)`_ peut être très utile dans ce cas. Elle supporte plusieurs options. L'option ``-d`` permet d'indiquer le séparateur entre les différents champs du fichier. L'option ``-f`` est suivie de la liste des champs qu'il faut extraire du fichier.
@@ -818,7 +737,7 @@ Les shells Unix supportent un second mécanisme qui est encore plus intéressant
 
 Le premier exemple utilise `echo(1)`_ pour générer du texte et le passer directement à `wc(1)`_ qui compte le nombre de caractères. Le deuxième exemple utilise `cat(1)`_ pour afficher sur la sortie standard le contenu d'un fichier. Cette sortie est reliée à `sort(1)`_ qui trie le texte reçu sur son entrée standard en ordre alphabétique croissant. Cette sortie en ordre alphabétique est reliée à `uniq(1)`_ qui la filtre pour en retirer les lignes dupliquées.
 
-.. Ajouter l'exercice https://inginious.org/course/cli-linux/qcm-sort
+.. inginious:: qcm-sort
    
 .. - `uniq(1)`_ : utilitaire permettant de filtrer le contenu d'un fichier texte afin d'en extraire les lignes qui sont uniques ou dupliquées (cela requiert que le fichier d'entrée soit trié, car ne compare que les lignes consécutives).
 .. - `gzip(1)`_ et `gunzip(1)`_ : utilitaires permettant respectivement de compresser et de décompresser des fichiers. Les fichiers compressés prennent moins de place sur le disque que les fichiers standard et ont par convention un nom qui se termine par ``.gz``.
@@ -1131,4 +1050,17 @@ Pour les plus rapides, nous vous invitons à parcourir le syllabus de systèmes 
 .. rubric:: Footnotes
 
 .. [#fexecbit] Sous Unix et contrairement à d'autres systèmes d'exploitation, le suffixe d'un nom de fichier ne joue pas de rôle particulier pour indiquer si un fichier contient un programme exécutable ou non. Comme nous le verrons ultérieurement, le système de fichiers Unix contient des bits de permission qui indiquent notamment si un fichier est exécutable ou non.
-.. 
+
+
+.. _intel : http://www.intel.com
+.. _python : http://www.python.org
+.. _perl : http://www.perl.org
+.. _Git : http://git-scm.com/
+.. _subversion : http://subversion.apache.org/
+.. _ISO-8859 : http://en.wikipedia.org/wiki/ISO/IEC_8859
+.. _Unicode: http://en.wikipedia.org/wiki/Unicode
+.. _Endianness: http://en.wikipedia.org/wiki/Endianness
+.. _llvm: http://llvm.org               
+
+
+.. [ABS] Cooper, M., `Advanced Bash-Scripting Guide`, 2011, http://tldp.org/LDP/abs/html/
