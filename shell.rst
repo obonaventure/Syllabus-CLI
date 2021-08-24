@@ -110,6 +110,11 @@ Avec l'option ``-l``, le premier caractère de la ligne indique le type du fichi
 		first.txt  log.log  second.txt
 
 
+.. inginious::  mkdir-base
+
+
+.. inginious::  mkdir-pratique
+
 Manipulation de fichiers
 ------------------------
 
@@ -130,6 +135,12 @@ Créer et détruire
 				    	* -i : 	interactif, demande une confirmation sur chaque fichier
 				    	* -f : 	force la suppression du fichier
 				    	* -r :  efface un répertoire et son contenu
+
+.. inginious::  creationfichier-base
+
+
+
+.. inginious::  creationfichier-qcm
 
 Visualiser
 ^^^^^^^^^^
@@ -363,6 +374,9 @@ Déplacer ou renommer
 		$ mv test.txt testrename.txt
 		$ mv test.txt ./testbis/
 		$ mv repertoire ./repertoirebis
+		
+
+.. inginious::  mv-pratique
 
 Rechercher
 ^^^^^^^^^^
@@ -468,6 +482,9 @@ Il est important de noter qu'une archive n'est pas forcément compressée.
 		secondfile.c
 		$ tar xf monarchive.tar.gz				 =	désarchive
 		$ tar xf monarchive.tar -C /home			 =	désarchive monarchive.tar dans /home
+
+
+.. inginious::  ar-base
 
  
 `gzip(1)`_ file				compresse un fichier ou une archive
