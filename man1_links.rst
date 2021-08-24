@@ -70,6 +70,7 @@
 .. _`catchsegv(1)` : http://sites.uclouvain.be/SystInfo/manpages/man1/catchsegv.1.html
 .. _`cc(1)` : http://sites.uclouvain.be/SystInfo/manpages/man1/cc.1.html
 .. _`c++filt(1)` : http://sites.uclouvain.be/SystInfo/manpages/man1/c++filt.1.html
+.. _`cd(1posix)` : https://sites.uclouvain.be/SystInfo/manpages/man1/cd.1posix.html
 .. _`cg_annotate(1)` : http://sites.uclouvain.be/SystInfo/manpages/man1/cg_annotate.1.html
 .. _`chage(1)` : http://sites.uclouvain.be/SystInfo/manpages/man1/chage.1.html
 .. _`chattr(1)` : http://sites.uclouvain.be/SystInfo/manpages/man1/chattr.1.html
