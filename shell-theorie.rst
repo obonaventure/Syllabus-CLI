@@ -117,6 +117,7 @@ La quasi totalité des commandes Unix affichent un message d'aide de ce type lor
 
   Dans la version en-ligne de ces notes, toutes les références vers un programme Unix, un appel système ou une fonction de la librairie pointent vers la page de manuel Linux correspondante. Les pages de manuel sont également disponibles sur de nombreux sites web, comme par exemple `https://www.man7.org/linux/man-pages/index.html <https://www.man7.org/linux/man-pages/index.html>`_ qui présente les dernières versions des pages de manuel de Linux en anglais. Certaines de ces pages de manuel ont étés traduite (parfois partiellement en français). Vous les trouverez notamment sur `https://man.cx/ <https://man.cx/>`_.
 
+.. todo? ajouter un petit qcm demandant ce que sont les man-page, qu'est ce qu'une commande, etc ?
 
 Navigation dans un arbre de fichiers Unix
 -----------------------------------------
@@ -186,10 +187,6 @@ Commandes de création de fichiers et répertoires
 
 Une commande intéressante de manipulation des fichiers est `touch(1)`_. Elle permet de créer un fichier qui n'existe pas ou de mettre à jour la date de modification d'un fichier existant sans changer son contenu.
 
-
-Pour présenter les dernières commandes, nous allons ajouter un deuxième fichier. Celui-ci a comme nom ``points.csv``. Il est au format ``comma-separated values``, c'est-à-dire qu'il contient des mots et des valeurs qui sont séparés par une virgule. La plupart des tableurs permettent de manipuler de tels fichiers, tout comme les commandes Unix comme nous allons le voir. 
-
-
 .. code:: console
 
    $ ls -lt
@@ -257,11 +254,10 @@ Ceux-ci vous apprendront à créer des répertoires :
 .. inginious:: mkdir-pratique
 
 
-
 Plus sur la commande ``ls``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Nous vous invitons à chercher l'utilité de l'option ``-a`` de `ls(1)`_ dans sa page de manuel.   
+Vous avez déjà pu voir à quoi servait l'option ``-l`` de `ls(1)`_, mais il existe bien d'autres options ! Nous allons maintenant jeter un oeil aux options ``-a`` et ``R``. En regardant cet exemple, essayez de déterminer à quoi sert l'option ``-a`` :
 
 .. code:: console
 
@@ -289,9 +285,9 @@ Nous vous invitons à chercher l'utilité de l'option ``-a`` de `ls(1)`_ dans sa
    -rw-r--r--  1 obo obo  181 Aug  3 10:18 points.csv
    -rw-r--r--  1 obo obo    0 Aug  3 14:13 vide.txt
 
+Si vous ne trouvez pas avec cet exemple, voici un petit tips : l'options ``-a`` signifie *all*. Si cela ne vous a pas aidé et que vous ne l'avez pas encore fait, aller regarder dans la page de manuel de `ls(1)`_ !
 
-
-Enfin, notez que l'option ``-R`` de la commande `ls(1)`_ permet de parcourir automatiquement tous les sous-répertoires (et leurs sous-répertoires). N'utilisez pas cette option sur des fichiers dont vous ne connaissez pas la taille ou la profondeur, par exemple, utiliser cette option sur la racine du système (nous expliquons ce que cela signifie ci-dessous) va permettre de lister TOUS les fichiers de votre ordinateur, ce qui pourrait prendre du temps.
+L'option ``-R`` de la commande `ls(1)`_ permet quant à elle de parcourir automatiquement tous les sous-répertoires (et leurs sous-répertoires). N'utilisez pas cette option sur des fichiers dont vous ne connaissez pas la taille ou la profondeur, par exemple, utiliser cette option sur la racine du système (nous expliquons ce que cela signifie ci-dessous) va permettre de lister TOUS les fichiers de votre ordinateur, ce qui pourrait prendre du temps.
 
 .. code:: console
 
@@ -423,19 +419,30 @@ Traitements de fichiers
 Observer le contenu d'un fichier 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Il est possible de modifier l'ordre dans lequel `ls(1)`_ affiche les différents fichiers d'un répertoire. Ainsi, l'option ``-S`` permet de les afficher par ordre décroissant de taille, bien pratique lorsqu'il faut rechercher les gros fichiers qui occupent de la place sur le disque dur. L'option ``-t`` permet d'afficher d'abord les fichiers les plus récents. Très pratique pour retrouver le dernier fichier téléchargé par exemple.
+Imaginons que le fichier ``fichier.txt`` à notre disposition contient le texte suivant :
 
+.. code:: console 
 
-   $ ls -lt
-   total 8
-   -rw-r--r-- 1 obo obo 181 Aug  3 10:18 points.csv
-   -rw-r--r-- 1 obo obo 283 Aug  2 15:34 fichier.txt
-   $ touch fichier.txt 
-   $ ls -lt
-   total 8
-   -rw-r--r-- 1 obo obo 283 Aug  3 14:11 fichier.txt
-   -rw-r--r-- 1 obo obo 181 Aug  3 10:18 points.csv
-   
+   Les sanglots longs
+   Des violons
+   De l’automne
+   Blessent mon coeur
+   D’une langueur
+   Monotone.
+
+   Tout suffocant
+   Et blême, quand
+   Sonne l’heure,
+   Je me souviens
+   Des jours anciens
+   Et je pleure;
+
+   Et je m’en vais
+   Au vent mauvais
+   Qui m’emporte
+   Deçà, delà,
+   Pareil à la
+   Feuille morte.
 
 Une des premières commandes que l'on utilise pour manipuler des fichiers textes est la commande `cat(1)`_. Celle-ci affiche simplement sur le terminal le contenu du fichier passé en argument. Dans l'exemple ci-dessous, Unix exécute la commande `cat(1)`_ avec comme argument le nom ``fichier.txt``. Lors de son exécution, la commande `cat(1)`_ ouvre le fichier dont le nom est ``fichier.txt`` et affiche son contenu.
 
@@ -471,50 +478,19 @@ Une des premières commandes que l'on utilise pour manipuler des fichiers textes
 
    La ligne de commande supporte de nombreux raccourcis clavier qui peuvent vous permettre d'être encore plus rapide. La flèche vers le haut vous permet par exemple de récupérer les commandes précédentes. Vous pouvez ensuite utiliser les flèches gauche et droite pour éditer l'ancienne commande avant de taper sur Return pour l'exécuter. Lorsque vous tapez les premières lettres d'une commande, il suffit de taper sur la touche de tabulation pour que la commande soit complétée si elle est reconnue. Ainsi, si vous tapez ``mkd`` suivi de tabulation, les caractères ``ir`` manquants seront automatiquement ajouté. Ce mécanisme de complétion de la ligne de commande s'applique aussi aux arguments lorsque ceux-ci sont des fichiers ou des répertoires. Ainsi, si vous tapez ``cat fi`` suivi de tabulation dans le répertoire, la commande se complétera en ``cat fichier.txt``.
 
-.. inginious:: ccm-cat
-
 Il y a trois commandes qui sont très proches de `cat(1)`_ et qui peuvent être utiles lorsque l'on doit consulter de longs fichiers texte. Tout d'abord, la commande `head(1)`_ permet de consulter le début d'un fichier. Sans option, `head(1)`_ affiche les dix premières lignes du fichier. Avec l'option ``-n`` suivie d'un entier (``x``), `head(1)`_ affiche les ``x`` premières lignes du fichier (voir exemple ci-dessous). La commande `tail(1)`_ fait la même chose pour la fin du fichier. Si vous consultez la page de manuel de `tail(1)`_, vous verrez qu'elle a beaucoup plus d'options que `head(1)`_. Il y a en effet plusieurs cas pratiques dans lesquels il est utile de lire la fin d'un fichier que son début, mais ceux-ci sortent du cadre de cette brève introduction à la ligne de commande.
-
-
-.. inginious:: creationfichier-base
-
-
-.. inginious:: touch-pratique
-
-.. inginious::  creationfichier-qcm
-   
-Pour organiser tous ces fichiers, il est important de pouvoir les regrouper dans des répertoires. Prenons l'exemple d'une étudiante bien organisée qui doit gérer toutes les informations relatives à chacun de ses cours. Elle va créer un répertoire pour chaque année académique et un sous-répertoire pour chaque cours. La commande `mkdir(1)`_ lui permet de créer un répertoire pour l'année ``2021-2022``. Elle va ensuite y créer les répertoires des cours d'informatiques, d'anglais et de mathématiques. Pour cela, elle devra aller dans le répertoire ``2021-2022`` en utilisant la commande `cd(1posix)`_ (change directory). Cette commande permet de changer de répertoire courant.
 
 .. code:: console
 
-   $ mkdir 2021-2022/
-   $ ls -l
-   total 12
-   drwxr-xr-x 2 obo obo 4096 Aug  3 16:10 2021-2022
-   -rw-r--r-- 1 obo obo  283 Aug  3 14:11 fichier.txt
-   -rw-r--r-- 1 obo obo  181 Aug  3 10:18 points.csv
-   -rw-r--r-- 1 obo obo    0 Aug  3 14:13 vide.txt
-   $ cd 2021-2022/
-   ~/2021-2022$ ls -l
-   total 0
-   ~/2021-2022$ mkdir anglais
-   ~/2021-2022$ mkdir info
-   ~/2021-2022$ mkdir math
-   ~/2021-2022$ ls -l
-   total 12
-   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 anglais
-   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 info
-   drwxr-xr-x 2 obo obo 4096 Aug  3 16:18 math
-   
-
-
-.. inginious::  mkdir-base
-
-
-.. inginious::  mkdir-pratique
-
-On signale les répertoires avec la lettre d comme première permission dans l'information affichée par la commande ``ls -l``. La commande `pwd(1)`_ indique quel est le répertoire courant, c'est-à-dire le répertoire dans lequel les commandes sont exécutées.
-
+   $head -n 4 fichier.txt 
+   Les sanglots longs
+   Des violons
+   De l’automne
+   Blessent mon coeur
+   $ tail --lines 3 fichier.txt 
+   Deçà, delà,
+   Pareil à la
+   Feuille morte.
 
 .. inginious:: head-base
 
@@ -613,9 +589,7 @@ Une première commande intéressante pour manipuler de tels fichiers est la comm
    Vanessa, Dupond, 14, 12
 
 
-
 `sort(1)`_ a trié les étudiants sur base de leur prénom. L'option ``-r`` permet d'avoir les lignes dans l'ordre alphabétique inverse. Pour pouvoir trier sur base du nom de famille ou des points obtenus, il suffit d'indiquer à `sort(1)`_ la structure du fichier. Dans un fichier ``csv``, les champs sont séparés par une virgule. Par convention, le premier champ dans chaque ligne est le champ ``1``, le second le ``2``, ... L'option ``-t`` permet d'indiquer le séparateur des champs et l'option ``-k`` le numéro du champ à utiliser pour le tri. 
-
 
 .. code:: console
 
@@ -629,7 +603,7 @@ Une première commande intéressante pour manipuler de tels fichiers est la comm
    Simon, Sanzot, 8, 9
    Vanessa, Dupond, 14, 12
  
-On peut maintenant trier sur base des noms de famille ou des points obtenus.
+On peut maintenant trier ce fichier sur base des noms de familles :
 
 .. code:: console
 
@@ -643,9 +617,7 @@ On peut maintenant trier sur base des noms de famille ou des points obtenus.
    Emilie, Michel, 17, 19
    Simon, Sanzot, 18, 10
 
-
-.. inginious::  mv-pratique
-
+Un autre exemple pourrait être de trier sur base des points obtenus (remarquez l'utilisation de l'option ``-r``, à votre avis quelle est son utilité ?):
 
 .. code:: console
 
@@ -705,6 +677,7 @@ La commande `uniq(1)`_ permet de retirer toutes les lignes qui sont identiques d
    Michel
    Sanzot
 
+.. inginious:: qcm-sort
    
 Combiner des commandes
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -737,7 +710,6 @@ Les shells Unix supportent un second mécanisme qui est encore plus intéressant
 
 Le premier exemple utilise `echo(1)`_ pour générer du texte et le passer directement à `wc(1)`_ qui compte le nombre de caractères. Le deuxième exemple utilise `cat(1)`_ pour afficher sur la sortie standard le contenu d'un fichier. Cette sortie est reliée à `sort(1)`_ qui trie le texte reçu sur son entrée standard en ordre alphabétique croissant. Cette sortie en ordre alphabétique est reliée à `uniq(1)`_ qui la filtre pour en retirer les lignes dupliquées.
 
-.. inginious:: qcm-sort
    
 .. - `uniq(1)`_ : utilitaire permettant de filtrer le contenu d'un fichier texte afin d'en extraire les lignes qui sont uniques ou dupliquées (cela requiert que le fichier d'entrée soit trié, car ne compare que les lignes consécutives).
 .. - `gzip(1)`_ et `gunzip(1)`_ : utilitaires permettant respectivement de compresser et de décompresser des fichiers. Les fichiers compressés prennent moins de place sur le disque que les fichiers standard et ont par convention un nom qui se termine par ``.gz``.
@@ -745,13 +717,23 @@ Le premier exemple utilise `echo(1)`_ pour générer du texte et le passer direc
 .. - `sed(1)`_ : utilitaire permettant d'éditer, c'est-à-dire de modifier les caractères présents dans un flux de données.
 .. - `awk(1)`_ : utilitaire incluant un petit langage de programmation et qui permet d'écrire rapidement de nombreux programmes de manipulation de fichiers de texte.
 
-Voici quelques exercices vous permettant de vous familiariser avec les redirections :
+Voici quelques exercices vous permettant de vous familiariser avec les redirections, cette section est extrêmement importante, c'est pourquoi il y'a un peu plus d'exercices :
+
+Le premier vous permettra de vous familiariser avec les redirections de sorties.
 
 .. inginious:: appendtofile
 
+Celui-ci va vous permettre d'appliquer les principe de redirections et de "pipeline".
+
 .. inginious:: Patterninfile
 
+Le troisième va vous permettre de voir si vous avez bien compris comment fonctionne un pipeline.
+
 .. inginious:: pipe-base
+
+Et voici un petit QCM permettant de voir si vous avez bien compris le contenu jusqu'à maintenant, il ne concerne pas que cette section :
+
+.. inginious:: creationfichier-qcm
 
 Traitement de fichiers multiples
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -776,7 +758,6 @@ Dans les exemples précédents, nous avons vu comment une commande Unix pouvait 
 Considérons un deuxième exemple qui concerne les données météorologiques. Le site web `https://www.historique-meteo.net/europe/belgique/charleroi/ <https://www.historique-meteo.net/europe/belgique/charleroi/>`_ fournit les relevés météorologiques pour la ville de Charleroi depuis 2009 en format csv.
 
 .. code:: console
-
 
    $ ls
    2009.csv  2011.csv  2013.csv  2015.csv  2017.csv  2019.csv
@@ -805,27 +786,12 @@ Essayons par exemple de voir quel est le jour durant lequel il a fait le plus ch
    2009-08-20,32,27,25,24,32,20,1.9,60,9.75,1019,28.375,34,19,28,116,113,200,0,6,13.4,météo idéale
 
    
-Pour analyser de la même façon toutes les mesures ou les mesures d'une décennie, on pourrait simplement lister tous les fichiers concernés. Ce sertait une longue commande.
+Pour analyser de la même façon toutes les mesures ou les mesures d'une décennie, on pourrait simplement lister tous les fichiers concernés. Ce serait une longue commande.
 
 .. code:: console
 
-
-   $ grep -v "#" 2001.csv 2002.csv 2003.csv 2004.csv 2005.csv 2006.csv 2007.csv 2008.csv 2009.csv | sort -r -g -t ',' -k 2 | head -1
-   2009-08-20,32,27,25,24,32,20,1.9,60,9.75,1019,28.375,34,19,28,116,113,200,0,6,\13.4,météo idéale
-
-Sous Unix, on peut être plus rapide en utilisant les `wildcards` ce sont des caractères spéciaux qui peuvent être remplacés par un ou plusieurs caractères. Les plus courants sont :
-
- - ``?`` qui remplace n'importe quel caractère
- - ``*`` qui remplace un ou plusieurs caractères
-
-Lorsque l'on tape un de ces caractères spéciaux en ligne de commande, Unix essaye de voir s'il y a un ou plusieurs fichiers qui correspondent. A titre d'exemple, considérons le répertoire qui contient les fichiers suivants
-
- - ``A.txt`` ``Bb.txt`` ```Ccc.csv```
-
-Si vous tapez ``*`` comme argument, Unix le remplacera automatiquement ``A.txt BB.txt Ccc.csv``.
-
-Si vous tapez ``*.txt`` comme argument, Unix le remplacera automatiquement en ``A.txt BB.txt``.
-
+   $ grep -v "#" 2010.csv 2011.csv 2012.csv 2013.csv 2014.csv 2015.csv 2016.csv 2017.csv 2018.csv 2019.csv | sort -r -g -t ',' -k 2 | head -1
+   2019.csv:2019-07-25,38,30,13,24,35,35,0,55,10,1016,6.25,39,20,30,116,116,116,0,8,14.5,météo favorable
 
 Remarquez que dans ce cas particulier, le fichier dans lequel la température la plus élevée à été trouvée est stipulé en début de ligne. Cela est dû au fait que lorsque plusieurs fichiers sont fournis en entrée à `grep(1)`_, celui-ci précise dans quel fichier se trouvent les patterns trouvés.
 
@@ -874,7 +840,7 @@ Lorsque l'on travaille sur des projets qui regroupent plusieurs fichiers, il est
  - ``c`` qui demande de créer une archive et d'y place des fichiers
  - ``z`` qui demande à `tar(1)`_ d'automatiquement utiliser `gzip(1)`_ ou `gunzip(1)`_ pour manipuler des archives comprimées
  - ``f`` qui permet d'indiquer le nom de l'archive (ce nom est l'argument qui suit le caractère ``f``)
-   - ``t`` qui permet de demander de tester si une archive est correcte 
+ - ``t`` qui permet de demander de tester si une archive est correcte 
 
    
 A titre d'exemple, nous allons placer tous les fichiers de données météorologiques dans une archive au format ``.tar.gz```.
