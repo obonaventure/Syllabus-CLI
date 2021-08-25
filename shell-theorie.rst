@@ -908,7 +908,7 @@ A titre d'exemple, nous allons placer tous les fichiers de données météorolog
 	  -rw-r--r-- 1 obo obo 36019 Aug  4 12:44 2019.csv
 	  -rw-r--r-- 1 obo obo 36129 Aug  4 12:44 2020.csv
 	
-.. inginious:: tri-fichier-pratique
+.. inginious:: tri-fichiers-pratique
 
 
 Base de la gestion de processus 
