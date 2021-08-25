@@ -909,9 +909,11 @@ A titre d'exemple, nous allons placer tous les fichiers de données météorolog
 	  -rw-r--r-- 1 obo obo 36129 Aug  4 12:44 2020.csv
 	
 Voici un petit QCM pour tester votre compréhension de l'utilitaire `tar(1)`_
+
 .. inginious:: ar-base
 
 Et voici un exercice pratique, vous permettant de comprendre l'utilisation de `tar(1)`_
+
 .. inginious:: tri-fichiers-pratique
 
 
