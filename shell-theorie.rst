@@ -956,7 +956,7 @@ Les scripts servent souvent à réaliser des opérations sur des fichiers, et il
  - ``-f file`` est vraie si ``file`` existe et est un fichier;
  - ``-s file`` est vraie si ``file`` n'est pas vide;
  - ``-r file``, ``-w file``, ``-x file`` est vraie si ``file`` peut, respectivement, être *lu*, *écrit* ou *exécuté* par l'utilisateur lançant le script;
- - ``-s file`` est vraie si ``file`` est le nom d'un répertoire.
+ - ``-d file`` est vraie si ``file`` est le nom d'un répertoire.
  
 L'exemple ci-dessous illustre l'utilisation des conditions sur les fichiers :
 
@@ -965,8 +965,8 @@ L'exemple ci-dessous illustre l'utilisation des conditions sur les fichiers :
 
 On note l'utilisation du combinateur logique de négation ``!`` pour la troisième condition. Deux autres opérateurs logiques sont disponibles : ``-a`` est le ET logique (AND) et le ``-o`` est le OU logique (OR) :
 
- - ``-a`` renvoie une valeur positive (faux) si au moins une des deux conditions renvoie une valeur positive, et 0 sinon (vrai);
- - ``-o`` renvoie une valeur positive (faux) si les deux conditions renvoient une valeur positive, et 0 sinon (vrai).
+ - ``-o`` renvoie une valeur positive (faux) si au moins une des deux conditions renvoie une valeur positive, et 0 sinon (vrai);
+ - ``-a`` renvoie une valeur positive (faux) si les deux conditions renvoient une valeur positive, et 0 sinon (vrai).
 
 La deuxième et la troisième condition de l'exemple ci-dessus peuvent ainsi être combinées de la manière suivante :
 
